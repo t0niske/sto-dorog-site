@@ -1,0 +1,270 @@
+/*
+ * Автошкола «Сто дорог» — скрипты сайта. Без библиотек.
+ * Меню на телефоне, формы заявок (docs/lead-api.md), метки рекламы, карта по нажатию, уведомление о cookies.
+ * Всё содержимое страниц работает и без этого файла.
+ */
+(function () {
+  'use strict';
+
+  var PHONE = '+7 (983) 234-56-56';
+  var PHONE_TEL = '+79832345656';
+  var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'yclid'];
+
+  function storage() {
+    try { return window.sessionStorage; } catch (e) { return null; }
+  }
+
+  /* ---------- Меню ---------- */
+  var toggle = document.querySelector('.nav-toggle');
+  if (toggle) {
+    var setOpen = function (open) {
+      document.documentElement.classList.toggle('nav-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
+    };
+    toggle.addEventListener('click', function () {
+      setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+    document.getElementById('main-nav').addEventListener('click', function (e) {
+      if (e.target.closest('a')) setOpen(false);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') setOpen(false);
+    });
+  }
+
+  /* ---------- Метки рекламы: запоминаем на время визита, подставляем во все формы ---------- */
+  var utm = {};
+  var store = storage();
+  try { utm = JSON.parse((store && store.getItem('sd_utm')) || '{}') || {}; } catch (e) { utm = {}; }
+  var params = new URLSearchParams(window.location.search);
+  var fresh = false;
+  UTM_KEYS.forEach(function (key) {
+    var value = params.get(key);
+    if (value) { utm[key] = value.slice(0, 200); fresh = true; }
+  });
+  if (fresh && store) {
+    try { store.setItem('sd_utm', JSON.stringify(utm)); } catch (e) { /* приватный режим */ }
+  }
+
+  /* ---------- Формы заявок ---------- */
+  var forms = document.querySelectorAll('[data-lead-form]');
+
+  forms.forEach(function (form) {
+    UTM_KEYS.forEach(function (key) {
+      var input = form.elements[key];
+      if (input && !input.value && utm[key]) input.value = utm[key];
+    });
+    // Фактический адрес страницы вместе с метками — так в заявке видно, откуда пришёл человек.
+    if (form.elements.page_url) form.elements.page_url.value = window.location.href.split('#')[0];
+    form.addEventListener('submit', onSubmit);
+    form.addEventListener('input', function (e) { clearError(form, e.target.name); });
+    form.addEventListener('change', function (e) { clearError(form, e.target.name); });
+  });
+
+  /* ---------- Маска телефона +7 (XXX) XXX-XX-XX: поля с data-phone-mask ---------- */
+  function formatPhone(raw, deleting) {
+    var d = raw.replace(/\D/g, '');
+    // «+7…» — первая цифра код страны; «8 913…» и «7 913…» без плюса — тоже
+    if (raw.trim().charAt(0) === '+' || d.charAt(0) === '8' || d.charAt(0) === '7') d = d.slice(1);
+    d = d.slice(0, 10);
+    if (!d) return '';
+    var out = '+7 (' + d.slice(0, 3);
+    if (d.length > 3 || (d.length === 3 && !deleting)) out += ') ' + d.slice(3, 6);
+    if (d.length > 6 || (d.length === 6 && !deleting)) out += '-' + d.slice(6, 8);
+    if (d.length > 8 || (d.length === 8 && !deleting)) out += '-' + d.slice(8, 10);
+    return out;
+  }
+
+  document.querySelectorAll('[data-phone-mask]').forEach(function (input) {
+    input.addEventListener('input', function (e) {
+      input.value = formatPhone(input.value, (e.inputType || '').indexOf('delete') === 0);
+    });
+    input.addEventListener('focus', function () {
+      if (!input.value) input.value = '+7 (';
+    });
+    input.addEventListener('blur', function () {
+      if (input.value.replace(/\D/g, '').length <= 1) input.value = '';
+    });
+  });
+
+  // Кнопки «Записаться» в наборах подставляют услугу в форму блока записи.
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest('[data-service]');
+    if (!link) return;
+    var target = document.getElementById('zayavka');
+    var form = target && target.querySelector('[data-lead-form]');
+    if (!form) return;
+    form.elements.service.value = link.getAttribute('data-service');
+    window.setTimeout(function () {
+      var name = form.elements.name;
+      if (name) name.focus({ preventScroll: true });
+    }, 400);
+  });
+
+  function fieldError(form, name) {
+    return form.querySelector('[data-error-for="' + name + '"]');
+  }
+
+  function clearError(form, name) {
+    if (!name) return;
+    var box = fieldError(form, name);
+    if (box) { box.hidden = true; box.textContent = ''; }
+    var input = form.elements[name];
+    if (input && input.removeAttribute) input.removeAttribute('aria-invalid');
+  }
+
+  function showFieldErrors(form, errors) {
+    var first = null;
+    Object.keys(errors || {}).forEach(function (name) {
+      var box = fieldError(form, name);
+      var input = form.elements[name];
+      if (box) { box.textContent = errors[name]; box.hidden = false; }
+      if (input && input.setAttribute) {
+        input.setAttribute('aria-invalid', 'true');
+        if (box && box.id === '') box.id = (input.id || name) + '-error';
+        if (box) input.setAttribute('aria-describedby', box.id);
+        if (!first) first = input;
+      }
+    });
+    if (first && first.focus) first.focus();
+  }
+
+  function validate(form) {
+    var errors = {};
+    if (!form.elements.name.value.trim()) errors.name = 'Как к вам обращаться?';
+    var digits = form.elements.phone.value.replace(/\D/g, '');
+    if (digits.length < 10) errors.phone = 'Укажите номер телефона, например ' + PHONE + '.';
+    if (!form.elements.consent.checked) errors.consent = 'Без согласия на обработку данных мы не сможем связаться с вами.';
+    return errors;
+  }
+
+  function el(tag, className, text) {
+    var node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text) node.textContent = text;
+    return node;
+  }
+
+  function showResult(form, kind, title, message, maxLink) {
+    var box = form.querySelector('.lead-form__result');
+    box.innerHTML = '';
+    box.className = 'lead-form__result is-' + kind;
+    if (title) box.appendChild(el('strong', '', title));
+    if (message) box.appendChild(el('p', '', message));
+    if (maxLink) {
+      var a = el('a', 'btn btn--primary', 'Написать в MAX');
+      a.href = maxLink;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      box.appendChild(a);
+    }
+    if (kind === 'error') {
+      var p = el('p', '');
+      p.appendChild(document.createTextNode('Или позвоните нам: '));
+      var tel = el('a', '', PHONE);
+      tel.href = 'tel:' + PHONE_TEL;
+      p.appendChild(tel);
+      box.appendChild(p);
+    }
+    box.hidden = false;
+  }
+
+  function onSubmit(e) {
+    e.preventDefault();
+    var form = e.currentTarget;
+    var button = form.querySelector('[type="submit"]');
+    if (button.disabled) return;
+
+    ['name', 'phone', 'consent'].forEach(function (n) { clearError(form, n); });
+    var errors = validate(form);
+    if (Object.keys(errors).length) {
+      showFieldErrors(form, errors);
+      return;
+    }
+
+    var label = button.innerHTML;
+    button.disabled = true;
+    button.textContent = 'Отправляем…';
+    form.querySelector('.lead-form__result').hidden = true;
+
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' },
+      credentials: 'same-origin'
+    }).then(function (response) {
+      var type = response.headers.get('Content-Type') || '';
+      if (type.indexOf('application/json') === -1) {
+        throw new Error('not-json:' + response.status);
+      }
+      return response.json().then(function (data) { return { status: response.status, data: data }; });
+    }).then(function (res) {
+      var data = res.data || {};
+      if (data.success) {
+        form.classList.add('is-sent');
+        showResult(form, 'success', data.title || 'Заявка принята!', data.message || '', data.max_link || '');
+        if (typeof window.ym === 'function' && document.body.dataset.metrika) {
+          window.ym(Number(document.body.dataset.metrika), 'reachGoal', 'lead');
+        }
+        return;
+      }
+      showResult(form, 'error', '', data.message || 'Не удалось отправить заявку.', '');
+      if (data.errors) showFieldErrors(form, data.errors);
+    }).catch(function () {
+      showResult(form, 'error', 'Не удалось отправить заявку', 'Похоже, сервер заявок сейчас недоступен. Попробуйте ещё раз через минуту.', '');
+    }).then(function () {
+      button.disabled = false;
+      button.innerHTML = label;
+    });
+  }
+
+  /* ---------- Яндекс SmartCaptcha: загружаем, только когда человек начал заполнять форму ---------- */
+  var captchaLoaded = false;
+  document.addEventListener('focusin', function (e) {
+    if (captchaLoaded || !e.target.closest('[data-captcha]')) return;
+    captchaLoaded = true;
+    var s = document.createElement('script');
+    s.src = 'https://smartcaptcha.yandexcloud.net/captcha.js';
+    s.defer = true;
+    document.head.appendChild(s);
+  });
+
+  /* ---------- Карта по нажатию: тяжёлый виджет не грузится вместе со страницей ---------- */
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-map-src]');
+    if (!btn) return;
+    var box = btn.closest('.map-box');
+    var frame = document.createElement('iframe');
+    frame.src = btn.getAttribute('data-map-src');
+    frame.title = btn.getAttribute('data-map-title') || 'Карта';
+    frame.loading = 'lazy';
+    frame.allowFullscreen = true;
+    box.innerHTML = '';
+    box.appendChild(frame);
+  });
+
+  /* ---------- Уведомление о cookies — только если подключена Метрика ---------- */
+  if (document.body.dataset.metrika) {
+    var seen = false;
+    try { seen = window.localStorage.getItem('sd_cookie_ok') === '1'; } catch (e) { seen = false; }
+    if (!seen) {
+      var note = el('div', 'cookie-note');
+      note.setAttribute('role', 'region');
+      note.setAttribute('aria-label', 'Уведомление о cookies');
+      var text = el('p', '', 'Сайт использует cookies и Яндекс.Метрику, чтобы понимать, какие страницы полезны. ');
+      var more = el('a', '', 'Подробнее');
+      more.href = '/politika-konfidentsialnosti';
+      text.appendChild(more);
+      var ok = el('button', 'btn btn--primary', 'Понятно');
+      ok.type = 'button';
+      ok.addEventListener('click', function () {
+        try { window.localStorage.setItem('sd_cookie_ok', '1'); } catch (err) { /* ничего */ }
+        note.remove();
+      });
+      note.appendChild(text);
+      note.appendChild(ok);
+      document.body.appendChild(note);
+    }
+  }
+})();
