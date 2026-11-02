@@ -5,7 +5,7 @@
   --p-ink (контур и массы), --p-accent (оранжевый), --p-paper (белые детали). На тёмном фоне ink → белый, paper → фон.
   Классы: i/a/p — заливка ink/accent/paper, n — без заливки, si/sa/sp — обводка ink/accent/paper.
 -->
-<style>.i{fill:var(--p-ink,#141414)}.a{fill:var(--p-accent,#ef8108)}.p{fill:var(--p-paper,#fff)}.n{fill:none}.si{stroke:var(--p-ink,#141414)}.sa{stroke:var(--p-accent,#ef8108)}.sp{stroke:var(--p-paper,#fff)}symbol{stroke-linecap:round;stroke-linejoin:round}</style>
+<style>.i{fill:var(--p-ink,#2d2926)}.a{fill:var(--p-accent,#f07714)}.p{fill:var(--p-paper,#fff)}.n{fill:none}.si{stroke:var(--p-ink,#2d2926)}.sa{stroke:var(--p-accent,#f07714)}.sp{stroke:var(--p-paper,#fff)}symbol{stroke-linecap:round;stroke-linejoin:round}</style>
 
 <symbol id="steering" viewBox="0 0 64 64">
   <circle cx="32" cy="32" r="23" class="n si" stroke-width="7"/>
