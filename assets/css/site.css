@@ -114,6 +114,11 @@ h1, h2, h3, h4 { font-weight: 800; line-height: 1.08; letter-spacing: -.025em; }
 /* Без одиноких слов в последней строке: заголовки разделов — ровными строками, абзацы — без «висящего» хвоста.
    Висячие предлоги и точки в конце убирает App\Site\Typograph. */
 h2, h3 { text-wrap: balance; }
+/* Длинное слово в заголовке («конфиденциальности») не шире экрана 320 px: перенос по слогам, в крайнем случае — разрыв */
+h1, h2, h3 { overflow-wrap: break-word; }
+@media (max-width: 359px) {
+  h1, h2 { -webkit-hyphens: auto; hyphens: auto; }
+}
 p, li, dd, figcaption, blockquote { text-wrap: pretty; }
 a { color: inherit; text-decoration: none; }
 a[href^="tel:"] { white-space: nowrap; }
@@ -154,6 +159,9 @@ table { border-collapse: collapse; }
 /* ---------- Раскладка ---------- */
 .container { width: 100%; max-width: calc(var(--container) + 2 * var(--gutter)); margin: 0 auto; padding: 0 var(--gutter); }
 .container.narrow, .narrow { max-width: calc(860px + 2 * var(--gutter)); }
+/* Узкий раздел среди широких: колонка у левого края сетки, иначе его заголовок съезжает вправо от соседних */
+.section > .container.narrow { max-width: calc(var(--container) + 2 * var(--gutter)); }
+:where(.section > .container.narrow) > * { max-width: 860px; }
 /* Отступы сжаты по просьбе заказчика 03.11.2026: «чтобы на сайте не было таких больших полей» */
 .section { padding: 40px 0; }
 .section--tight { padding: 28px 0; }
@@ -776,6 +784,8 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 .panel > p + p, .panel > ul + p, .panel > .table-wrap + p, .panel > p + .link-arrow, .panel > ul + .link-arrow, .panel > ul + .table-wrap { margin-top: 16px; }
 .panel a:not(.link-arrow) { color: var(--link); }
 .split { display: grid; gap: 14px; }
+/* Колонка не шире экрана: иначе таблица с min-width раздвигает её, и на телефоне текст обрезан справа */
+.split > * { min-width: 0; }
 @media (min-width: 900px) {
   .panel { padding: 36px; }
   .split { grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
@@ -814,7 +824,7 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 
 /* Выбор программы (/obuchenie) */
 .choose { display: grid; gap: 14px; }
-.choose__col { padding: 22px; border-radius: var(--radius-xl); background: #fff; }
+.choose__col { min-width: 0; padding: 22px; border-radius: var(--radius-xl); background: #fff; }
 .choose__title { display: flex; align-items: center; gap: 12px; font-size: 22px; margin-bottom: 10px; }
 .choose__list { display: grid; }
 .choose__item { display: grid; grid-template-columns: 1fr auto; gap: 2px 16px; padding: 16px 0; border-top: 1px solid var(--line); }
@@ -823,6 +833,11 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 .choose__text { grid-column: 1; font-size: 14px; color: var(--muted); }
 .choose__price { grid-column: 2; grid-row: 1 / span 2; align-self: center; display: inline-flex; align-items: center; gap: 8px; font-weight: 800; white-space: nowrap; }
 .choose__price .icon { color: var(--orange); }
+/* Узкий телефон: длинная цена («950 ₽/акад. час») справа не помещается и вылезает за карточку — ставим её под описание */
+@media (max-width: 419px) {
+  .choose__item { grid-template-columns: 1fr; }
+  .choose__price { grid-column: 1; grid-row: auto; margin-top: 6px; }
+}
 @media (min-width: 900px) {
   .choose { grid-template-columns: 1fr 1fr; gap: 18px; }
   .choose__col { padding: 32px; }
@@ -1125,6 +1140,8 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 .table a { color: var(--link); font-weight: 700; }
 .num { text-align: right !important; white-space: nowrap; font-variant-numeric: tabular-nums; }
 .panel .table th, .panel .table td { padding-left: 0; }
+/* В карточке таблица из двух колонок «что — цена»: на телефоне без прокрутки, иначе цены уходят за край */
+.panel .table { min-width: 0; }
 @media (min-width: 900px) { .table { font-size: 16px; } .table th, .table td { padding: 16px 24px; } }
 
 /* ---------- Текст статей ---------- */
@@ -1199,6 +1216,7 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 
 /* Сведения об образовательной организации */
 .sveden { display: grid; gap: 24px; padding: 28px 0 56px; }
+.sveden > * { min-width: 0; }
 .sveden-nav details { padding: 18px 20px; border-radius: var(--radius-lg); background: #fff; }
 .sveden-nav summary { font-weight: 800; cursor: pointer; }
 .sveden-nav ul { display: grid; gap: 2px; margin-top: 12px; }
