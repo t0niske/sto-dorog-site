@@ -995,8 +995,7 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 /* Строки текста — на всю ширину карточки, без «красивого» переноса: он сжимал текст к левому краю (заказчик 03.11.2026) */
 .adv__text { margin-top: 12px; font-size: 16px; line-height: 1.45; color: var(--muted); text-wrap: wrap; }
 .adv__visual { position: relative; flex: 1; min-height: 220px; margin: 24px calc(-1 * var(--pad)) 0; }
-/* Машине на дороге нужно больше высоты, иначе конусы ложатся на крышу */
-.adv__card--route .adv__visual { min-height: 250px; }
+.adv__card--route .adv__visual { min-height: 230px; }
 /* Лист договора с ценой целиком, а не обрезанный низом карточки */
 .adv__card--contract .adv__visual { min-height: 250px; }
 .adv__card--theory .adv__visual { min-height: 240px; }
@@ -1013,20 +1012,11 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 .adv__chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
 .adv__chips .adv-chip { position: static; padding: 8px 12px; font-size: 13px; box-shadow: none; }
 
-/* Автодром: площадка с разметкой, конусы «змейкой», учебная машина заходит в упражнение */
-.adv-route__road {
-  position: absolute; left: 0; right: 0; bottom: 0; height: 168px; background: var(--ink);
-  background-image: repeating-linear-gradient(90deg, #fff 0 22px, transparent 22px 40px); background-size: 100% 4px;
-  background-repeat: no-repeat; background-position: 0 52%;
-}
-.adv-route__car { position: absolute; right: 3%; bottom: 34px; width: 66%; max-width: 280px; }
-.adv-route__cone { position: absolute; width: 13%; max-width: 54px; height: auto; }
-/* Дальний ряд меньше и выше, ближний крупнее и ниже — так конусы стоят на площадке, а не висят */
-.adv-route__cone--1 { left: 3%; bottom: 112px; width: 10%; max-width: 42px; }
-.adv-route__cone--2 { left: 11%; bottom: 30px; }
-.adv-route__cone--3 { left: 20%; bottom: 112px; width: 10%; max-width: 42px; }
-.adv-route__cone--4 { left: 26%; bottom: 30px; }
-.adv-route__cone--5 { right: 2%; bottom: 14px; width: 11%; max-width: 46px; }
+/* Автодром: учебная площадка сверху — разметка, змейка из конусов, машина заезжает на парковку (заказчик
+   03.11.2026: прежние текст и картинка с машиной на чёрной дороге не подошли). SVG обрезается по краям
+   (slice), главное — в середине, поэтому на телефоне схема та же, только уже */
+.adv-route { position: absolute; left: var(--pad); right: var(--pad); top: 0; bottom: var(--pad); overflow: hidden; border-radius: 20px; background: var(--graphite-2); }
+.adv-route svg { display: block; width: 100%; height: 100%; }
 
 /* Теория: фото класса «или» телефон с билетом (вариант А, заказчик 03.11.2026). Всё стоит от низа вставки:
    в ряду карточки одной высоты, и так над картинкой не остаётся провала; телефон уходит за край карточки */
