@@ -982,34 +982,38 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 }
 
 /* «Почему учиться у нас удобно»: карточки — заголовок, текст и наглядная вставка снизу (по референсу заказчика
-   02.11.2026, элементы — свои: дорога, класс, неделя, автопарк, договор, вычет).
-   Телефон — одна колонка, планшет — две, компьютер — три. */
+   02.11.2026, элементы — свои: дорога, класс, чек, автопарк, договор, сертификат).
+   Телефон — одна колонка, планшет — две, компьютер — три. --pad — боковой отступ карточки: по нему выровнены
+   подписи и картинки вставок. */
 .adv { display: grid; gap: 12px; }
 .adv__card {
-  container-type: inline-size; position: relative; display: flex; flex-direction: column; padding: 26px 24px 0;
+  --pad: 24px;
+  container-type: inline-size; position: relative; display: flex; flex-direction: column; padding: 26px var(--pad) 0;
   overflow: hidden; border-radius: var(--radius-xl); background: #fff;
 }
 .adv__title { font-size: 26px; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; }
-.adv__text { margin-top: 12px; font-size: 16px; line-height: 1.45; color: var(--muted); }
-.adv__visual { position: relative; flex: 1; min-height: 220px; margin: 24px -24px 0; }
-/* Машине на дороге и автопарку нужно больше высоты, иначе подписи ложатся на крыши */
-.adv__card--route .adv__visual, .adv__card--fleet .adv__visual { min-height: 250px; }
+/* Строки текста — на всю ширину карточки, без «красивого» переноса: он сжимал текст к левому краю (заказчик 03.11.2026) */
+.adv__text { margin-top: 12px; font-size: 16px; line-height: 1.45; color: var(--muted); text-wrap: wrap; }
+.adv__visual { position: relative; flex: 1; min-height: 220px; margin: 24px calc(-1 * var(--pad)) 0; }
+/* Машине на дороге нужно больше высоты, иначе конусы ложатся на крышу */
+.adv__card--route .adv__visual { min-height: 250px; }
 /* Лист договора с ценой целиком, а не обрезанный низом карточки */
 .adv__card--contract .adv__visual { min-height: 250px; }
-/* Вставкам с расписанием и вычетом много места не нужно — на телефоне карточка по содержимому */
-.adv__card--week .adv__visual { min-height: 130px; }
-.adv__card--refund .adv__visual { min-height: 190px; }
+.adv__card--theory .adv__visual { min-height: 240px; }
+.adv__card--fleet .adv__visual { min-height: 190px; margin-top: 8px; }
+.adv__card--refund .adv__visual { min-height: 230px; }
 .adv-chip {
   position: absolute; z-index: 1; display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px;
   background: #fff; color: var(--ink); font-size: 14px; font-weight: 700; white-space: nowrap; box-shadow: 0 8px 22px rgba(45, 41, 38, .14);
 }
 .adv-chip .icon { width: 18px; height: 18px; color: var(--orange); }
-.adv-chip b { margin-left: 2px; color: var(--orange); }
 .adv-chip--dark { background: var(--ink); color: #fff; }
 .adv-chip--orange { background: var(--orange); color: #fff; }
+/* Подписи сразу под текстом и с его левого края (заказчик 03.11.2026: были далеко от текста и левее его) */
+.adv__chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+.adv__chips .adv-chip { position: static; padding: 8px 12px; font-size: 13px; box-shadow: none; }
 
-/* Автодром: площадка с разметкой, конусы «змейкой», учебная машина заходит в упражнение
-   (плашки «пр. Мира, 50» и «Автодром 10 мин» убраны 03.11.2026 — это сказано в тексте карточки) */
+/* Автодром: площадка с разметкой, конусы «змейкой», учебная машина заходит в упражнение */
 .adv-route__road {
   position: absolute; left: 0; right: 0; bottom: 0; height: 168px; background: var(--ink);
   background-image: repeating-linear-gradient(90deg, #fff 0 22px, transparent 22px 40px); background-size: 100% 4px;
@@ -1024,29 +1028,47 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 .adv-route__cone--4 { left: 26%; bottom: 30px; }
 .adv-route__cone--5 { right: 2%; bottom: 14px; width: 11%; max-width: 46px; }
 
-/* Теория: настоящее фото класса и способы учиться. «Онлайн в приложении» — над фото, «В классе» — на фото
-   (заказчик 03.11.2026); фото всегда начинается ниже верхней подписи */
-.adv-theory__photo { position: absolute; left: 24px; right: 24px; top: 52px; width: calc(100% - 48px); height: calc(100% - 34px); object-fit: cover; border-radius: 20px 20px 0 0; }
-.adv-theory__online { top: 2px; left: 36px; }
-/* Ниже верхней подписи: на узком телефоне они стоят друг над другом и иначе наезжают */
-.adv-theory__class { top: 46px; right: 36px; }
-.adv-theory__hours { position: absolute; z-index: 1; right: 36px; bottom: 26px; padding: 6px 14px; border-radius: 14px; background: var(--ink); color: #fff; font-size: 26px; font-weight: 800; letter-spacing: -.03em; }
+/* Теория: фото класса «или» телефон с билетом (вариант А, заказчик 03.11.2026). Всё стоит от низа вставки:
+   в ряду карточки одной высоты, и так над картинкой не остаётся провала; телефон уходит за край карточки */
+.adv-theory__photo { position: absolute; left: var(--pad); bottom: 32px; width: 54%; height: 170px; object-fit: cover; border-radius: 20px; }
+.adv-theory__class { left: calc(var(--pad) + 12px); bottom: 44px; }
+.adv-theory__or {
+  position: absolute; z-index: 2; left: calc(var(--pad) + 54%); bottom: 94px; display: grid; place-items: center; width: 46px; height: 46px;
+  margin-left: -23px; border-radius: 50%; background: #fff; font-size: 14px; font-weight: 800; box-shadow: 0 8px 20px rgba(45, 41, 38, .18);
+}
+.adv-theory__phone {
+  position: absolute; right: var(--pad); bottom: -24px; width: clamp(112px, 34%, 140px); height: 248px; padding: 8px; border-radius: 26px;
+  background: var(--ink); box-shadow: 0 18px 36px rgba(45, 41, 38, .22); transform: rotate(4deg);
+}
+.adv-theory__screen { display: grid; align-content: start; gap: 7px; height: 100%; padding: 14px 10px; border-radius: 19px; background: #fff; }
+.adv-theory__screen b { font-size: 11px; font-weight: 800; color: var(--orange); letter-spacing: .04em; text-transform: uppercase; }
+.adv-theory__q { height: 7px; border-radius: 4px; background: var(--paper-2); }
+.adv-theory__q--short { width: 70%; }
+.adv-theory__opt { display: flex; align-items: center; gap: 6px; padding: 7px 8px; border-radius: 9px; background: var(--paper); font-size: 10px; font-weight: 700; }
+.adv-theory__opt i { flex: 1; height: 6px; border-radius: 3px; background: var(--paper-2); }
+.adv-theory__opt--ok { background: var(--orange); color: #fff; }
+.adv-theory__opt--ok i { background: rgba(255, 255, 255, .55); }
 
-/* Неделя: будни — вечерние группы, выходные — группы выходного дня */
-.adv-week { position: absolute; left: 24px; right: 24px; bottom: 30px; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
-.adv-week__day { display: grid; place-items: center; aspect-ratio: 1; border-radius: 14px; background: var(--paper); font-size: 15px; font-weight: 800; }
-.adv-week__day--off { background: #fadcc3; }
-.adv-week__bar { grid-column: 1 / 6; padding: 10px 12px; border-radius: 12px; background: var(--ink); color: #fff; font-size: 13px; font-weight: 700; text-align: center; white-space: nowrap; }
-.adv-week__bar--off { grid-column: 6 / 8; background: var(--orange); }
+/* Вычет: чек за курс и сколько вернётся. Чек уходит за низ карточки — без пустого поля под ним */
+.adv-receipt {
+  position: absolute; left: 50%; top: 22px; bottom: -30px; display: grid; align-content: start; gap: 10px; width: 86%; max-width: 350px;
+  padding: 24px 24px 40px; background: #fff; box-shadow: 0 16px 40px rgba(45, 41, 38, .16); transform: translateX(-50%) rotate(2deg);
+  font-size: 14px; font-weight: 600; color: var(--muted);
+}
+.adv-receipt__head { font-size: 18px; font-weight: 800; color: var(--ink); }
+.adv-receipt__line { height: 9px; border-radius: 5px; background: var(--paper); }
+.adv-receipt__line--short { width: 60%; }
+.adv-receipt__row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 10px 0; border-top: 1.5px dashed var(--line); }
+.adv-receipt__row b { font-size: 18px; font-weight: 800; letter-spacing: -.02em; color: var(--ink); white-space: nowrap; }
+.adv-receipt__row--back { border-bottom: 1.5px dashed var(--line); color: var(--ink); }
+.adv-receipt__row--back b { font-size: 24px; color: var(--orange); }
 
-/* Автопарк: машины с обеими коробками. Подписи в строку, машины целиком — без обрезки краем (заказчик 03.11.2026) */
+/* Автопарк: машины с обеими коробками, целиком — без обрезки краем (заказчик 03.11.2026) */
 .adv-fleet { position: absolute; left: 14px; right: 14px; bottom: 8px; height: 170px; }
 .adv-fleet img { position: absolute; bottom: 0; width: 60%; max-width: 250px; }
 .adv-fleet img:nth-child(1) { left: 0; bottom: 40px; width: 47%; max-width: 205px; }
 .adv-fleet img:nth-child(2) { right: 0; bottom: 36px; width: 47%; max-width: 205px; }
 .adv-fleet img:nth-child(3) { left: 50%; transform: translateX(-50%); }
-.adv-fleet__chips { position: absolute; z-index: 1; top: 6px; left: 24px; right: 24px; display: flex; flex-wrap: wrap; gap: 6px; }
-.adv-fleet__chips .adv-chip { position: static; padding: 8px 12px; font-size: 13px; }
 
 /* Договор: лист с ценой программы и печатью «Цена зафиксирована». Лист крупнее и выше — над ним не остаётся
    пустого поля (заказчик 03.11.2026) */
@@ -1066,34 +1088,42 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
   letter-spacing: .02em; background: rgba(255, 255, 255, .9); transform: rotate(-12deg);
 }
 
-/* Вычет: крупные 13% и плашка маткапитала */
-.adv-refund { position: absolute; left: 24px; right: 24px; bottom: 26px; display: grid; gap: 12px; justify-items: start; }
-.adv-refund__big { display: grid; padding: 18px 22px; border-radius: 22px; background: var(--orange); color: #fff; font-size: 64px; font-weight: 800; letter-spacing: -.05em; line-height: .95; }
-.adv-refund__big small { margin-top: 6px; font-size: 14px; font-weight: 700; letter-spacing: 0; line-height: 1.3; }
-.adv-refund__chip { position: static; }
-.adv-refund__chip .icon { color: var(--orange); }
+/* Материнский капитал: оранжевый сертификат (не лист, как договор и чек) и плашка «Оплата обучения» на его краю */
+.adv-cert {
+  position: absolute; left: 50%; bottom: 44px; display: flex; flex-direction: column; gap: 10px; width: 80%; max-width: 310px; aspect-ratio: 1.6;
+  padding: 24px 26px; border-radius: 18px; background: var(--orange); color: #fff; box-shadow: 0 18px 38px rgba(240, 119, 20, .3);
+  transform: translateX(-50%) rotate(-4deg);
+}
+.adv-cert::before { content: ""; position: absolute; inset: 9px; border: 2px dashed rgba(255, 255, 255, .55); border-radius: 11px; }
+.adv-cert__label { font-size: 12px; font-weight: 700; opacity: .9; }
+.adv-cert__title { font-size: 24px; font-weight: 800; letter-spacing: -.02em; line-height: 1.05; }
+.adv-cert__line { height: 8px; border-radius: 4px; background: rgba(255, 255, 255, .4); }
+.adv-cert__title + .adv-cert__line { margin-top: auto; }
+.adv-cert__line--short { width: 55%; }
+.adv-cert__use { left: calc(var(--pad) + 4px); bottom: 26px; }
 /* Высота карточек — по самой высокой в ряду, без запаса сверху: пустых полей меньше */
 @media (min-width: 700px) {
   .adv { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (min-width: 1100px) {
   .adv { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-  .adv__card { padding: 32px 30px 0; }
+  .adv__card { --pad: 30px; padding-top: 32px; }
   .adv__title { font-size: 28px; }
-  .adv__visual { margin: 28px -30px 0; }
-  .adv-fleet__chips { left: 30px; right: 30px; }
-  .adv-week, .adv-refund { left: 30px; right: 30px; }
-  .adv-theory__photo { left: 30px; right: 30px; width: calc(100% - 60px); }
+  .adv__visual { margin-top: 28px; }
 }
 /* Узкая карточка (телефон, две колонки на планшете, три на 1100–1180): подписи автопарка мельче, чтобы остаться
-   в одной строке. После @media — чтобы перебить отступ 30px */
+   в одной строке; лист договора и чек плотнее */
 @container (max-width: 370px) {
-  .adv-fleet__chips { left: 16px; right: 16px; }
-  .adv-fleet__chips .adv-chip { padding: 7px 10px; font-size: 12px; }
+  .adv__chips { gap: 5px; }
+  .adv__chips .adv-chip { padding: 7px 8px; font-size: 12px; }
   .adv-contract { padding: 22px 22px 40px; }
   .adv-contract__title { padding-right: 58px; font-size: 16px; }
   .adv-contract__row b { font-size: 21px; }
   .adv-contract__stamp { right: -18px; top: -26px; width: 96px; height: 96px; font-size: 9px; }
+  .adv-receipt { padding: 20px 20px 40px; font-size: 13px; }
+  .adv-receipt__row--back b { font-size: 21px; }
+  .adv-cert { padding: 20px 22px; }
+  .adv-cert__title { font-size: 21px; }
 }
 
 /* Оплата частями: полоса платежей */
