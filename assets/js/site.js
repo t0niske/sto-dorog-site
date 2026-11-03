@@ -48,18 +48,24 @@
     var a11y = { on: false, font: 1, theme: 'light', img: 1 };
     try { Object.assign(a11y, JSON.parse(window.localStorage.getItem('sd_a11y') || '{}') || {}); } catch (e) { /* по умолчанию */ }
     var a11yLabels = a11yToggle.querySelectorAll('.topbar__label');
+    // Меняем только то, что отличается: правка атрибутов <html> заставляет браузер пересчитать стили всей страницы,
+    // а при открытии страницы всё уже выставил скрипт в <head>
+    var setAttr = function (el, name, value) { if (el.getAttribute(name) !== value) el.setAttribute(name, value); };
+    var setText = function (el, value) { if (el.textContent !== value) el.textContent = value; };
     var a11yApply = function () {
       var html = document.documentElement;
       html.classList.toggle('a11y', !!a11y.on);
       html.classList.toggle('a11y-noimg', !!a11y.on && a11y.img === 0);
-      html.setAttribute('data-a11y-font', a11y.font);
-      html.setAttribute('data-a11y-theme', a11y.theme);
-      a11yToggle.setAttribute('aria-pressed', a11y.on ? 'true' : 'false');
-      a11yLabels[0].textContent = a11y.on ? 'Обычная версия сайта' : 'Версия для слабовидящих';
-      a11yLabels[1].textContent = a11y.on ? 'Обычная версия' : 'Для слабовидящих';
+      if (a11y.on) {
+        setAttr(html, 'data-a11y-font', String(a11y.font));
+        setAttr(html, 'data-a11y-theme', a11y.theme);
+      }
+      setAttr(a11yToggle, 'aria-pressed', a11y.on ? 'true' : 'false');
+      setText(a11yLabels[0], a11y.on ? 'Обычная версия сайта' : 'Версия для слабовидящих');
+      setText(a11yLabels[1], a11y.on ? 'Обычная версия' : 'Для слабовидящих');
       document.querySelectorAll('.a11y-panel button').forEach(function (b) {
         var on = b.dataset.a11yFont === String(a11y.font) || b.dataset.a11yTheme === a11y.theme || b.dataset.a11yImg === String(a11y.img);
-        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        setAttr(b, 'aria-pressed', on ? 'true' : 'false');
       });
       try { window.localStorage.setItem('sd_a11y', JSON.stringify(a11y)); } catch (e) { /* выбор не запомнится */ }
     };
@@ -166,10 +172,15 @@
       routeQueued = true;
       window.requestAnimationFrame(function () { routeQueued = false; routePlace(); });
     }, { passive: true });
+    // Первый замер — в обратном вызове ResizeObserver: он приходит после раскладки и не заставляет браузер
+    // раскладывать страницу лишний раз, пока она грузится
     window.addEventListener('load', routeRefresh);
-    if (window.ResizeObserver) new ResizeObserver(routeRefresh).observe(routeStreet.parentNode);
-    else window.addEventListener('resize', routeRefresh);
-    routeRefresh();
+    if (window.ResizeObserver) {
+      new ResizeObserver(routeRefresh).observe(routeStreet.parentNode);
+    } else {
+      window.addEventListener('resize', routeRefresh);
+      routeRefresh();
+    }
   }
 
   /* ---------- Метки рекламы: запоминаем на время визита, подставляем во все формы ---------- */
