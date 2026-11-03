@@ -528,6 +528,54 @@ table { border-collapse: collapse; }
 .more span { color: var(--muted); font-weight: 500; }
 .more a { border-bottom: 1.5px solid var(--orange); }
 
+/* ---------- Посадочная страница программы: первый экран ---------- */
+/* Вариант В (выбор заказчика 03.11.2026): тёмная панель, учебная машина уезжает за правый край, форма — в оранжевой
+   плашке, цифры курса строкой внизу. Телефон: метка → заголовок → машина → форма → цифры по две.
+   Компьютер: слева текст и форма, справа машина на две строки, цифры — на всю ширину */
+.lhero {
+  --fg: #fff; --muted: rgba(255, 255, 255, .75);
+  position: relative; overflow: hidden; display: grid; gap: 20px; padding: 22px 18px 20px;
+  border-radius: var(--radius-xl); background: var(--ink); color: var(--fg);
+}
+.lhero__badge {
+  display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px 6px 10px; border-radius: 999px;
+  background: var(--orange); color: #fff; font-size: 13px; font-weight: 700;
+}
+.lhero__badge .icon { width: 18px; height: 18px; }
+.lhero__title { margin-top: 16px; font-size: 38px; line-height: 1; letter-spacing: -.045em; }
+.lhero__title span { color: var(--orange); }
+.lhero__lead { margin-top: 14px; max-width: 520px; font-size: 16px; color: var(--muted); }
+.lhero__car { justify-self: end; width: 115%; max-width: none; height: auto; margin-right: -20%; }
+.lhero__form { padding: 18px; border-radius: 24px; background: var(--orange); }
+.lhero__form-title { margin-bottom: 12px; font-size: 19px; font-weight: 800; letter-spacing: -.02em; line-height: 1.2; }
+.lhero__form :focus-visible { outline-color: var(--ink); }
+.lhero__stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 20px; padding-top: 18px; border-top: 1.5px solid rgba(255, 255, 255, .14); }
+.lhero__stats li { display: grid; align-content: start; gap: 2px; }
+.lhero__stats b { font-size: 26px; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; }
+.lhero__stats li:first-child b { color: var(--orange); }
+.lhero__stats span { font-size: 13px; color: var(--muted-dark); }
+.lhero__updated { margin-top: -8px; font-size: 13px; color: var(--muted-dark); }
+@media (min-width: 600px) {
+  .lhero { padding: 30px 28px 26px; }
+  .lhero__title { font-size: 48px; }
+  .lhero__car { width: 100%; margin-right: -12%; }
+}
+@media (min-width: 900px) {
+  .lhero { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px 40px; padding: 44px 0 30px 52px; }
+  .lhero__text { grid-column: 1; grid-row: 1; }
+  .lhero__title { font-size: 56px; }
+  .lhero__lead { font-size: 17px; }
+  .lhero__car { grid-column: 2; grid-row: 1 / 3; align-self: center; width: 118%; margin-right: -26%; }
+  .lhero__form { grid-column: 1; grid-row: 2; max-width: 520px; padding: 20px 22px; }
+  .lhero__stats, .lhero__updated { grid-column: 1 / -1; margin-right: 52px; }
+  .lhero__stats { grid-template-columns: repeat(4, minmax(0, 1fr)); padding-top: 24px; }
+  .lhero__stats b { font-size: 34px; }
+}
+@media (min-width: 1240px) {
+  .lhero { padding-left: 64px; }
+  .lhero__title { font-size: 62px; }
+}
+
 /* ---------- Главная: «От первого занятия до прав» ---------- */
 /* Шаги карточками лесенкой по пунктирной «разметке» к учебной машине (референс заказчика 02.11.2026).
    Карточки: светлые — оранжевая кнопка, оранжевые и тёмная — белая кнопка; вторая и пятая слегка повёрнуты. */
@@ -1190,6 +1238,14 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 .pay-block__list { display: grid; gap: 12px; margin: 24px 0; }
 .pay-block__list li { display: flex; align-items: center; gap: 12px; font-size: 17px; font-weight: 600; }
 .pay-block__list .icon { flex: none; width: 26px; height: 26px; color: var(--orange); }
+/* Посадочная страница программы: что входит — список с галочками, ниже «Оплачивается отдельно»; карточка оплаты
+   частями — одна, без переключателя «Автомат / Механика» */
+.pay-block__includes { margin-top: 24px; font-size: 17px; font-weight: 600; }
+.pay-block__subtitle { margin-top: 28px; font-size: 19px; font-weight: 800; letter-spacing: -.02em; }
+.pay-block__extra { margin: 14px 0 24px; color: var(--muted); }
+.payroute__title { font-size: 21px; font-weight: 800; letter-spacing: -.02em; }
+.payroute--single .payroute__plan { display: block; }
+.payroute--single .payroute__steps { margin-top: 24px; }
 .payroute { padding: 24px 22px 26px; border-radius: var(--radius-xl); background: #fff; }
 .payroute__tabs { display: inline-grid; grid-template-columns: 1fr 1fr; padding: 4px; border-radius: 999px; background: var(--paper); }
 .payroute__tab { padding: 9px 20px; border-radius: 999px; font-size: 15px; font-weight: 700; text-align: center; cursor: pointer; transition: background .2s, color .2s; }
