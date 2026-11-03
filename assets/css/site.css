@@ -221,11 +221,32 @@ table { border-collapse: collapse; }
   .btn--lg { width: 100%; }
 }
 
+/* ---------- Полоса над шапкой: версия для слабовидящих, сведения об организации (заказчик 03.11.2026) ---------- */
+.topbar { background: var(--ink); color: rgba(255, 255, 255, .86); font-size: 13px; font-weight: 600; line-height: 1.3; }
+.topbar__inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; padding-top: 8px; padding-bottom: 8px; }
+.topbar__link { display: inline-flex; align-items: center; gap: 6px; padding: 0; border: 0; background: none; color: inherit; font: inherit; cursor: pointer; }
+.topbar__link:hover, .topbar__link[aria-current] { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.topbar__link .icon { flex: none; width: 16px; height: 16px; color: var(--orange); }
+.topbar__link[hidden] { display: none; }
+/* На телефоне полные подписи не помещаются в строку — короткие */
+.topbar__label { display: none; }
+.topbar__label--short { display: inline; }
+@media (min-width: 600px) {
+  .topbar__inner { justify-content: flex-end; gap: 32px; }
+  .topbar__label { display: inline; }
+  .topbar__label--short { display: none; }
+}
+@media (min-width: 900px) {
+  .topbar { font-size: 14px; }
+  .topbar__inner { padding-top: 9px; padding-bottom: 9px; }
+}
+
 /* ---------- Шапка ---------- */
 .site-header { position: relative; z-index: 50; }
 .site-header__inner { display: flex; align-items: center; gap: 20px; height: var(--header-h); }
 .logo { display: inline-flex; align-items: center; flex: none; }
-.logo__img { width: auto; height: 38px; }
+/* contain: на узком телефоне (320 px) шапке не хватает места, и логотип сжимается — пропорционально, а не сплющиваясь */
+.logo__img { width: auto; height: 38px; object-fit: contain; object-position: left center; }
 .logo__text { font-weight: 900; font-size: 18px; line-height: .95; text-transform: uppercase; }
 .logo__mark { width: 40px; height: 40px; margin-right: 8px; }
 
@@ -252,7 +273,8 @@ table { border-collapse: collapse; }
 .nav-open body { overflow: hidden; }
 .nav-open .main-nav {
   display: flex; flex-direction: column; gap: 24px;
-  position: fixed; inset: var(--header-h) 0 0; z-index: 60; overflow-y: auto;
+  /* --nav-top — низ шапки на момент открытия (site.js): над шапкой есть полоса, и страница может быть прокручена */
+  position: fixed; inset: var(--nav-top, var(--header-h)) 0 0; z-index: 60; overflow-y: auto;
   padding: 16px var(--gutter) 120px; background: var(--paper);
 }
 .main-nav__list { display: grid; gap: 4px; }
@@ -1375,8 +1397,68 @@ select.field__input option { color: var(--ink); }
   *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
 }
 
+/* ---------- Версия для слабовидящих ----------
+   Класс a11y у <html> (скрипт в <head> по выбору из localStorage, переключает site.js). Два цвета вместо фирменных:
+   чёрный на белом, белый на чёрном, синий на голубом; шрифт крупнее через zoom (размеры на сайте в px);
+   картинки можно выключить. Логотип — одним цветом текста. */
+.a11y-panel { display: none; }
+html.a11y { --a-bg: #fff; --a-fg: #000; --p-ink: var(--a-fg); --p-accent: var(--a-fg); --p-paper: var(--a-bg); }
+html.a11y[data-a11y-theme="dark"] { --a-bg: #000; --a-fg: #fff; }
+html.a11y[data-a11y-theme="blue"] { --a-bg: #9dd1ff; --a-fg: #063462; }
+html.a11y body { background: var(--a-bg); color: var(--a-fg); }
+/* На телефоне увеличение меньше: при 1.5 в экран помещалось бы 260 px вёрстки, и слова не влезали бы в строку */
+html.a11y[data-a11y-font="2"] body { zoom: 1.1; }
+html.a11y[data-a11y-font="3"] body { zoom: 1.2; }
+/* Экран 320 px: шапка и нижняя панель помещаются только при +5% */
+@media (max-width: 359px) {
+  html.a11y[data-a11y-font="2"] body, html.a11y[data-a11y-font="3"] body { zoom: 1.05; }
+}
+@media (min-width: 600px) {
+  html.a11y[data-a11y-font="2"] body { zoom: 1.25; }
+  html.a11y[data-a11y-font="3"] body { zoom: 1.5; }
+}
+html.a11y body * {
+  background-color: var(--a-bg) !important; background-image: none !important; color: var(--a-fg) !important;
+  border-color: var(--a-fg) !important; box-shadow: none !important; text-shadow: none !important; filter: none !important;
+}
+html.a11y body *::before, html.a11y body *::after {
+  background-color: transparent !important; background-image: none !important; color: var(--a-fg) !important;
+  border-color: var(--a-fg) !important; box-shadow: none !important;
+}
+/* Маркеры списков и номера шагов — контуром цвета текста */
+html.a11y .prose ul li::before, html.a11y .cross-list li::before { background-color: var(--a-fg) !important; }
+html.a11y .check-list li::before { content: "✓"; display: grid; place-items: center; border: 2px solid; font-size: 14px; font-weight: 900; line-height: 1; }
+html.a11y .prose ol li::before, html.a11y .payroute__step::before { border: 2px solid; }
+html.a11y a { text-decoration: underline !important; text-underline-offset: 3px; }
+html.a11y .btn, html.a11y button, html.a11y input, html.a11y select, html.a11y textarea,
+html.a11y .header-social a, html.a11y .route__cta, html.a11y .route__btn, html.a11y .ticket { border: 2px solid var(--a-fg) !important; }
+html.a11y :focus-visible { outline: 3px solid var(--a-fg) !important; outline-offset: 3px; }
+html.a11y body .logo__img { background-color: transparent !important; filter: brightness(0) !important; }
+html.a11y[data-a11y-theme="dark"] body .logo__img { filter: brightness(0) invert(1) !important; }
+html.a11y-noimg img:not(.logo__img), html.a11y-noimg picture, html.a11y-noimg video, html.a11y-noimg iframe { display: none !important; }
+/* Крупный шрифт: меню, телефон и кнопки шапки не помещаются в строку — переносятся (zoom не меняет точки перелома) */
+html.a11y .site-header__inner { flex-wrap: wrap; height: auto; min-height: var(--header-h); padding-top: 8px; padding-bottom: 8px; row-gap: 8px; }
+html.a11y .main-nav__list { flex-wrap: wrap; }
+/* Меню у правого края: выпадающий список «О школе» раскрывается влево, иначе при увеличении уходит за экран */
+html.a11y .main-nav__item--sub:nth-last-child(-n+2) .main-nav__sub { left: auto; right: -8px; }
+/* Полоса: кнопка версии становится «Обычная версия»; под полосой — панель настроек */
+html.a11y .topbar { border-bottom: 2px solid var(--a-fg); }
+html.a11y .a11y-panel { display: block; border-bottom: 2px solid var(--a-fg); }
+.a11y-panel__inner { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 32px; padding-top: 12px; padding-bottom: 12px; font-size: 16px; }
+.a11y-panel__group { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.a11y-panel__name { margin-right: 6px; font-weight: 800; }
+.a11y-panel button { min-width: 48px; height: 48px; padding: 0 12px; border-radius: 12px; font: inherit; font-weight: 800; cursor: pointer; }
+.a11y-panel [data-a11y-font="2"] { font-size: 20px; }
+.a11y-panel [data-a11y-font="3"] { font-size: 24px; }
+html.a11y .a11y-panel button[aria-pressed="true"] { background-color: var(--a-fg) !important; color: var(--a-bg) !important; }
+html.a11y .a11y-panel .a11y-panel__swatch { font-size: 20px; }
+html.a11y .a11y-panel .a11y-panel__swatch--light { background-color: #fff !important; color: #000 !important; border-color: #000 !important; }
+html.a11y .a11y-panel .a11y-panel__swatch--dark { background-color: #000 !important; color: #fff !important; border-color: #fff !important; }
+html.a11y .a11y-panel .a11y-panel__swatch--blue { background-color: #9dd1ff !important; color: #063462 !important; border-color: #063462 !important; }
+html.a11y .a11y-panel .a11y-panel__swatch[aria-pressed="true"] { outline: 3px solid var(--a-fg); outline-offset: 3px; }
+
 @media print {
-  .site-header, .site-footer, .mobile-bar, .lead-section, .cookie-note { display: none; }
+  .topbar, .a11y-panel, .site-header, .site-footer, .mobile-bar, .lead-section, .cookie-note { display: none; }
   body { background: #fff; }
   .page-hero > .container, .hero { background: none; color: #000; }
 }

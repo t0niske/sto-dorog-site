@@ -1,6 +1,7 @@
 /*
  * Автошкола «Сто дорог» — скрипты сайта. Без библиотек.
- * Меню на телефоне, формы заявок (docs/lead-api.md), метки рекламы, карта по нажатию, уведомление о cookies.
+ * Меню на телефоне, версия для слабовидящих, формы заявок (docs/lead-api.md), метки рекламы, карта по нажатию,
+ * уведомление о cookies.
  * Всё содержимое страниц работает и без этого файла.
  */
 (function () {
@@ -18,6 +19,13 @@
   var toggle = document.querySelector('.nav-toggle');
   if (toggle) {
     var setOpen = function (open) {
+      if (open) {
+        // Панель меню — сразу под шапкой: над ней полоса, страница может быть прокручена, в версии для
+        // слабовидящих страница увеличена через zoom (координаты окна делим на него)
+        var zoom = parseFloat(window.getComputedStyle(document.body).zoom) || 1;
+        var bottom = document.querySelector('.site-header').getBoundingClientRect().bottom;
+        document.documentElement.style.setProperty('--nav-top', Math.max(0, bottom / zoom) + 'px');
+      }
       document.documentElement.classList.toggle('nav-open', open);
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
       toggle.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
@@ -31,6 +39,44 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') setOpen(false);
     });
+  }
+
+  /* ---------- Версия для слабовидящих: шрифт, цвета, картинки; выбор помнится (скрипт в <head> применяет его
+     до отрисовки, чтобы страница не мелькала обычной) ---------- */
+  var a11yToggle = document.querySelector('[data-a11y-toggle]');
+  if (a11yToggle) {
+    var a11y = { on: false, font: 1, theme: 'light', img: 1 };
+    try { Object.assign(a11y, JSON.parse(window.localStorage.getItem('sd_a11y') || '{}') || {}); } catch (e) { /* по умолчанию */ }
+    var a11yLabels = a11yToggle.querySelectorAll('.topbar__label');
+    var a11yApply = function () {
+      var html = document.documentElement;
+      html.classList.toggle('a11y', !!a11y.on);
+      html.classList.toggle('a11y-noimg', !!a11y.on && a11y.img === 0);
+      html.setAttribute('data-a11y-font', a11y.font);
+      html.setAttribute('data-a11y-theme', a11y.theme);
+      a11yToggle.setAttribute('aria-pressed', a11y.on ? 'true' : 'false');
+      a11yLabels[0].textContent = a11y.on ? 'Обычная версия сайта' : 'Версия для слабовидящих';
+      a11yLabels[1].textContent = a11y.on ? 'Обычная версия' : 'Для слабовидящих';
+      document.querySelectorAll('.a11y-panel button').forEach(function (b) {
+        var on = b.dataset.a11yFont === String(a11y.font) || b.dataset.a11yTheme === a11y.theme || b.dataset.a11yImg === String(a11y.img);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      try { window.localStorage.setItem('sd_a11y', JSON.stringify(a11y)); } catch (e) { /* выбор не запомнится */ }
+    };
+    a11yToggle.hidden = false;
+    a11yToggle.addEventListener('click', function () {
+      a11y.on = !a11y.on;
+      a11yApply();
+    });
+    document.querySelector('.a11y-panel').addEventListener('click', function (e) {
+      var b = e.target.closest('button');
+      if (!b) return;
+      if (b.dataset.a11yFont) a11y.font = Number(b.dataset.a11yFont);
+      if (b.dataset.a11yTheme) a11y.theme = b.dataset.a11yTheme;
+      if (b.dataset.a11yImg) a11y.img = Number(b.dataset.a11yImg);
+      a11yApply();
+    });
+    a11yApply();
   }
 
   /* ---------- Метки рекламы: запоминаем на время визита, подставляем во все формы ---------- */
