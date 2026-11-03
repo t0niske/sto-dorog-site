@@ -154,25 +154,27 @@ table { border-collapse: collapse; }
 /* ---------- Раскладка ---------- */
 .container { width: 100%; max-width: calc(var(--container) + 2 * var(--gutter)); margin: 0 auto; padding: 0 var(--gutter); }
 .container.narrow, .narrow { max-width: calc(860px + 2 * var(--gutter)); }
-.section { padding: 52px 0; }
-.section--tight { padding: 36px 0; }
-/* Блок сразу после соседнего без своего фона: отступ сверху почти не нужен, хватает нижнего у предыдущего */
-.section.section--flush { padding-top: 8px; }
+/* Отступы сжаты по просьбе заказчика 03.11.2026: «чтобы на сайте не было таких больших полей» */
+.section { padding: 40px 0; }
+.section--tight { padding: 28px 0; }
+/* Блок сразу после соседнего без своего фона: отступ сверху почти не нужен, хватает нижнего у предыдущего.
+   Своего фона у разделов нет, поэтому так — у любых двух разделов подряд, а не только с section--flush */
+.section.section--flush, .section + .section { padding-top: 8px; }
 .section--soft { position: relative; }
 @media (min-width: 900px) {
-  .section { padding: 76px 0; }
-  .section--tight { padding: 48px 0; }
+  .section { padding: 56px 0; }
+  .section--tight { padding: 40px 0; }
 }
 
-.section-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px 32px; margin-bottom: 32px; }
+.section-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 32px; margin-bottom: 24px; }
 .section-head > div { max-width: 760px; }
 .section-title { font-size: clamp(30px, 4vw, 48px); letter-spacing: -.035em; line-height: 1.04; }
-.section-title + .section-text, .section-title + p { margin-top: 14px; }
-.section > .container > .section-title { margin-bottom: 28px; }
-.section > .container > .section-title + .section-text { margin-top: -14px; margin-bottom: 28px; }
+.section-title + .section-text, .section-title + p { margin-top: 12px; }
+.section > .container > .section-title { margin-bottom: 24px; }
+.section > .container > .section-title + .section-text { margin-top: -12px; margin-bottom: 24px; }
 .section-text { font-size: 17px; color: var(--muted); max-width: 680px; }
 @media (min-width: 900px) {
-  .section-head { margin-bottom: 44px; }
+  .section-head { margin-bottom: 32px; }
   .section-text { font-size: 18px; }
 }
 
@@ -225,10 +227,10 @@ table { border-collapse: collapse; }
 .header-phone__text { display: grid; text-align: right; line-height: 1.25; }
 .header-phone__number { font-size: 17px; font-weight: 800; letter-spacing: -.01em; white-space: nowrap; }
 .header-phone__hours { font-size: 12px; font-weight: 600; color: var(--muted); }
-/* MAX и ВК — белые кружки с оранжевыми знаками, как в карточке контактов у карты */
+/* MAX и ВК — оранжевые кружки с белыми знаками (заказчик 03.11.2026), как в карточке контактов у карты */
 .header-social { display: flex; gap: 6px; }
-.header-social a { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: #fff; color: var(--orange); transition: background .2s, color .2s; }
-.header-social a:hover { background: var(--orange); color: #fff; }
+.header-social a { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: var(--orange); color: #fff; transition: background .2s; }
+.header-social a:hover { background: var(--orange-2); }
 .header-social .icon { width: 22px; height: 22px; }
 .site-header__cta { display: none; background: var(--ink); color: #fff; min-height: 46px; }
 .site-header__cta:hover { background: var(--graphite-3); }
@@ -313,8 +315,8 @@ table { border-collapse: collapse; }
 .page-hero .facts-list { margin-top: 24px; }
 .page-hero--compact > .container { padding-top: 28px; padding-bottom: 32px; }
 @media (min-width: 900px) {
-  .page-hero > .container, .container > .page-hero { padding: 64px; }
-  .page-hero--compact > .container, .container > .page-hero--compact { padding: 52px 64px; }
+  .page-hero > .container, .container > .page-hero { padding: 52px 56px; }
+  .page-hero--compact > .container, .container > .page-hero--compact { padding: 40px 56px; }
   .page-hero__grid { grid-template-columns: 1.1fr .9fr; gap: 56px; }
   .page-hero__lead { font-size: 19px; }
 }
@@ -476,7 +478,7 @@ table { border-collapse: collapse; }
 @media (min-width: 1100px) {
   .programs { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 40px; }
   /* Узкие карточки: цена — сразу под пояснением, низ карточки целиком под предмет */
-  .prog { min-height: 460px; padding: 28px 24px 24px; }
+  .prog { min-height: 420px; padding: 28px 24px 24px; }
   .prog__title { font-size: 26px; }
   .prog__text { max-width: none; }
   .prog__price { margin-top: 14px; padding-top: 0; font-size: 24px; }
@@ -491,9 +493,10 @@ table { border-collapse: collapse; }
 /* ---------- Главная: «От первого занятия до прав» ---------- */
 /* Шаги карточками лесенкой по пунктирной «разметке» к учебной машине (референс заказчика 02.11.2026).
    Карточки: светлые — оранжевая кнопка, оранжевые и тёмная — белая кнопка; вторая и пятая слегка повёрнуты. */
-.route__head { display: grid; justify-items: start; gap: 14px; }
+/* Отступ между заголовком и текстом — от .section-title + p, как у остальных разделов */
+.route__head { display: grid; justify-items: start; }
 .route__text { max-width: 680px; font-size: 17px; color: var(--muted); }
-.route__track { position: relative; margin-top: 36px; }
+.route__track { position: relative; margin-top: 28px; }
 .route__path, .route__start, .route__car { display: none; }
 .route__steps { position: relative; z-index: 1; display: grid; gap: 14px; }
 .route__step {
@@ -521,9 +524,9 @@ table { border-collapse: collapse; }
 .route__step:nth-child(2) { transform: rotate(1deg); }
 .route__step:nth-child(5) { transform: rotate(-1deg); }
 .route__cta {
-  display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; max-width: 360px; margin: 44px auto 0;
+  display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; max-width: 360px; margin: 28px auto 0;
   padding: 17px 28px; border-radius: 999px; background: var(--orange); color: #fff; font-size: 17px; font-weight: 800;
-  box-shadow: 0 14px 30px rgba(240, 119, 20, .3); transition: transform .2s, background .2s;
+  transition: transform .2s, background .2s;
 }
 .route__cta:hover { transform: translateY(-2px); background: var(--orange-2); }
 .route__cta .icon { width: 20px; height: 20px; }
@@ -535,10 +538,9 @@ table { border-collapse: collapse; }
 }
 /* Компьютер: лесенка — 1-2 в верхнем ряду, 3-4-5 ниже со сдвигом вправо; справа сверху — машина в конце пунктира */
 @media (min-width: 1100px) {
-  .route__head { gap: 18px; }
   .route__text { font-size: 18px; }
-  .route__track { min-height: 560px; margin-top: 44px; }
-  .route__cta { margin-top: 72px; }
+  .route__track { min-height: 560px; margin-top: 32px; }
+  .route__cta { margin-top: 40px; }
   .route__path { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
   .route__start {
     position: absolute; left: 0; bottom: 14px; display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%;
@@ -718,7 +720,7 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 .where__phone:hover { color: #fff; }
 .where__mail { font-size: 16px; font-weight: 700; }
 .where__mail:hover { color: var(--orange); }
-/* Слева адреса, справа график и «Пишите нам»: почта, MAX и ВК рядом, белые кружки с оранжевыми знаками */
+/* Слева адреса, справа график и «Пишите нам»: почта, MAX и ВК рядом, оранжевые кружки с белыми знаками, как в шапке */
 .where__grid { display: grid; gap: 24px; padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, .12); }
 .where__item { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
 .where__h { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--muted-dark); }
@@ -728,8 +730,8 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 .where__list a:hover { color: var(--orange); }
 .where__text { display: grid; gap: 2px; font-size: 16px; font-weight: 700; line-height: 1.35; }
 .where__social { display: flex; gap: 8px; }
-.where__social a { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: #fff; color: var(--orange); transition: background .2s, color .2s; }
-.where__social a:hover { background: var(--orange); color: #fff; }
+.where__social a { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--orange); color: #fff; transition: background .2s, color .2s; }
+.where__social a:hover { background: #fff; color: var(--orange); }
 .where__social .icon { width: 22px; height: 22px; }
 .where__cta { margin-top: 18px; }
 @media (min-width: 600px) {
@@ -951,8 +953,9 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 }
 .adv__title { font-size: 26px; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; }
 .adv__text { margin-top: 12px; font-size: 16px; line-height: 1.45; color: var(--muted); }
-.adv__visual { position: relative; flex: 1; min-height: 250px; margin: 24px -24px 0; }
-.adv__card--fleet .adv__visual { min-height: 270px; }
+.adv__visual { position: relative; flex: 1; min-height: 220px; margin: 24px -24px 0; }
+/* Машине на дороге и автопарку нужно больше высоты, иначе подписи ложатся на крыши */
+.adv__card--route .adv__visual, .adv__card--fleet .adv__visual { min-height: 250px; }
 /* Вставкам с расписанием и вычетом много места не нужно — на телефоне карточка по содержимому */
 .adv__card--week .adv__visual { min-height: 130px; }
 .adv__card--refund .adv__visual { min-height: 190px; }
@@ -975,10 +978,12 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 .adv-route__from { top: 6px; left: 24px; }
 .adv-route__to { top: 48px; right: 24px; }
 
-/* Теория: настоящее фото класса и способы учиться */
-.adv-theory__photo { position: absolute; left: 24px; right: 24px; bottom: -18px; width: calc(100% - 48px); height: 100%; max-height: 230px; object-fit: cover; border-radius: 20px 20px 0 0; }
-.adv-theory__class { top: 14px; left: 36px; }
-.adv-theory__online { top: 58px; right: 36px; }
+/* Теория: настоящее фото класса и способы учиться. «Онлайн в приложении» — над фото, «В классе» — на фото
+   (заказчик 03.11.2026); фото всегда начинается ниже верхней подписи */
+.adv-theory__photo { position: absolute; left: 24px; right: 24px; top: 52px; width: calc(100% - 48px); height: calc(100% - 34px); object-fit: cover; border-radius: 20px 20px 0 0; }
+.adv-theory__online { top: 2px; left: 36px; }
+/* Ниже верхней подписи: на узком телефоне они стоят друг над другом и иначе наезжают */
+.adv-theory__class { top: 46px; right: 36px; }
 .adv-theory__hours { position: absolute; z-index: 1; right: 36px; bottom: 26px; padding: 6px 14px; border-radius: 14px; background: var(--ink); color: #fff; font-size: 26px; font-weight: 800; letter-spacing: -.03em; }
 
 /* Неделя: будни — вечерние группы, выходные — группы выходного дня */
@@ -1019,13 +1024,13 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 .adv-refund__big small { margin-top: 6px; font-size: 14px; font-weight: 700; letter-spacing: 0; line-height: 1.3; }
 .adv-refund__chip { position: static; }
 .adv-refund__chip .icon { color: var(--orange); }
+/* Высота карточек — по самой высокой в ряду, без запаса сверху: пустых полей меньше */
 @media (min-width: 700px) {
   .adv { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .adv__card { min-height: 420px; }
 }
 @media (min-width: 1100px) {
   .adv { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-  .adv__card { min-height: 460px; padding: 32px 30px 0; }
+  .adv__card { padding: 32px 30px 0; }
   .adv__title { font-size: 28px; }
   .adv__visual { margin: 28px -30px 0; }
   .adv-route__from, .adv-fleet__akpp, .adv-fleet__mkpp { left: 30px; }
@@ -1079,15 +1084,19 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 .payroute__step b { display: block; font-size: 18px; font-weight: 800; }
 .payroute__step small { display: block; margin-top: 2px; font-size: 14px; color: var(--muted); }
 .payroute__step strong { font-size: 22px; font-weight: 800; letter-spacing: -.02em; white-space: nowrap; }
-.payroute__total { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 26px; padding-top: 20px; border-top: 1.5px solid var(--line); }
-.payroute__total span { font-size: 17px; font-weight: 700; }
-.payroute__total strong { font-size: 34px; font-weight: 800; letter-spacing: -.04em; white-space: nowrap; }
-.payroute__pill { display: inline-block; margin-top: 16px; padding: 8px 16px; border-radius: 999px; background: var(--orange); color: #fff; font-size: 14px; font-weight: 700; }
+/* «Без кредита и процентов» — подпись под «Итого за курс» с галочкой, а не оранжевая таблетка: та выглядела как кнопка.
+   Сумма справа на высоту обеих строк; на телефоне подпись — во всю ширину под суммой, чтобы не переносилась */
+.payroute__total { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 4px 12px; margin-top: 26px; padding-top: 20px; border-top: 1.5px solid var(--line); }
+.payroute__total span { grid-area: 1 / 1; font-size: 17px; font-weight: 700; }
+.payroute__total small { grid-area: 2 / 1; display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: var(--muted); }
+.payroute__total small .icon { width: 18px; height: 18px; color: var(--orange); }
+.payroute__total strong { grid-area: 1 / 2 / 3 / 3; font-size: 34px; font-weight: 800; letter-spacing: -.04em; white-space: nowrap; }
 /* Телефон: сумма шага — под названием, иначе подпись зажата */
 @media (max-width: 599px) {
   .payroute__step { flex-direction: column; gap: 6px; }
   .payroute__step strong { font-size: 20px; }
-  .payroute__total strong { font-size: 30px; }
+  .payroute__total strong { grid-area: 1 / 2; font-size: 30px; }
+  .payroute__total small { grid-area: 2 / 1 / 3 / 3; }
 }
 @media (min-width: 900px) {
   .pay-block { grid-template-columns: minmax(0, .9fr) minmax(0, 1fr); gap: 56px; }
@@ -1134,7 +1143,7 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 .post-meta { margin-top: 14px; font-size: 14px; color: var(--muted); }
 
 /* Простые страницы: блог, тексты, 404 */
-.simple-page { padding: 24px 0 72px; }
+.simple-page { padding: 24px 0 56px; }
 .simple-page h1 { font-size: clamp(34px, 5vw, 56px); letter-spacing: -.04em; line-height: 1.04; }
 .simple-page .lead { margin-top: 16px; }
 .simple-page .prose { margin-top: 32px; }
@@ -1187,7 +1196,7 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 }
 
 /* Сведения об образовательной организации */
-.sveden { display: grid; gap: 24px; padding: 28px 0 72px; }
+.sveden { display: grid; gap: 24px; padding: 28px 0 56px; }
 .sveden-nav details { padding: 18px 20px; border-radius: var(--radius-lg); background: #fff; }
 .sveden-nav summary { font-weight: 800; cursor: pointer; }
 .sveden-nav ul { display: grid; gap: 2px; margin-top: 12px; }
@@ -1308,8 +1317,9 @@ select.field__input option { color: var(--ink); }
 .site-footer__brand p { margin-top: 18px; max-width: 340px; color: var(--muted); font-size: 15px; }
 .site-footer__brand .logo__img { height: 44px; }
 .site-footer__social { display: flex; gap: 8px; margin-top: 20px; }
-.site-footer__social a { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 14px; background: var(--graphite-2); transition: background .2s; }
-.site-footer__social a:hover { background: var(--orange); color: #fff; }
+/* MAX и ВК везде одинаковые: оранжевый кружок, белый знак */
+.site-footer__social a { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: var(--orange); color: #fff; transition: background .2s, color .2s; }
+.site-footer__social a:hover { background: #fff; color: var(--orange); }
 .site-footer__title { margin-bottom: 14px; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
 .site-footer__links { display: grid; gap: 9px; font-size: 15px; }
 .site-footer__links a { color: rgba(255, 255, 255, .86); }
@@ -1318,13 +1328,13 @@ select.field__input option { color: var(--ink); }
 .site-footer__contacts a { color: rgba(255, 255, 255, .86); }
 .site-footer__phone { font-size: 22px; font-weight: 800; color: #fff !important; }
 .site-footer__hours { margin-top: 6px; color: var(--muted); }
-.site-footer__legal { display: grid; gap: 8px; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+.site-footer__legal { display: grid; gap: 8px; margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
 .site-footer__legal a { color: rgba(255, 255, 255, .8); text-decoration: underline; text-underline-offset: 2px; }
 .site-footer__docs { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 6px 0; }
 .site-footer__docs a { text-decoration: none; }
 @media (min-width: 700px) { .site-footer__grid { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 1000px) {
-  .site-footer { margin-top: 64px; padding: 80px 0 48px; }
+  .site-footer { margin-top: 48px; padding: 56px 0 40px; }
   .site-footer__grid { grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 40px; }
 }
 
