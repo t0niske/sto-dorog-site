@@ -601,8 +601,8 @@ table { border-collapse: collapse; }
   background: repeating-linear-gradient(180deg, var(--orange) 0 10px, transparent 10px 16px);
 }
 .exams__item { position: relative; display: grid; grid-template-columns: 16px 96px minmax(0, 1fr); align-items: baseline; gap: 2px 14px; }
-.exams__dot { position: relative; align-self: center; width: 17px; height: 17px; border-radius: 50%; background: var(--graphite-3); box-shadow: 0 0 0 4px var(--black); }
-.exams__item--gibdd .exams__dot { background: var(--orange); }
+/* Все точки оранжевые (заказчик 03.11.2026): серые у внутренних экзаменов читались как «прошедшие» */
+.exams__dot { position: relative; align-self: center; width: 17px; height: 17px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 0 4px var(--black); }
 .exams__item time { font-size: 17px; font-weight: 800; }
 .exams__item b { font-size: 16px; font-weight: 700; }
 .exams__item small { grid-column: 3; font-size: 13px; color: var(--muted-dark); }
