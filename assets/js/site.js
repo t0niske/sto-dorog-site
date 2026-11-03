@@ -1,7 +1,7 @@
 /*
  * Автошкола «Сто дорог» — скрипты сайта. Без библиотек.
- * Меню на телефоне, версия для слабовидящих, формы заявок (docs/lead-api.md), метки рекламы, карта по нажатию,
- * уведомление о cookies.
+ * Меню на телефоне, версия для слабовидящих, видео-отзывы, формы заявок (docs/lead-api.md), метки рекламы,
+ * карта по нажатию, уведомление о cookies.
  * Всё содержимое страниц работает и без этого файла.
  */
 (function () {
@@ -78,6 +78,27 @@
     });
     a11yApply();
   }
+
+  /* ---------- Видео-отзывы: кнопка поверх кадра запускает ролик, одновременно играет только один ---------- */
+  var vreviews = document.querySelectorAll('.vreview');
+  vreviews.forEach(function (item) {
+    var video = item.querySelector('video');
+    var play = item.querySelector('.vreview__play');
+    video.controls = false;
+    play.hidden = false;
+    play.addEventListener('click', function () {
+      play.hidden = true;
+      video.controls = true;
+      var started = video.play();
+      if (started) started.catch(function () { /* браузер не дал запустить — остаются кнопки ролика */ });
+    });
+    video.addEventListener('play', function () {
+      vreviews.forEach(function (other) {
+        var v = other.querySelector('video');
+        if (v !== video && !v.paused) v.pause();
+      });
+    });
+  });
 
   /* ---------- Метки рекламы: запоминаем на время визита, подставляем во все формы ---------- */
   var utm = {};
