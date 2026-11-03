@@ -1,6 +1,6 @@
 /*
  * Автошкола «Сто дорог» — скрипты сайта. Без библиотек.
- * Меню на телефоне, версия для слабовидящих, видео-отзывы, машинка на дороге шагов, формы заявок (docs/lead-api.md),
+ * Закреплённая шапка, меню на телефоне, версия для слабовидящих, видео-отзывы, машинка на дороге шагов, формы заявок (docs/lead-api.md),
  * метки рекламы, карта по нажатию, уведомление о cookies.
  * Всё содержимое страниц работает и без этого файла.
  */
@@ -39,6 +39,18 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') setOpen(false);
     });
+  }
+
+  /* ---------- Шапка закреплена (CSS sticky); класс is-stuck, когда она прилипла к верху окна: тень, на главной
+     язычок логотипа — отдельной плашкой. Метка нулевой высоты перед шапкой уходит за верх окна ровно тогда ---------- */
+  var siteHeader = document.querySelector('.site-header');
+  if (siteHeader && window.IntersectionObserver) {
+    var headerMark = document.createElement('div');
+    headerMark.setAttribute('aria-hidden', 'true');
+    siteHeader.parentNode.insertBefore(headerMark, siteHeader);
+    new IntersectionObserver(function (entries) {
+      siteHeader.classList.toggle('is-stuck', !entries[0].isIntersecting);
+    }).observe(headerMark);
   }
 
   /* ---------- Версия для слабовидящих: шрифт, цвета, картинки; выбор помнится (скрипт в <head> применяет его

@@ -97,7 +97,8 @@
 
 /* ---------- Основа ---------- */
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 16px; }
+/* Отступ при переходе по якорю — под закреплённой шапкой */
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 16px); }
 body {
   margin: 0;
   font-family: var(--font);
@@ -242,7 +243,10 @@ table { border-collapse: collapse; }
 }
 
 /* ---------- Шапка ---------- */
-.site-header { position: relative; z-index: 50; }
+/* Закреплена при прокрутке (заказчик 03.11.2026: «чтобы она не исчезала»), полоса над ней уезжает. Фон — как у
+   страницы, чтобы содержимое уходило под шапку; когда шапка прилипла (класс is-stuck ставит site.js) — тень */
+.site-header { position: sticky; top: 0; z-index: 50; background: var(--paper); transition: box-shadow .2s; }
+.site-header.is-stuck { box-shadow: 0 8px 24px rgba(45, 41, 38, .08); }
 .site-header__inner { display: flex; align-items: center; gap: 20px; height: var(--header-h); }
 .logo { display: inline-flex; align-items: center; flex: none; }
 /* contain: на узком телефоне (320 px) шапке не хватает места, и логотип сжимается — пропорционально, а не сплющиваясь */
@@ -380,6 +384,9 @@ table { border-collapse: collapse; }
 }
 /* Кнопка записи в шапке главной не нужна: форма записи — сразу под ней. Так меню помещается рядом с язычком. */
 .site-header--home .site-header__cta { display: none; }
+/* Прилипшая шапка главной: панели первого экрана под ней уже нет — язычок становится отдельной плашкой */
+.site-header--home.is-stuck .logo { align-self: center; height: calc(100% - 16px); border-radius: var(--radius-lg); }
+.site-header--home.is-stuck .logo::after { display: none; }
 /* Вогнутое скругление там, где язычок переходит в верх панели */
 .site-header--home .logo::after {
   content: ""; position: absolute; left: 100%; bottom: 0; width: 24px; height: 24px;
@@ -1330,7 +1337,7 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 .doc-list small { margin-left: 8px; font-size: 12px; font-weight: 700; color: var(--muted); }
 @media (min-width: 1000px) {
   .sveden { grid-template-columns: 300px 1fr; gap: 40px; align-items: start; }
-  .sveden-nav { position: sticky; top: 16px; }
+  .sveden-nav { position: sticky; top: calc(var(--header-h) + 16px); }
 }
 
 /* ---------- Блок записи и форма ---------- */
