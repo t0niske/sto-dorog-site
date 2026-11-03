@@ -67,7 +67,7 @@
   --p-paper: #fff;
 
   /* Размеры */
-  --container: 1200px;
+  --container: 1440px;      /* было 1200: на широких экранах заказчику мешали большие поля по бокам (03.11.2026) */
   --gutter: 16px;
   --radius-xl: 28px;
   --radius-lg: 22px;
@@ -484,7 +484,8 @@ table { border-collapse: collapse; }
   .prog__price { margin-top: 14px; padding-top: 0; font-size: 24px; }
   .prog__go { top: 32px; right: 24px; }
   .prog:hover .prog__go { top: 24px; right: 18px; }
-  .prog__img { right: -16%; bottom: -10%; width: 88%; max-width: none; }
+  /* Не крупнее, чем при контейнере 1200: на широких карточках предмет иначе доходит до цены */
+  .prog__img { right: -16%; bottom: -10%; width: 88%; max-width: 260px; }
 }
 .more { display: flex; flex-wrap: wrap; gap: 10px 24px; margin-top: 26px; font-size: 15px; font-weight: 600; }
 .more span { color: var(--muted); font-weight: 500; }
@@ -974,7 +975,7 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
   background-image: repeating-linear-gradient(90deg, #fff 0 22px, transparent 22px 40px); background-size: 100% 4px;
   background-repeat: no-repeat; background-position: 0 50%;
 }
-.adv-route__car { position: absolute; left: 50%; bottom: 52px; width: 64%; max-width: 280px; transform: translateX(-46%); }
+.adv-route__car { position: absolute; left: 50%; bottom: 52px; width: 64%; max-width: 250px; transform: translateX(-46%); }
 .adv-route__from { top: 6px; left: 24px; }
 .adv-route__to { top: 48px; right: 24px; }
 
@@ -995,9 +996,10 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 
 /* Автопарк: машины с обеими коробками */
 .adv-fleet { position: absolute; left: 0; right: 0; bottom: 8px; height: 170px; }
-.adv-fleet img { position: absolute; bottom: 0; width: 62%; max-width: 270px; }
-.adv-fleet img:nth-child(1) { left: -6%; bottom: 46px; width: 50%; opacity: .95; }
-.adv-fleet img:nth-child(2) { right: -8%; bottom: 40px; width: 52%; }
+/* Предельные размеры — как в карточке шириной 390: в широкой машины иначе заходят под подписи */
+.adv-fleet img { position: absolute; bottom: 0; width: 62%; max-width: 245px; }
+.adv-fleet img:nth-child(1) { left: -6%; bottom: 46px; width: 50%; max-width: 200px; opacity: .95; }
+.adv-fleet img:nth-child(2) { right: -8%; bottom: 40px; width: 52%; max-width: 210px; }
 .adv-fleet img:nth-child(3) { left: 50%; transform: translateX(-50%); }
 .adv-fleet__akpp { top: 6px; left: 24px; }
 .adv-fleet__mkpp { top: 50px; left: 24px; }
