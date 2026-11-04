@@ -532,13 +532,14 @@ table { border-collapse: collapse; }
 /* Вариант Б (выбор заказчика 04.11.2026): светлый экран — метка, заголовок, подзаголовок и форма телефона; справа
    тёмная карточка цены: весь курс, платежи по шагам, маткапитал и вычет, учебная машина внизу. Под экраном — цифры
    курса белыми карточками (дату обновления цен заказчик убрал). Телефон: текст → форма → карточка → цифры по две */
-.lhero { display: grid; gap: 24px; padding-top: 4px; }
+.lhero { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; padding-top: 4px; }
 .lhero__badge {
   display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px 6px 10px; border-radius: 999px;
   background: var(--ink); color: #fff; font-size: 13px; font-weight: 700;
 }
 .lhero__badge .icon { width: 18px; height: 18px; color: var(--orange); }
-.lhero__title { margin-top: 16px; font-size: 40px; line-height: 1; letter-spacing: -.045em; }
+/* На 320 px длинное слово («Восстановление») не влезает в 40 px — шрифт от ширины экрана */
+.lhero__title { margin-top: 16px; font-size: clamp(32px, 10.4vw, 40px); line-height: 1; letter-spacing: -.045em; }
 .lhero__title span { color: var(--orange); }
 .lhero__lead { margin-top: 16px; max-width: 540px; font-size: 16px; color: var(--muted); }
 .lhero .lead-form--hero { margin-top: 24px; max-width: 520px; }
@@ -606,16 +607,24 @@ table { border-collapse: collapse; }
 .lchoose__text { margin-top: 14px; font-size: 17px; color: var(--muted); }
 .lchoose .link-arrow { margin-top: 20px; }
 .lchoose .lchoose__table { margin-top: 0; }
-/* Список справа вместо таблицы (категория A: упражнения экзамена) */
+/* Список справа вместо таблицы: нумерованный (категория A: упражнения экзамена) или с галочками (услуга: что входит) */
 .lchoose__list { padding: 22px 24px; border-radius: var(--radius-lg); background: #fff; }
 .lchoose__list-title { font-size: 15px; font-weight: 800; color: var(--orange-text); }
 .lchoose__list ol { margin-top: 6px; counter-reset: lchoose; }
-.lchoose__list li { display: flex; align-items: center; gap: 14px; padding: 13px 0; border-top: 1.5px dashed var(--line); font-size: 18px; font-weight: 700; counter-increment: lchoose; }
+.lchoose__list li { padding: 13px 0; border-top: 1.5px dashed var(--line); font-size: 18px; font-weight: 700; }
 .lchoose__list li:first-child { border-top: 0; }
-.lchoose__list li::before {
+.lchoose__list ol li { display: flex; align-items: center; gap: 14px; counter-increment: lchoose; }
+.lchoose__list ol li::before {
   content: counter(lchoose); flex: none; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px;
   background: var(--orange); color: #fff; font-size: 15px; font-weight: 800;
 }
+.lchoose__list .check-list { gap: 0; margin: 0; }
+.lchoose__list .check-list li { padding-left: 38px; font-size: 17px; font-weight: 600; }
+.lchoose__list .check-list li::before { top: 14px; }
+/* Услуга: без строки «Маткапитал / Вычет» машина встала бы на строки карточки — место снизу по высоте машины
+   (ширина как у .lhero__car, пропорции картинки 768×412) */
+.lhero__card--service { padding-bottom: calc(min(92%, 460px) * .536 + 8px); }
+@media (min-width: 900px) { .lhero__card--service { padding-bottom: calc(min(80%, 460px) * .536 + 8px); } }
 /* Мотоцикл в карточке цены: чёрный на тёмном теряется — за ним светлое пятно */
 .lhero__card--moto { padding-bottom: 210px; background: radial-gradient(58% 42% at 70% 86%, #6b625c 0%, rgba(107, 98, 92, 0) 72%), var(--ink); }
 .lhero__card .lhero__moto { right: -2%; bottom: -14px; width: 70%; max-width: 380px; }
