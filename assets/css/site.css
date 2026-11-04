@@ -434,6 +434,12 @@ table { border-collapse: collapse; }
   .lead-form--hero .field__input { padding: 0 14px; }
   .lead-form--hero .lead-form__submit { padding: 0 18px; }
 }
+/* Меню строкой только-только помещается: на 1180–1279 px справа обрезалась кнопка «Записаться» — отступы меньше */
+@media (min-width: 1180px) and (max-width: 1279px) {
+  .site-header__inner { gap: 16px; }
+  .main-nav__list { gap: 0; }
+  .main-nav__link { padding: 10px 9px; }
+}
 /* Узкий телефон (уже 390px): маска +7 (___) ___-__-__ не помещается рядом с кнопкой — кнопка под полем */
 @media (max-width: 389px) { .lead-form__row { grid-template-columns: 1fr; } }
 
