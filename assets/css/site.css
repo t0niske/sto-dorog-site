@@ -1134,6 +1134,35 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
   .price-row__go .icon { width: 18px; height: 18px; }
 }
 
+/* /raspisanie: наборы и экзамены одной лентой по датам (вариант 2, 04.11.2026). Телефон — дата слева, справа метка,
+   что и пояснение, кнопка во всю ширину; компьютер — общие колонки (subgrid), кнопки одной ширины */
+.sched-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 20px; margin: 22px 0 14px; }
+.sched-legend { display: flex; flex-wrap: wrap; gap: 8px; }
+.sched-updated { font-size: 14px; color: var(--muted); }
+.sched-chip { display: inline-flex; align-items: center; justify-self: start; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 700; white-space: nowrap; }
+.sched-chip--orange { background: var(--orange); color: #fff; }
+.sched-chip--dark { background: var(--ink); color: #fff; }
+.sched-chip--line { background: #fff; box-shadow: inset 0 0 0 1.5px #cfc8c2; color: var(--ink); }
+.sched-list { display: grid; gap: 8px; }
+.sched-row { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 6px 16px; align-items: center; padding: 16px; border-radius: var(--radius-lg); background: #fff; }
+.sched-row__date { grid-row: 1 / span 3; grid-column: 1; display: grid; place-items: center; align-content: center; width: 64px; height: 64px; border-radius: 16px; background: var(--paper); font-size: 12px; font-weight: 700; color: var(--muted); line-height: 1.1; }
+.sched-row__date b { font-size: 26px; font-weight: 800; letter-spacing: -.03em; color: var(--ink); }
+.sched-row__date--soon .icon { width: 26px; height: 26px; color: var(--orange); }
+.sched-row__wd { display: none; }
+.sched-row > .sched-chip, .sched-row__what, .sched-row__note { grid-column: 2; }
+.sched-row__what { font-size: 18px; font-weight: 800; letter-spacing: -.02em; line-height: 1.2; }
+a.sched-row__what:hover { color: var(--orange-text); }
+.sched-row__note { font-size: 14px; color: var(--muted); }
+.sched-row__btn { grid-column: 1 / -1; justify-content: center; margin-top: 6px; }
+@media (min-width: 900px) {
+  .sched-list { grid-template-columns: auto auto max-content minmax(0, .8fr) minmax(0, 1.25fr) max-content; column-gap: 22px; }
+  .sched-list > li { grid-column: 1 / -1; grid-template-columns: subgrid; column-gap: 22px; padding: 12px 22px 12px 12px; }
+  .sched-row > * { grid-row: 1; grid-column: auto; }
+  .sched-row__wd { display: block; font-size: 15px; font-weight: 700; color: var(--muted); }
+  /* Кнопки растянуты на ширину колонки — «Записаться» и «Уточнить время» одной ширины */
+  .sched-row__btn { justify-self: stretch; margin-top: 0; }
+}
+
 /* /oplata: тот же оранжевый экран, справа вместо машины — белая карточка маршрута платежей (вариант 1, 04.11.2026) */
 .price-hero--card .payroute { color: var(--ink); }
 @media (max-width: 379px) {

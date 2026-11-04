@@ -9,7 +9,7 @@
 <link rel="canonical" href="https://sto-dorog-tomsk.ru/raspisanie">
 <link rel="preload" href="/sto-dorog-site/assets/fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/sto-dorog-site/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/sto-dorog-site/assets/css/site.css?v=1793801978">
+<link rel="stylesheet" href="/sto-dorog-site/assets/css/site.css?v=1793803430">
 <script>try{var a=JSON.parse(localStorage.getItem('sd_a11y')||'null'),d=document.documentElement;if(a&&a.on){d.classList.add('a11y');d.setAttribute('data-a11y-font',a.font||1);d.setAttribute('data-a11y-theme',a.theme||'light');if(a.img===0)d.classList.add('a11y-noimg');}}catch(e){}</script>
 <link rel="icon" href="/sto-dorog-site/assets/img/favicon-32.png?v=1793608767" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/sto-dorog-site/assets/img/apple-touch-icon.png?v=1793608768">
@@ -130,49 +130,55 @@
         <li><span aria-current="page">Расписание</span></li>
       </ol>
 </nav>
-<section class="page-hero page-hero--compact" aria-labelledby="page-title">
+<section class="section section--tight hub" aria-labelledby="page-title">
   <div class="container">
-    <h1 id="page-title">Расписание наборов и экзаменов</h1>
-    <p class="page-hero__lead">Ближайшие даты старта групп по адресам и даты экзаменов — внутренних и в ГИБДД. Время занятий в группе и свободные места подскажет администратор при записи</p>
-    <p class="post-meta">Обновлено <time datetime="2026-10-29">29 октября 2026</time></p>
-  </div>
-</section>
-
-<section class="section section--tight" aria-labelledby="nabory-title">
-  <div class="container">
-    <h2 class="section-title" id="nabory-title">Старт групп</h2>
-    <p class="note">Даты следующих наборов уточняйте у администратора: <a href="tel:+79832345656">+7 (983) 234-56-56</a></p>
-
-  </div>
-</section>
-
-<section class="section section--soft" aria-labelledby="exams-title">
-  <div class="container narrow">
-    <h2 class="section-title" id="exams-title">Экзамены</h2>
-        <div class="table-wrap">
-      <table class="table">
-        <caption class="visually-hidden">Ближайшие экзамены</caption>
-        <thead><tr><th scope="col">Экзамен</th><th scope="col">Часть</th><th scope="col" class="num">Дата</th></tr></thead>
-        <tbody>
-                              <tr>
-            <th scope="row">Внутренний экзамен в автошколе</th>
-            <td>Практика</td>
-            <td class="num"><time datetime="2026-11-05">5 ноября, чт</time></td>
-          </tr>
-                                        <tr>
-            <th scope="row">Экзамен в ГИБДД</th>
-            <td>Теория</td>
-            <td class="num"><time datetime="2026-11-19">19 ноября, чт</time></td>
-          </tr>
-                    <tr>
-            <th scope="row">Экзамен в ГИБДД</th>
-            <td>Практика</td>
-            <td class="num"><time datetime="2026-11-24">24 ноября, вт</time></td>
-          </tr>
-                            </tbody>
-      </table>
+    <div class="hub__head">
+      <h1 class="hub__title" id="page-title">Расписание <span class="title-pill">наборов</span> и экзаменов</h1>
+      <p class="hub__lead">Ближайшие даты старта групп по адресам и даты экзаменов — внутренних и в ГИБДД. Время занятий в группе и свободные места подскажет администратор при записи</p>
     </div>
-        <p class="note">Перед экзаменом уточните у администратора время, место и какие документы взять с собой. Внутренний экзамен входит в стоимость обучения; экзамен в ГИБДД для категории B оплачивается отдельно — 5 000 ₽</p>
+
+    <div class="sched-bar">
+      <ul class="sched-legend">
+        <li><span class="sched-chip sched-chip--orange">Старт группы</span></li><li><span class="sched-chip sched-chip--dark">Внутренний экзамен</span></li><li><span class="sched-chip sched-chip--line">Экзамен в ГИБДД</span></li>      </ul>
+      <p class="sched-updated">Обновлено <time datetime="2026-10-29">29 октября 2026</time></p>
+    </div>
+
+    <h2 class="visually-hidden">Ближайшие даты</h2>
+    <ol class="sched-list">
+            <li class="sched-row">
+        <span class="sched-row__date sched-row__date--soon"><svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1793711967#calendar"></use></svg></span>
+        <span class="sched-row__wd"></span>
+        <span class="sched-chip sched-chip--orange">Старт группы</span>
+        <span class="sched-row__what">Ближайший набор</span>
+        <span class="sched-row__note">Дату и адрес уточняйте у администратора</span>
+        <a class="btn btn--primary sched-row__btn" href="#zayavka" data-service="Запись в группу">Записаться</a>
+      </li>
+                        <li class="sched-row">
+        <time class="sched-row__date" datetime="2026-11-05"><b>5</b>ноября</time>
+        <span class="sched-row__wd">чт</span>
+        <span class="sched-chip sched-chip--dark">Внутренний экзамен</span>
+                <span class="sched-row__what">Практика</span>
+        <span class="sched-row__note">Входит в стоимость обучения</span>
+        <a class="btn btn--outline sched-row__btn" href="tel:+79832345656">Уточнить время</a>
+              </li>
+                  <li class="sched-row">
+        <time class="sched-row__date" datetime="2026-11-19"><b>19</b>ноября</time>
+        <span class="sched-row__wd">чт</span>
+        <span class="sched-chip sched-chip--line">Экзамен в ГИБДД</span>
+                <span class="sched-row__what">Теория</span>
+        <span class="sched-row__note">Для категории B — 5 000 ₽, оплачивается отдельно</span>
+        <a class="btn btn--outline sched-row__btn" href="tel:+79832345656">Уточнить время</a>
+              </li>
+                  <li class="sched-row">
+        <time class="sched-row__date" datetime="2026-11-24"><b>24</b>ноября</time>
+        <span class="sched-row__wd">вт</span>
+        <span class="sched-chip sched-chip--line">Экзамен в ГИБДД</span>
+                <span class="sched-row__what">Практика</span>
+        <span class="sched-row__note">Для категории B — 5 000 ₽, оплачивается отдельно</span>
+        <a class="btn btn--outline sched-row__btn" href="tel:+79832345656">Уточнить время</a>
+              </li>
+          </ol>
+    <p class="note">Перед экзаменом уточните у администратора время, место и какие документы взять с собой: <a href="tel:+79832345656">+7 (983) 234-56-56</a></p>
   </div>
 </section>
 
@@ -180,9 +186,9 @@
   <div class="container">
     <div class="section-head">
   <div>
-        <h2 class="section-title" id="where-title">Где проходит обучение</h2>
+        <h2 class="section-title" id="where-title">Где проходит <span class="accent">обучение</span></h2>
       </div>
-    <a class="link-arrow" href="/sto-dorog-site/kontakty">Контакты <svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1793711967#arrow-right"></use></svg></a>
+    <a class="link-arrow" href="/sto-dorog-site/kontakty">Все контакты <svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1793711967#arrow-right"></use></svg></a>
   </div>
     <ul class="card-grid card-grid--4 offices">
     <li class="office">
