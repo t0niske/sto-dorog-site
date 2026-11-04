@@ -1008,7 +1008,7 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 }
 /* Самые узкие телефоны и две колонки на 600–699 px: длинная цена («Цена по запросу», «950 ₽/акад. час») иначе заходит на предмет */
 @media (max-width: 379px), (min-width: 600px) and (max-width: 699px) {
-  .programs--three .prog__img { width: 40%; }
+  .programs--three .prog__img, .programs--two .prog__img { width: 40%; }
 }
 /* Три карточки в группе: на планшете третья — во всю ширину, чтобы справа от неё не оставалось пустого места */
 @media (min-width: 600px) and (max-width: 899px) {
@@ -1031,6 +1031,22 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 @media (min-width: 1100px) {
   .programs--three { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 14px; }
   .programs--three .prog { min-height: 380px; }
+}
+/* Две карточки в группе («Права уже есть»: восстановление и прикрепление): по две в ряд с 600 px, на компьютере — широкие
+   и ниже трёх верхних, цена внизу слева, предмет справа */
+@media (min-width: 600px) {
+  .programs--two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 900px) {
+  .programs--two { gap: 16px; }
+  .programs--two .prog { min-height: 300px; }
+  .programs--two .prog__text { max-width: 55%; }
+  .programs--two .prog__img { right: -6%; bottom: -12%; width: 44%; max-width: 260px; }
+}
+@media (min-width: 1100px) {
+  .programs--two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .programs--two .prog { min-height: 320px; }
+  .programs--two .prog__price { margin-top: auto; padding-top: 18px; }
 }
 
 /* ---------- /price: оранжевый первый экран с машиной и ценниками, прайс строками, вкладки «Томск / Молчаново» ---------- */
