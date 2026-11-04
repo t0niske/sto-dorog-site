@@ -942,6 +942,9 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
   .split { grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
   /* «Подойдёт, если» и «Важно знать» — плашки одной высоты (заказчик 04.11.2026) */
   .split--even { align-items: stretch; }
+  /* Ссылки внизу плашек — на одной линии, как бы ни отличалась длина списков */
+  .split--even > .panel { display: flex; flex-direction: column; }
+  .split--even > .panel > .link-arrow:last-child { align-self: flex-start; margin-top: auto; padding-top: 16px; }
 }
 
 /* Списки с отметками: плюс — оранжевая галочка, минус — «разметка» */
@@ -977,25 +980,57 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
   .related { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
-/* Выбор программы (/obuchenie) */
-.choose { display: grid; gap: 14px; }
-.choose__col { min-width: 0; padding: 22px; border-radius: var(--radius-xl); background: #fff; }
-.choose__title { display: flex; align-items: center; gap: 12px; font-size: 22px; margin-bottom: 10px; }
-.choose__list { display: grid; }
-.choose__item { display: grid; grid-template-columns: 1fr auto; gap: 2px 16px; padding: 16px 0; border-top: 1px solid var(--line); }
-.choose__item:hover .choose__name { color: var(--orange-text); }
-.choose__name { font-size: 18px; font-weight: 800; letter-spacing: -.01em; }
-.choose__text { grid-column: 1; font-size: 14px; color: var(--muted); }
-.choose__price { grid-column: 2; grid-row: 1 / span 2; align-self: center; display: inline-flex; align-items: center; gap: 8px; font-weight: 800; white-space: nowrap; }
-.choose__price .icon { color: var(--orange); }
-/* Узкий телефон: длинная цена («950 ₽/акад. час») справа не помещается и вылезает за карточку — ставим её под описание */
+/* Раздел «Обучение» (/obuchenie), вариант 1 от 04.11.2026: заголовок с плашкой, как на главной, текст справа;
+   две группы карточек программ (.prog с главной) по три; сертификат — оранжевой полосой */
+.hub__head { display: grid; gap: 14px; }
+.hub__title { font-size: clamp(36px, 10vw, 64px); line-height: 1.05; letter-spacing: -.045em; }
+.hub__lead { max-width: 720px; font-size: 17px; color: var(--muted); }
+.hub__group { margin-top: 34px; font-size: 22px; font-weight: 800; letter-spacing: -.02em; line-height: 1.2; }
+.hub__group small { margin-left: 6px; font-size: 15px; font-weight: 600; letter-spacing: 0; color: var(--muted); }
+.hub .programs { margin-top: 14px; }
+.hub-gift {
+  position: relative; overflow: hidden; display: flex; align-items: center; gap: 16px; margin-top: 16px; padding: 18px 20px;
+  border-radius: var(--radius-xl); background: var(--orange); color: #fff; transition: transform .25s, box-shadow .25s;
+}
+.hub-gift:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+.hub-gift__img { flex: none; width: 96px; height: auto; margin: -10px 0 -16px -6px; }
+.hub-gift__body { display: grid; gap: 2px; font-size: 15px; line-height: 1.35; }
+.hub-gift__body b { font-size: 20px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; }
+.hub-gift > .icon { flex: none; margin-left: auto; width: 26px; height: 26px; }
+.hub__table { margin-top: 0; }
+/* Узкий телефон: картинка сертификата съедает строку — прячем, остаётся текст и стрелка */
 @media (max-width: 419px) {
-  .choose__item { grid-template-columns: 1fr; }
-  .choose__price { grid-column: 1; grid-row: auto; margin-top: 6px; }
+  .hub-gift__img { display: none; }
+}
+/* Телефон: «кому» — отдельной строкой под группой, а не переносом с отступом */
+@media (max-width: 599px) {
+  .hub__group small { display: block; margin: 2px 0 0; }
+}
+/* Самые узкие телефоны и две колонки на 600–699 px: длинная цена («Цена по запросу», «950 ₽/акад. час») иначе заходит на предмет */
+@media (max-width: 379px), (min-width: 600px) and (max-width: 699px) {
+  .programs--three .prog__img { width: 40%; }
+}
+/* Три карточки в группе: на планшете третья — во всю ширину, чтобы справа от неё не оставалось пустого места */
+@media (min-width: 600px) and (max-width: 899px) {
+  .programs--three > li:last-child { grid-column: 1 / -1; }
+  .programs--three > li:last-child .prog { min-height: 240px; }
+  .programs--three > li:last-child .prog__img { width: 34%; max-width: 200px; }
 }
 @media (min-width: 900px) {
-  .choose { grid-template-columns: 1fr 1fr; gap: 18px; }
-  .choose__col { padding: 32px; }
+  .hub__head { grid-template-columns: minmax(0, 1fr) minmax(0, .8fr); align-items: end; gap: 40px; }
+  .programs--three { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  /* Три узкие карточки: как на главной от 1100 px — цена сразу под пояснением, низ карточки под предмет */
+  .programs--three .prog { min-height: 360px; }
+  .programs--three .prog__text { max-width: none; }
+  .programs--three .prog__price { margin-top: 14px; padding-top: 0; }
+  .programs--three .prog__img { right: -12%; bottom: -10%; width: 70%; max-width: 240px; }
+  .hub-gift { gap: 22px; padding: 18px 28px; }
+  .hub-gift__img { width: 128px; margin: -12px 0 -20px -8px; }
+  .hub-gift__body b { font-size: 22px; }
+}
+@media (min-width: 1100px) {
+  .programs--three { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 14px; }
+  .programs--three .prog { min-height: 380px; }
 }
 
 /* Шаги обучения — вдоль «дороги» */
