@@ -1146,13 +1146,6 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 @media (min-width: 900px) {
   .price-hero--card { align-items: start; padding-right: 44px; }
 }
-/* Строки «название — цена» в белой плашке справа (Молчаново на /oplata): итоги отделены сплошной линией */
-.pay-rows li { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 13px 0; border-top: 1.5px dashed var(--line); font-size: 17px; font-weight: 600; }
-.pay-rows li:first-child { border-top: 0; }
-.pay-rows b { font-size: 20px; font-weight: 800; white-space: nowrap; }
-.pay-rows li:not(.pay-rows__total) + .pay-rows__total { margin-top: 6px; border-top: 2px solid var(--ink); }
-.pay-rows__total { font-weight: 800; }
-.pay-rows__total b { font-size: 22px; }
 /* Вопросы: заголовок с пояснением слева, ответы справа */
 .lchoose--faq .faq { margin-top: 0; }
 
@@ -1458,9 +1451,17 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 .payroute__tabs { display: inline-grid; grid-template-columns: 1fr 1fr; padding: 4px; border-radius: 999px; background: var(--paper); }
 .payroute__tab { padding: 9px 20px; border-radius: 999px; font-size: 15px; font-weight: 700; text-align: center; cursor: pointer; transition: background .2s, color .2s; }
 .payroute__input--0:checked ~ .payroute__tabs .payroute__tab--0,
-.payroute__input--1:checked ~ .payroute__tabs .payroute__tab--1 { background: var(--ink); color: #fff; }
+.payroute__input--1:checked ~ .payroute__tabs .payroute__tab--1,
+.payroute__input--0:checked ~ .payroute__head .payroute__tab--0,
+.payroute__input--1:checked ~ .payroute__head .payroute__tab--1 { background: var(--ink); color: #fff; }
 .payroute__input--0:focus-visible ~ .payroute__tabs .payroute__tab--0,
-.payroute__input--1:focus-visible ~ .payroute__tabs .payroute__tab--1 { outline: 3px solid var(--orange); outline-offset: 2px; }
+.payroute__input--1:focus-visible ~ .payroute__tabs .payroute__tab--1,
+.payroute__input--0:focus-visible ~ .payroute__head .payroute__tab--0,
+.payroute__input--1:focus-visible ~ .payroute__head .payroute__tab--1 { outline: 3px solid var(--orange); outline-offset: 2px; }
+/* Подпись места слева от переключателя (вторая карточка на /oplata — «Молчаново») */
+.payroute__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; }
+.payroute__place { display: inline-flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 800; }
+.payroute__place .icon { width: 20px; height: 20px; color: var(--orange); }
 .payroute__plan { display: none; }
 .payroute__input--0:checked ~ .payroute__plan--0,
 .payroute__input--1:checked ~ .payroute__plan--1 { display: block; }
