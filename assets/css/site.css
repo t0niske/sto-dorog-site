@@ -594,6 +594,25 @@ table { border-collapse: collapse; }
   .lhero-facts b { font-size: 32px; }
 }
 
+/* Посадочная: «Как проходит обучение» — три карточки с цифрой; «Автомат или механика» — текст слева, таблица справа
+   (вариант 1, заказчик 04.11.2026: в узкой колонке текста справа оставалось слишком много пустоты) */
+.lsteps { display: grid; gap: 12px; margin-top: 24px; }
+.lsteps__item { display: grid; align-content: start; gap: 10px; padding: 22px; border-radius: var(--radius-lg); background: #fff; }
+.lsteps__top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 12px; }
+.lsteps__name { font-size: 15px; font-weight: 800; color: var(--orange-text); }
+.lsteps__figure { font-size: 32px; font-weight: 800; letter-spacing: -.04em; line-height: 1; }
+.lsteps__text { font-size: 16px; color: var(--muted); }
+.lchoose { display: grid; gap: 24px; }
+.lchoose__text { margin-top: 14px; font-size: 17px; color: var(--muted); }
+.lchoose .link-arrow { margin-top: 20px; }
+.lchoose .lchoose__table { margin-top: 0; }
+@media (min-width: 900px) {
+  .lsteps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .lsteps__item { padding: 28px 30px; }
+  .lsteps__figure { font-size: 40px; }
+  .lchoose { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 48px; align-items: center; }
+}
+
 /* ---------- Главная: «От первого занятия до прав» ---------- */
 /* Шаги карточками лесенкой по пунктирной «разметке» к учебной машине (референс заказчика 02.11.2026).
    Карточки: светлые — оранжевая кнопка, оранжевые и тёмная — белая кнопка; вторая и пятая слегка повёрнуты. */
