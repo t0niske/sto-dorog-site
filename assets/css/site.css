@@ -1261,7 +1261,8 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 /* Посадочная страница программы: что входит — список с галочками, ниже «Оплачивается отдельно»; карточка оплаты
    частями — одна, без переключателя «Автомат / Механика» */
 .pay-block__includes { margin-top: 24px; font-size: 17px; font-weight: 600; }
-.pay-block__extra { margin-bottom: 22px; color: var(--muted); }
+/* Ссылки под списком больше нет (способы оплаты — карточками ниже): список заполняет плашку по высоте */
+.pay-block__extra { gap: 18px; font-size: 17px; color: var(--muted); }
 .payroute { padding: 24px 22px 26px; border-radius: var(--radius-xl); background: #fff; }
 .payroute__tabs { display: inline-grid; grid-template-columns: 1fr 1fr; padding: 4px; border-radius: 999px; background: var(--paper); }
 .payroute__tab { padding: 9px 20px; border-radius: 999px; font-size: 15px; font-weight: 700; text-align: center; cursor: pointer; transition: background .2s, color .2s; }
@@ -1296,6 +1297,9 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 @media (min-width: 900px) {
   .pay-block { grid-template-columns: minmax(0, .9fr) minmax(0, 1fr); gap: 56px; }
   .pay-block > div:first-child { padding-top: 8px; }
+  /* Посадочная: верх заголовка «Что входит» — на уровне верха плашки «Оплачивается отдельно» (заказчик 04.11.2026) */
+  .pay-block--top { align-items: stretch; }
+  .pay-block--top > div:first-child { margin-top: -9px; padding-top: 0; }
   .payroute { padding: 36px 40px 38px; }
 }
 .pay-steps { display: grid; gap: 12px; }
