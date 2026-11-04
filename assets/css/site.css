@@ -531,7 +531,7 @@ table { border-collapse: collapse; }
 /* ---------- Посадочная страница программы: первый экран ---------- */
 /* Вариант Б (выбор заказчика 04.11.2026): светлый экран — метка, заголовок, подзаголовок и форма телефона; справа
    тёмная карточка цены: весь курс, платежи по шагам, маткапитал и вычет, учебная машина внизу. Под экраном — цифры
-   курса белыми карточками. Телефон: текст → форма → карточка → цифры по две */
+   курса белыми карточками (дату обновления цен заказчик убрал). Телефон: текст → форма → карточка → цифры по две */
 .lhero { display: grid; gap: 24px; padding-top: 4px; }
 .lhero__badge {
   display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px 6px 10px; border-radius: 999px;
@@ -570,7 +570,6 @@ table { border-collapse: collapse; }
 .lhero-facts li { display: grid; align-content: start; gap: 4px; padding: 16px 18px; border-radius: var(--radius-lg); background: #fff; }
 .lhero-facts b { font-size: 24px; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; }
 .lhero-facts span { font-size: 13px; color: var(--muted); }
-.lhero-updated { margin: 10px 0 12px; font-size: 13px; color: var(--muted); }
 @media (max-width: 359px) {
   .lhero__card { padding-inline: 18px; }
   .lhero__steps li { font-size: 14px; }
