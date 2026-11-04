@@ -1033,6 +1033,91 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
   .programs--three .prog { min-height: 380px; }
 }
 
+/* ---------- /price: оранжевый первый экран с машиной и ценниками, прайс строками, вкладки «Томск / Молчаново» ---------- */
+.price-hero { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; overflow: hidden; padding: 22px 18px 24px; border-radius: var(--radius-xl); background: var(--orange); color: #fff; }
+.price-hero__badge { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; background: #fff; color: var(--ink); font-size: 14px; font-weight: 700; }
+.price-hero__badge .icon { width: 18px; height: 18px; color: var(--orange); }
+.price-hero__title { margin-top: 18px; font-size: clamp(34px, 10vw, 66px); line-height: 1; letter-spacing: -.045em; }
+.price-hero__title span { color: var(--ink); }
+.price-hero__lead { margin-top: 16px; max-width: 540px; font-size: 17px; }
+.price-hero__actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+.price-hero__media { position: relative; display: grid; gap: 8px; }
+.price-hero__car { width: 100%; height: auto; }
+.price-tag {
+  display: inline-grid; justify-self: start; padding: 10px 16px; border-radius: 16px; background: #fff; color: var(--ink);
+  font-size: 24px; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; box-shadow: 0 12px 30px rgba(0, 0, 0, .12); transition: box-shadow .2s;
+}
+.price-tag:hover { box-shadow: 0 18px 40px rgba(0, 0, 0, .22); }
+.price-tag small { font-size: 13px; font-weight: 700; letter-spacing: 0; color: var(--muted); }
+.price-tag--pay { display: inline-flex; align-items: center; gap: 8px; background: var(--ink); color: #fff; font-size: 15px; letter-spacing: 0; }
+.price-tag--pay .icon { width: 18px; height: 18px; color: var(--orange); }
+/* Телефон и планшет: ценники сеткой под машиной */
+@media (max-width: 899px) {
+  .price-hero__media { grid-template-columns: 1fr 1fr; }
+  .price-hero__car { grid-column: 1 / -1; }
+  .price-tag { justify-self: stretch; }
+  .price-tag--pay { grid-column: 1 / -1; justify-content: center; }
+}
+@media (max-width: 599px) {
+  .price-hero__actions .btn { width: 100%; justify-content: center; }
+}
+@media (min-width: 900px) {
+  .price-hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 32px; padding: 44px 0 44px 48px; }
+  .price-hero__media { display: block; min-height: 380px; }
+  .price-hero__car { position: absolute; right: -8%; bottom: 10px; width: 112%; max-width: none; }
+  .price-tag { position: absolute; }
+  .price-tag--b { left: 4%; top: 0; transform: rotate(-3deg); }
+  .price-tag--a { right: 8%; top: 14%; transform: rotate(3deg); }
+  .price-tag--pay { left: 10%; bottom: 0; }
+}
+
+/* Вкладки городов — радиокнопки, без JS: открыт Томск, «Молчаново» показывает второй прайс */
+.city-tabs { position: relative; }
+.city-tabs__radio { position: absolute; top: 0; left: 0; opacity: 0; pointer-events: none; }
+.city-tabs__bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 20px; margin-bottom: 14px; }
+.city-tabs__switch { display: inline-flex; gap: 4px; padding: 5px; border-radius: 999px; background: #fff; }
+.city-tabs__switch label { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; border-radius: 999px; font-size: 16px; font-weight: 800; cursor: pointer; transition: background .2s, color .2s; }
+.city-tabs__switch .icon { width: 18px; height: 18px; color: var(--orange); }
+.city-tabs__updated { font-size: 14px; color: var(--muted); }
+#city-tomsk:checked ~ .city-tabs__bar label[for=city-tomsk],
+#city-molchanovo:checked ~ .city-tabs__bar label[for=city-molchanovo] { background: var(--ink); color: #fff; }
+#city-tomsk:focus-visible ~ .city-tabs__bar label[for=city-tomsk],
+#city-molchanovo:focus-visible ~ .city-tabs__bar label[for=city-molchanovo] { outline: 3px solid var(--orange); outline-offset: 2px; }
+.city-tabs__panel--molchanovo { display: none; }
+#city-molchanovo:checked ~ .city-tabs__panel--tomsk { display: none; }
+#city-molchanovo:checked ~ .city-tabs__panel--molchanovo { display: block; }
+.city-note { display: grid; gap: 8px; margin-top: 8px; padding: 20px 22px; border-radius: var(--radius-lg); background: var(--ink); color: #fff; font-size: 16px; line-height: 1.4; }
+.city-note b { color: var(--orange); }
+.city-note .link-arrow { margin-top: 4px; color: #fff; }
+@media (max-width: 379px) {
+  .city-tabs__switch label { padding: 10px 14px; font-size: 15px; }
+}
+@media (min-width: 900px) {
+  .city-note { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; align-items: center; gap: 24px; padding: 22px 26px; }
+  .city-note .link-arrow { margin-top: 0; }
+}
+
+/* Прайс строками: телефон — раздел, название и цена, пояснение; компьютер — общие колонки (subgrid), описания и цены ровно друг под другом */
+.price-list { display: grid; gap: 8px; }
+.price-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; align-items: center; padding: 18px 20px; border-radius: var(--radius-lg); background: #fff; transition: transform .2s, box-shadow .2s; }
+.price-row:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.price-row__group { grid-column: 1 / -1; font-size: 13px; font-weight: 700; color: var(--orange-text); }
+.price-row__name { font-size: 19px; font-weight: 800; letter-spacing: -.02em; line-height: 1.2; }
+.price-row__text { grid-column: 1 / -1; font-size: 14px; color: var(--muted); }
+.price-row__price { grid-column: 2; grid-row: 2; font-size: 20px; font-weight: 800; white-space: nowrap; }
+.price-row__go { display: none; }
+@media (min-width: 900px) {
+  .price-list { grid-template-columns: 170px minmax(0, 1fr) minmax(0, 1.15fr) max-content 40px; column-gap: 24px; }
+  .price-list > li { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; }
+  .price-row { grid-column: 1 / -1; grid-template-columns: subgrid; row-gap: 0; padding: 20px 26px; }
+  .price-row__group { grid-column: 1; grid-row: 1; }
+  .price-row__name { grid-column: 2; grid-row: 1; }
+  .price-row__text { grid-column: 3; grid-row: 1; }
+  .price-row__price { grid-column: 4; grid-row: 1; justify-self: end; font-size: 22px; }
+  .price-row__go { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--orange); color: #fff; }
+  .price-row__go .icon { width: 18px; height: 18px; }
+}
+
 /* Шаги обучения — вдоль «дороги» */
 .steps { display: grid; gap: 12px; counter-reset: step; }
 .step { position: relative; display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; align-items: start; padding: 20px; border-radius: var(--radius-lg); background: #fff; }
