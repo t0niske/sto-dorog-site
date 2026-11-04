@@ -606,6 +606,19 @@ table { border-collapse: collapse; }
 .lchoose__text { margin-top: 14px; font-size: 17px; color: var(--muted); }
 .lchoose .link-arrow { margin-top: 20px; }
 .lchoose .lchoose__table { margin-top: 0; }
+/* Список справа вместо таблицы (категория A: упражнения экзамена) */
+.lchoose__list { padding: 22px 24px; border-radius: var(--radius-lg); background: #fff; }
+.lchoose__list-title { font-size: 15px; font-weight: 800; color: var(--orange-text); }
+.lchoose__list ol { margin-top: 6px; counter-reset: lchoose; }
+.lchoose__list li { display: flex; align-items: center; gap: 14px; padding: 13px 0; border-top: 1.5px dashed var(--line); font-size: 18px; font-weight: 700; counter-increment: lchoose; }
+.lchoose__list li:first-child { border-top: 0; }
+.lchoose__list li::before {
+  content: counter(lchoose); flex: none; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px;
+  background: var(--orange); color: #fff; font-size: 15px; font-weight: 800;
+}
+/* Мотоцикл в карточке цены: чёрный на тёмном теряется — за ним светлое пятно */
+.lhero__card--moto { padding-bottom: 210px; background: radial-gradient(58% 42% at 70% 86%, #6b625c 0%, rgba(107, 98, 92, 0) 72%), var(--ink); }
+.lhero__card .lhero__moto { right: -2%; bottom: -14px; width: 70%; max-width: 380px; }
 @media (min-width: 900px) {
   .lsteps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
   .lsteps__item { padding: 28px 30px; }
@@ -944,6 +957,8 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 }
 @media (min-width: 1000px) {
   .service-list, .related { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+  /* «Другие программы» — всегда три карточки: в три колонки, без пустого места справа (04.11.2026) */
+  .related { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
 /* Выбор программы (/obuchenie) */
