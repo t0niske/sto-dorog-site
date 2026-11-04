@@ -1532,19 +1532,28 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 }
 @media (min-width: 900px) { .pay-way { padding: 26px 28px; } }
 
-/* topic-card — белая «квитанция» с главным на тёмном первом экране страницы маткапитала или вычета */
+/* topic-card — белая карточка с главным на оранжевом первом экране страницы маткапитала или вычета (как маршрут на /oplata) */
 .topic-card { --fg: var(--ink); --muted: var(--muted-light); --line: #e0ded9; padding: 22px; border-radius: var(--radius-xl); background: #fff; color: var(--ink); }
 .topic-card__title { font-size: 20px; font-weight: 800; letter-spacing: -.02em; line-height: 1.2; }
 .topic-card__rows { margin-top: 14px; }
 .topic-card__rows div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 13px 0; border-top: 1.5px dashed var(--line); }
-.topic-card__rows dt { font-size: 15px; color: var(--muted); }
-.topic-card__rows dd { margin: 0; flex: none; font-size: 17px; font-weight: 800; text-align: right; }
+.topic-card__rows dt { flex: 1 1 0; min-width: 0; font-size: 15px; color: var(--muted); }
+/* Значение целиком, пока помещается; длинное («до 5 рабочих дней») на узком телефоне переносится — не шире 55% строки */
+.topic-card__rows dd { margin: 0; flex: 0 0 auto; max-width: 55%; font-size: 17px; font-weight: 800; text-align: right; }
 .topic-card__rows--money dd { font-size: 24px; letter-spacing: -.02em; color: var(--orange); }
+/* Узкий телефон: условия маткапитала — подпись над значением, чтобы «до 5 рабочих дней» не ломалось на три строки */
+@media (max-width: 419px) {
+  .topic-card__rows:not(.topic-card__rows--money) div { flex-direction: column; align-items: flex-start; gap: 2px; }
+  .topic-card__rows:not(.topic-card__rows--money) dt { flex: none; }
+  .topic-card__rows:not(.topic-card__rows--money) dd { max-width: none; text-align: left; }
+}
 .topic-card__note { display: flex; align-items: flex-start; gap: 8px; padding-top: 14px; border-top: 1.5px dashed var(--line); font-size: 14px; color: var(--muted); }
 .topic-card__note .icon { flex: none; width: 18px; height: 18px; color: var(--orange); }
-.topic-docs { font-size: 17px; }
-.topic-source { margin-top: 20px; font-size: 14px; color: var(--muted); }
-.topic-source a { color: var(--link); }
+/* Источник правил — ссылкой под заголовком «Какие документы нужны» */
+.topic-source { color: var(--link); font-weight: 600; }
+/* Длинный h1 («Оплата автошколы материнским капиталом») на оранжевом экране — мельче, чтобы не было четырёх строк */
+.price-hero__title--long { font-size: clamp(32px, 8.6vw, 52px); }
+@media (min-width: 900px) { .price-hero__title--long { font-size: clamp(40px, 4.1vw, 52px); } }
 @media (min-width: 900px) { .topic-card { padding: 30px 32px; } }
 @media (min-width: 900px) { .pay-steps { grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); grid-auto-flow: column; gap: 16px; } }
 

@@ -9,7 +9,7 @@
 <link rel="canonical" href="https://sto-dorog-tomsk.ru/nalogovyj-vychet">
 <link rel="preload" href="/sto-dorog-site/assets/fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/sto-dorog-site/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/sto-dorog-site/assets/css/site.css?v=1793801252">
+<link rel="stylesheet" href="/sto-dorog-site/assets/css/site.css?v=1793801978">
 <script>try{var a=JSON.parse(localStorage.getItem('sd_a11y')||'null'),d=document.documentElement;if(a&&a.on){d.classList.add('a11y');d.setAttribute('data-a11y-font',a.font||1);d.setAttribute('data-a11y-theme',a.theme||'light');if(a.img===0)d.classList.add('a11y-noimg');}}catch(e){}</script>
 <link rel="icon" href="/sto-dorog-site/assets/img/favicon-32.png?v=1793608767" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/sto-dorog-site/assets/img/apple-touch-icon.png?v=1793608768">
@@ -131,16 +131,16 @@
         <li><span aria-current="page">Налоговый вычет 13%</span></li>
       </ol>
 </nav>
-<section class="page-hero page-hero--compact" aria-labelledby="page-title">
-  <div class="container payplan-wrap">
-    <div>
-      <p class="eyebrow">Возврат налога за обучение</p>
-      <h1 id="page-title">Налоговый вычет за автошколу — вернуть 13%</h1>
-      <p class="page-hero__lead">Если вы официально работаете и платите НДФЛ, за обучение в автошколе с лицензией можно вернуть 13% от оплаченной суммы. С курса на автомате за 61 200 ₽ это до 7 956 ₽ — но не больше налога, который вы заплатили за год</p>
-      <div class="page-hero__actions">
-        <a class="btn btn--primary btn--lg" href="#zayavka">Записаться <svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1793711967#arrow-right"></use></svg></a>
-        <a class="btn btn--outline btn--lg" href="/sto-dorog-site/price">Все цены</a>
-      </div>
+<div class="container">
+  <section class="price-hero price-hero--card" aria-labelledby="page-title">
+    <div class="price-hero__main">
+      <p class="price-hero__badge"><svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1793711967#wallet"></use></svg>Возврат налога за обучение</p>
+      <h1 class="price-hero__title price-hero__title--long" id="page-title">Налоговый вычет за автошколу — <span>вернуть 13%</span></h1>
+      <p class="price-hero__lead">Если вы официально работаете и платите НДФЛ, за обучение в автошколе с лицензией можно вернуть 13% от оплаченной суммы. С курса на автомате за 61 200 ₽ это до 7 956 ₽ — но не больше налога, который вы заплатили за год</p>
+      <p class="price-hero__actions">
+        <a class="btn btn--dark btn--lg" href="#zayavka">Записаться <svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1793711967#arrow-right"></use></svg></a>
+        <a class="btn btn--light btn--lg" href="/sto-dorog-site/price">Все цены</a>
+      </p>
     </div>
     <div class="topic-card">
       <p class="topic-card__title">Сколько вернётся за курс</p>
@@ -151,12 +151,16 @@
               </dl>
             <p class="topic-card__note"><svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1793711967#info"></use></svg>Если за год вы заплатили НДФЛ не меньше этой суммы</p>
           </div>
-  </div>
-</section>
+  </section>
+</div>
 
-<section class="section section--soft" aria-labelledby="usloviya-title">
+<section class="section" aria-labelledby="usloviya-title">
   <div class="container">
-    <h2 class="section-title" id="usloviya-title">Кому подходит и что знать заранее</h2>
+    <div class="section-head">
+  <div>
+        <h2 class="section-title" id="usloviya-title">Кому подходит <span class="accent">и что знать заранее</span></h2>
+      </div>
+  </div>
     <div class="split split--even">
       <div class="panel panel--soft">
         <h3 class="panel__title">Вычет можно получить, если</h3>
@@ -172,8 +176,12 @@
 
 <section class="section" aria-labelledby="shagi-title">
   <div class="container">
-    <h2 class="section-title" id="shagi-title">Как получить вычет</h2>
-    <ol class="pay-steps">
+    <div class="section-head">
+  <div>
+        <h2 class="section-title" id="shagi-title">Как получить <span class="accent">вычет</span></h2>
+      </div>
+  </div>
+    <ol class="pay-steps pay-steps--grid">
             <li class="pay-steps__item">
         <span class="pay-steps__num">1</span>
         <h3 class="pay-steps__title">Справка от автошколы</h3>
@@ -198,16 +206,25 @@
   </div>
 </section>
 
-<section class="section section--soft" aria-labelledby="docs-title">
-  <div class="container narrow">
-    <h2 class="section-title" id="docs-title">Какие документы нужны</h2>
-    <ul class="check-list topic-docs"><li>За расходы с 2024 года — справка об оплате образовательных услуг от автошколы</li><li>За 2023 год — договор с автошколой и документы об оплате: чеки или платёжные поручения</li><li>Если учился ребёнок, брат, сестра или супруг — подтверждение очной формы обучения, если её нет в договоре</li></ul>
+<section class="section" aria-labelledby="docs-title">
+  <div class="container lchoose">
+    <div>
+      <h2 class="section-title" id="docs-title">Какие <span class="accent">документы</span> нужны</h2>
+      <p class="lchoose__text">Правила — по данным официального сайта: <a class="topic-source" href="https://www.nalog.gov.ru/rn70/taxation/taxes/ndfl/nalog_vichet/soc_nv/soc_nv_ob/" target="_blank" rel="noopener">ФНС России: социальный налоговый вычет за обучение</a></p>
+    </div>
+    <div class="lchoose__list">
+      <ul class="check-list"><li>За расходы с 2024 года — справка об оплате образовательных услуг от автошколы</li><li>За 2023 год — договор с автошколой и документы об оплате: чеки или платёжные поручения</li><li>Если учился ребёнок, брат, сестра или супруг — подтверждение очной формы обучения, если её нет в договоре</li></ul>
+    </div>
   </div>
 </section>
 
 <section class="section" aria-labelledby="faq-title">
-  <div class="container narrow">
-    <h2 class="section-title" id="faq-title">Вопросы о налоговом вычете</h2>
+  <div class="container lchoose lchoose--faq">
+    <div>
+      <h2 class="section-title" id="faq-title">Вопросы <span class="accent">о налоговом вычете</span></h2>
+      <p class="lchoose__text">Не нашли ответа — позвоните или напишите в MAX, администратор подскажет</p>
+      <a class="link-arrow" href="/sto-dorog-site/price">Все цены <svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1793711967#arrow-right"></use></svg></a>
+    </div>
     <div class="faq">
         <details class="faq__item">
     <summary class="faq__q"><span class="faq__title">Сколько вернут за курс на автомате?</span><svg class="icon faq__icon" aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1793711967#plus"></use></svg></summary>
@@ -230,13 +247,9 @@
     <div class="faq__a"><p>За три последних года: в 2026 году — за 2023, 2024 и 2025 годы.</p></div>
   </details>
       </div>
-    <p class="topic-source">Правила — по данным официального сайта: <a href="https://www.nalog.gov.ru/rn70/taxation/taxes/ndfl/nalog_vichet/soc_nv/soc_nv_ob/" target="_blank" rel="noopener">ФНС России: социальный налоговый вычет за обучение</a></p>
   </div>
-</section>
-
-<section class="section section--soft" aria-labelledby="ways-title">
   <div class="container">
-    <h2 class="section-title" id="ways-title">Другие способы оплаты</h2>
+    <h2 class="pay-ways__heading">Другие способы оплаты</h2>
     <ul class="pay-ways pay-ways--2">
     <li>
     <a class="pay-way" href="/sto-dorog-site/oplata">
