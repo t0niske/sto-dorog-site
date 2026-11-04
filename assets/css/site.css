@@ -563,7 +563,11 @@ table { border-collapse: collapse; }
 }
 .lhero__steps b { flex: none; font-size: 17px; color: #fff; }
 .lhero__chips { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-.lhero__chips span { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 999px; background: var(--graphite-3); font-size: 13px; font-weight: 700; }
+.lhero__chips a {
+  display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 999px; background: var(--graphite-3);
+  color: #fff; font-size: 13px; font-weight: 700; text-decoration: none; transition: background .2s;
+}
+.lhero__chips a:hover { background: #5a524d; }
 .lhero__chips .icon { width: 16px; height: 16px; color: var(--orange); }
 .lhero__car { position: absolute; right: -12%; bottom: -10px; width: 92%; max-width: 460px; height: auto; }
 .lhero-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 16px; }
@@ -1299,6 +1303,51 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 .pay-steps__num { display: grid; place-items: center; width: 40px; height: 40px; margin-bottom: 14px; border-radius: 12px; background: var(--orange); color: #fff; font-weight: 800; }
 .pay-steps__title { font-size: 19px; margin-bottom: 6px; }
 .pay-steps__item p { font-size: 15px; color: var(--muted); }
+
+/* ---------- Способы оплаты карточками и страницы маткапитала и вычета (заказчик 04.11.2026) ---------- */
+/* pay-ways — три ссылки «частями / маткапитал / вычет 13%» вместо одной строки-ссылки; на странице способа — две */
+.pay-ways { display: grid; gap: 12px; }
+.pay-way {
+  display: grid; grid-template-rows: auto auto 1fr auto; height: 100%; padding: 22px; border-radius: var(--radius-lg);
+  background: #fff; color: var(--ink); text-decoration: none; transition: box-shadow .2s;
+}
+.pay-way:hover { box-shadow: var(--shadow); }
+.pay-way__icon {
+  display: grid; place-items: center; width: 44px; height: 44px; margin-bottom: 14px; border-radius: 12px;
+  background: var(--orange); color: #fff; font-size: 15px; font-weight: 800; letter-spacing: -.02em;
+}
+.pay-way__icon .icon { width: 22px; height: 22px; }
+.pay-way__title { font-size: 19px; font-weight: 800; letter-spacing: -.02em; line-height: 1.2; }
+.pay-way__text { margin-top: 6px; font-size: 15px; color: var(--muted-light); }
+.pay-way__more { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; font-size: 15px; font-weight: 700; color: var(--orange-text); }
+.pay-way__more .icon { width: 18px; height: 18px; color: var(--orange); }
+.pay-ways__heading { margin: 36px 0 16px; font-size: 22px; font-weight: 800; letter-spacing: -.02em; }
+/* Телефон: значок слева от текста, карточки ниже */
+@media (max-width: 699px) {
+  .pay-way { grid-template-columns: 44px minmax(0, 1fr); grid-template-rows: none; column-gap: 14px; padding: 18px; }
+  .pay-way__icon { grid-row: 1 / span 3; margin-bottom: 0; }
+  .pay-way__more { margin-top: 10px; }
+}
+@media (min-width: 700px) {
+  .pay-ways--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pay-ways--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 900px) { .pay-way { padding: 26px 28px; } }
+
+/* topic-card — белая «квитанция» с главным на тёмном первом экране страницы маткапитала или вычета */
+.topic-card { --fg: var(--ink); --muted: var(--muted-light); --line: #e0ded9; padding: 22px; border-radius: var(--radius-xl); background: #fff; color: var(--ink); }
+.topic-card__title { font-size: 20px; font-weight: 800; letter-spacing: -.02em; line-height: 1.2; }
+.topic-card__rows { margin-top: 14px; }
+.topic-card__rows div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 13px 0; border-top: 1.5px dashed var(--line); }
+.topic-card__rows dt { font-size: 15px; color: var(--muted); }
+.topic-card__rows dd { margin: 0; flex: none; font-size: 17px; font-weight: 800; text-align: right; }
+.topic-card__rows--money dd { font-size: 24px; letter-spacing: -.02em; color: var(--orange); }
+.topic-card__note { display: flex; align-items: flex-start; gap: 8px; padding-top: 14px; border-top: 1.5px dashed var(--line); font-size: 14px; color: var(--muted); }
+.topic-card__note .icon { flex: none; width: 18px; height: 18px; color: var(--orange); }
+.topic-docs { font-size: 17px; }
+.topic-source { margin-top: 20px; font-size: 14px; color: var(--muted); }
+.topic-source a { color: var(--link); }
+@media (min-width: 900px) { .topic-card { padding: 30px 32px; } }
 @media (min-width: 900px) { .pay-steps { grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); grid-auto-flow: column; gap: 16px; } }
 
 /* ---------- Таблицы ---------- */
