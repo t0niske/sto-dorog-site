@@ -529,51 +529,66 @@ table { border-collapse: collapse; }
 .more a { border-bottom: 1.5px solid var(--orange); }
 
 /* ---------- Посадочная страница программы: первый экран ---------- */
-/* Вариант В (выбор заказчика 03.11.2026): тёмная панель, учебная машина уезжает за правый край, форма — в оранжевой
-   плашке, цифры курса строкой внизу. Телефон: метка → заголовок → машина → форма → цифры по две.
-   Компьютер: слева текст и форма, справа машина на две строки, цифры — на всю ширину */
-.lhero {
-  --fg: #fff; --muted: rgba(255, 255, 255, .75);
-  position: relative; overflow: hidden; display: grid; gap: 20px; padding: 22px 18px 20px;
-  border-radius: var(--radius-xl); background: var(--ink); color: var(--fg);
-}
+/* Вариант Б (выбор заказчика 04.11.2026): светлый экран — метка, заголовок, подзаголовок и форма телефона; справа
+   тёмная карточка цены: весь курс, платежи по шагам, маткапитал и вычет, учебная машина внизу. Под экраном — цифры
+   курса белыми карточками. Телефон: текст → форма → карточка → цифры по две */
+.lhero { display: grid; gap: 24px; padding-top: 4px; }
 .lhero__badge {
   display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px 6px 10px; border-radius: 999px;
-  background: var(--orange); color: #fff; font-size: 13px; font-weight: 700;
+  background: var(--ink); color: #fff; font-size: 13px; font-weight: 700;
 }
-.lhero__badge .icon { width: 18px; height: 18px; }
-.lhero__title { margin-top: 16px; font-size: 38px; line-height: 1; letter-spacing: -.045em; }
+.lhero__badge .icon { width: 18px; height: 18px; color: var(--orange); }
+.lhero__title { margin-top: 16px; font-size: 40px; line-height: 1; letter-spacing: -.045em; }
 .lhero__title span { color: var(--orange); }
-.lhero__lead { margin-top: 14px; max-width: 520px; font-size: 16px; color: var(--muted); }
-.lhero__car { justify-self: end; width: 115%; max-width: none; height: auto; margin-right: -20%; }
-.lhero__form { padding: 18px; border-radius: 24px; background: var(--orange); }
-.lhero__form-title { margin-bottom: 12px; font-size: 19px; font-weight: 800; letter-spacing: -.02em; line-height: 1.2; }
-.lhero__form :focus-visible { outline-color: var(--ink); }
-.lhero__stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 20px; padding-top: 18px; border-top: 1.5px solid rgba(255, 255, 255, .14); }
-.lhero__stats li { display: grid; align-content: start; gap: 2px; }
-.lhero__stats b { font-size: 26px; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; }
-.lhero__stats li:first-child b { color: var(--orange); }
-.lhero__stats span { font-size: 13px; color: var(--muted-dark); }
-.lhero__updated { margin-top: -8px; font-size: 13px; color: var(--muted-dark); }
+.lhero__lead { margin-top: 16px; max-width: 540px; font-size: 16px; color: var(--muted); }
+.lhero .lead-form--hero { margin-top: 24px; max-width: 520px; }
+.lhero .lead-form--hero .field__input { box-shadow: inset 0 0 0 1.5px var(--line); }
+.lhero .lead-form--hero .field__input:focus { box-shadow: inset 0 0 0 1.5px var(--ink), 0 0 0 3px rgba(45, 41, 38, .12); }
+.lhero .lead-form--hero .lead-form__submit { background: var(--orange); }
+.lhero .lead-form--hero .lead-form__submit:hover { background: var(--ink); }
+.lhero .lead-form--hero .checkbox { color: var(--muted); }
+.lhero .lead-form--hero .checkbox input { accent-color: var(--orange); }
+.lhero .lead-form--hero .checkbox a { color: var(--link); }
+.lhero__card {
+  --fg: #fff; --muted: var(--muted-dark);
+  position: relative; overflow: hidden; padding: 24px 22px 150px; border-radius: var(--radius-xl); background: var(--ink); color: var(--fg);
+}
+.lhero__label { font-size: 14px; font-weight: 700; color: var(--muted-dark); }
+.lhero__sum { margin-top: 6px; font-size: 52px; font-weight: 800; letter-spacing: -.05em; line-height: 1; }
+.lhero__sum small { display: block; margin-top: 8px; font-size: 15px; font-weight: 700; letter-spacing: 0; color: var(--orange); }
+.lhero__steps { margin-top: 20px; }
+.lhero__steps li {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 12px 0;
+  border-top: 1.5px dashed rgba(255, 255, 255, .18); font-size: 15px; font-weight: 600; color: rgba(255, 255, 255, .8);
+}
+.lhero__steps b { flex: none; font-size: 17px; color: #fff; }
+.lhero__chips { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.lhero__chips span { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 999px; background: var(--graphite-3); font-size: 13px; font-weight: 700; }
+.lhero__chips .icon { width: 16px; height: 16px; color: var(--orange); }
+.lhero__car { position: absolute; right: -12%; bottom: -10px; width: 92%; max-width: 460px; height: auto; }
+.lhero-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 16px; }
+.lhero-facts li { display: grid; align-content: start; gap: 4px; padding: 16px 18px; border-radius: var(--radius-lg); background: #fff; }
+.lhero-facts b { font-size: 24px; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; }
+.lhero-facts span { font-size: 13px; color: var(--muted); }
+.lhero-updated { margin: 10px 0 12px; font-size: 13px; color: var(--muted); }
+@media (max-width: 359px) {
+  .lhero__card { padding-inline: 18px; }
+  .lhero__steps li { font-size: 14px; }
+}
 @media (min-width: 600px) {
-  .lhero { padding: 30px 28px 26px; }
-  .lhero__title { font-size: 48px; }
-  .lhero__car { width: 100%; margin-right: -12%; }
+  .lhero__title { font-size: 50px; }
+  .lhero__card { padding: 30px 30px 190px; }
+  .lhero__sum { font-size: 60px; }
 }
 @media (min-width: 900px) {
-  .lhero { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px 40px; padding: 44px 0 30px 52px; }
-  .lhero__text { grid-column: 1; grid-row: 1; }
-  .lhero__title { font-size: 56px; }
+  .lhero { grid-template-columns: minmax(0, 1fr) minmax(0, .9fr); align-items: center; gap: 48px; padding-top: 10px; }
+  .lhero__title { font-size: clamp(52px, 4.6vw, 66px); }
   .lhero__lead { font-size: 17px; }
-  .lhero__car { grid-column: 2; grid-row: 1 / 3; align-self: center; width: 118%; margin-right: -26%; }
-  .lhero__form { grid-column: 1; grid-row: 2; max-width: 520px; padding: 20px 22px; }
-  .lhero__stats, .lhero__updated { grid-column: 1 / -1; margin-right: 52px; }
-  .lhero__stats { grid-template-columns: repeat(4, minmax(0, 1fr)); padding-top: 24px; }
-  .lhero__stats b { font-size: 34px; }
-}
-@media (min-width: 1240px) {
-  .lhero { padding-left: 64px; }
-  .lhero__title { font-size: 62px; }
+  .lhero__card { padding: 34px 34px 180px; }
+  .lhero__car { width: 80%; }
+  .lhero-facts { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 24px; }
+  .lhero-facts li { padding: 22px 26px; }
+  .lhero-facts b { font-size: 32px; }
 }
 
 /* ---------- Главная: «От первого занятия до прав» ---------- */
@@ -1241,11 +1256,7 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 /* Посадочная страница программы: что входит — список с галочками, ниже «Оплачивается отдельно»; карточка оплаты
    частями — одна, без переключателя «Автомат / Механика» */
 .pay-block__includes { margin-top: 24px; font-size: 17px; font-weight: 600; }
-.pay-block__subtitle { margin-top: 28px; font-size: 19px; font-weight: 800; letter-spacing: -.02em; }
-.pay-block__extra { margin: 14px 0 24px; color: var(--muted); }
-.payroute__title { font-size: 21px; font-weight: 800; letter-spacing: -.02em; }
-.payroute--single .payroute__plan { display: block; }
-.payroute--single .payroute__steps { margin-top: 24px; }
+.pay-block__extra { margin-bottom: 22px; color: var(--muted); }
 .payroute { padding: 24px 22px 26px; border-radius: var(--radius-xl); background: #fff; }
 .payroute__tabs { display: inline-grid; grid-template-columns: 1fr 1fr; padding: 4px; border-radius: 999px; background: var(--paper); }
 .payroute__tab { padding: 9px 20px; border-radius: 999px; font-size: 15px; font-weight: 700; text-align: center; cursor: pointer; transition: background .2s, color .2s; }
