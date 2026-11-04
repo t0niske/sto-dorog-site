@@ -562,7 +562,8 @@ table { border-collapse: collapse; }
   display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 12px 0;
   border-top: 1.5px dashed rgba(255, 255, 255, .18); font-size: 15px; font-weight: 600; color: rgba(255, 255, 255, .8);
 }
-.lhero__steps b { flex: none; font-size: 17px; color: #fff; }
+/* Значение справа переносится, если не влезает (длинные строки у услуг), цены не рвутся — в них неразрывные пробелы */
+.lhero__steps b { flex: 0 1 auto; font-size: 17px; text-align: right; color: #fff; }
 .lhero__chips { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
 .lhero__chips a {
   display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 999px; background: var(--graphite-3);
@@ -603,6 +604,8 @@ table { border-collapse: collapse; }
 .lsteps__name { font-size: 15px; font-weight: 800; color: var(--orange-text); }
 .lsteps__figure { font-size: 32px; font-weight: 800; letter-spacing: -.04em; line-height: 1; }
 .lsteps__text { font-size: 16px; color: var(--muted); }
+/* Подпись над цифрой, а не рядом — когда подписи длинные (даты в «Как менялся закон») */
+.lsteps--stack .lsteps__top { flex-direction: column; align-items: flex-start; gap: 6px; }
 .lchoose { display: grid; gap: 24px; }
 .lchoose__text { margin-top: 14px; font-size: 17px; color: var(--muted); }
 .lchoose .link-arrow { margin-top: 20px; }
@@ -621,6 +624,10 @@ table { border-collapse: collapse; }
 .lchoose__list .check-list { gap: 0; margin: 0; }
 .lchoose__list .check-list li { padding-left: 38px; font-size: 17px; font-weight: 600; }
 .lchoose__list .check-list li::before { top: 14px; }
+.lchoose__list-title--sub { margin-top: 10px; padding-top: 18px; border-top: 1.5px solid var(--line); }
+.lchoose__list .cross-list { gap: 0; }
+.lchoose__list .cross-list li { padding-left: 36px; font-size: 17px; font-weight: 500; color: var(--muted); }
+.lchoose__list .cross-list li::before { top: 24px; }
 /* Услуга: без строки «Маткапитал / Вычет» машина встала бы на строки карточки — место снизу по высоте машины
    (ширина как у .lhero__car, пропорции картинки 768×412) */
 .lhero__card--service { padding-bottom: calc(min(92%, 460px) * .536 + 8px); }
