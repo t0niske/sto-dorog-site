@@ -1134,6 +1134,28 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
   .price-row__go .icon { width: 18px; height: 18px; }
 }
 
+/* /oplata: тот же оранжевый экран, справа вместо машины — белая карточка маршрута платежей (вариант 1, 04.11.2026) */
+.price-hero--card .payroute { color: var(--ink); }
+@media (max-width: 379px) {
+  .price-hero--card { padding-inline: 14px; }
+  .price-hero--card .payroute { padding: 20px 14px 22px; }
+  .price-hero--card .payroute__steps { padding-left: 42px; }
+  .price-hero--card .payroute__step::before { left: -42px; }
+  .price-hero--card .payroute__step strong { font-size: 18px; }
+}
+@media (min-width: 900px) {
+  .price-hero--card { align-items: start; padding-right: 44px; }
+}
+/* Строки «название — цена» в белой плашке справа (Молчаново на /oplata): итоги отделены сплошной линией */
+.pay-rows li { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 13px 0; border-top: 1.5px dashed var(--line); font-size: 17px; font-weight: 600; }
+.pay-rows li:first-child { border-top: 0; }
+.pay-rows b { font-size: 20px; font-weight: 800; white-space: nowrap; }
+.pay-rows li:not(.pay-rows__total) + .pay-rows__total { margin-top: 6px; border-top: 2px solid var(--ink); }
+.pay-rows__total { font-weight: 800; }
+.pay-rows__total b { font-size: 22px; }
+/* Вопросы: заголовок с пояснением слева, ответы справа */
+.lchoose--faq .faq { margin-top: 0; }
+
 /* Шаги обучения — вдоль «дороги» */
 .steps { display: grid; gap: 12px; counter-reset: step; }
 .step { position: relative; display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; align-items: start; padding: 20px; border-radius: var(--radius-lg); background: #fff; }
@@ -1416,27 +1438,10 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
   .adv-cert__title { font-size: 21px; }
 }
 
-/* Оплата частями: полоса платежей */
+/* Первый экран страниц маткапитала и вычета: текст слева, карточка справа */
 .payplan-wrap { display: grid; gap: 28px; align-items: center; }
-.payplan { display: grid; gap: 22px; padding: 22px; border-radius: var(--radius-xl); background: var(--card); }
-.payplan__head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 10px; }
-.payplan__label { font-weight: 700; }
-.payplan__total { font-size: 24px; letter-spacing: -.03em; }
-.payplan__bar { display: flex; gap: 3px; height: 18px; }
-.payplan__part { min-width: 12px; border-radius: 6px; }
-.payplan__part--start { background: var(--orange); }
-.payplan__part--lessons { background: repeating-linear-gradient(90deg, var(--fg) 0 calc(100% / var(--n) - 2px), transparent calc(100% / var(--n) - 2px) calc(100% / var(--n))); }
-.payplan__part--exam { background: var(--muted); }
-.payplan__legend { display: grid; gap: 10px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 15px; color: var(--muted); }
-.payplan__legend li { position: relative; padding-left: 24px; }
-.payplan__legend strong { color: var(--fg); }
-.payplan__dot { position: absolute; left: 0; top: 5px; width: 12px; height: 12px; border-radius: 4px; }
-.payplan__dot--start { background: var(--orange); }
-.payplan__dot--lessons { background: var(--fg); }
-.payplan__dot--exam { background: var(--muted); }
 @media (min-width: 900px) {
   .payplan-wrap { grid-template-columns: 1fr 1fr; gap: 56px; }
-  .payplan { padding: 32px; }
 }
 
 /* Главная: «Сколько платить» — текст слева, карточка-маршрут справа (вариант B, выбор заказчика 02.11.2026) */
@@ -1493,6 +1498,8 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 .pay-steps__num { display: grid; place-items: center; width: 40px; height: 40px; margin-bottom: 14px; border-radius: 12px; background: var(--orange); color: #fff; font-weight: 800; }
 .pay-steps__title { font-size: 19px; margin-bottom: 6px; }
 .pay-steps__item p { font-size: 15px; color: var(--muted); }
+/* /oplata: четыре шага — на планшете по два в ряд */
+@media (min-width: 600px) and (max-width: 899px) { .pay-steps--grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 /* ---------- Способы оплаты карточками и страницы маткапитала и вычета (заказчик 04.11.2026) ---------- */
 /* pay-ways — три ссылки «частями / маткапитал / вычет 13%» вместо одной строки-ссылки; на странице способа — две */

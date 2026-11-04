@@ -9,7 +9,7 @@
 <link rel="canonical" href="https://sto-dorog-tomsk.ru/oplata">
 <link rel="preload" href="/sto-dorog-site/assets/fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/sto-dorog-site/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/sto-dorog-site/assets/css/site.css?v=1793796831">
+<link rel="stylesheet" href="/sto-dorog-site/assets/css/site.css?v=1793799875">
 <script>try{var a=JSON.parse(localStorage.getItem('sd_a11y')||'null'),d=document.documentElement;if(a&&a.on){d.classList.add('a11y');d.setAttribute('data-a11y-font',a.font||1);d.setAttribute('data-a11y-theme',a.theme||'light');if(a.img===0)d.classList.add('a11y-noimg');}}catch(e){}</script>
 <link rel="icon" href="/sto-dorog-site/assets/img/favicon-32.png?v=1793608767" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/sto-dorog-site/assets/img/apple-touch-icon.png?v=1793608768">
@@ -131,53 +131,52 @@
         <li><span aria-current="page">Оплата частями</span></li>
       </ol>
 </nav>
-<section class="page-hero page-hero--compact" aria-labelledby="page-title">
-  <div class="container payplan-wrap">
-    <div>
-      <p class="eyebrow">Без банка и процентов</p>
-      <h1 id="page-title">Оплата обучения частями</h1>
-      <p class="page-hero__lead">Не нужно платить всю сумму сразу. На старте вы оплачиваете теоретический курс — 5 000 ₽, а занятия вождения — по одному, по мере обучения. Банков и процентов нет: вы платите автошколе ровно цену курса</p>
-      <div class="page-hero__actions">
-        <a class="btn btn--primary btn--lg" href="#zayavka">Записаться <svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1793711967#arrow-right"></use></svg></a>
-        <a class="btn btn--outline btn--lg" href="/sto-dorog-site/price">Все цены</a>
+<div class="container">
+  <section class="price-hero price-hero--card" aria-labelledby="page-title">
+    <div class="price-hero__main">
+      <p class="price-hero__badge"><svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1793711967#wallet"></use></svg>Без банка и процентов</p>
+      <h1 class="price-hero__title" id="page-title">Оплата обучения <span>частями</span></h1>
+      <p class="price-hero__lead">Не нужно платить всю сумму сразу. На старте вы оплачиваете теоретический курс — 5 000 ₽, а занятия вождения — по одному, по мере обучения. Банков и процентов нет: вы платите автошколе ровно цену курса</p>
+      <p class="price-hero__actions">
+        <a class="btn btn--dark btn--lg" href="#zayavka">Записаться <svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1793711967#arrow-right"></use></svg></a>
+        <a class="btn btn--light btn--lg" href="/sto-dorog-site/price">Все цены</a>
+      </p>
+    </div>
+    <div class="payroute">
+    <input class="payroute__input payroute__input--0 visually-hidden" type="radio" name="payroute-gearbox" id="payroute-b-akpp" checked>
+    <input class="payroute__input payroute__input--1 visually-hidden" type="radio" name="payroute-gearbox" id="payroute-b-mkpp">
+    <div class="payroute__tabs">
+        <label class="payroute__tab payroute__tab--0" for="payroute-b-akpp">Автомат</label>
+        <label class="payroute__tab payroute__tab--1" for="payroute-b-mkpp">Механика</label>
       </div>
-    </div>
-    <div class="payplan">
-      <div class="payplan__row">
-    <div class="payplan__head">
-      <span class="payplan__label">Автомат</span>
-      <strong class="payplan__total">61 200 ₽</strong>
-    </div>
-    <div class="payplan__bar" role="img" aria-label="Автомат: 5 000 ₽ на старте, затем 28 занятий по 1 900 ₽, в конце внутренний экзамен 3 000 ₽">
-      <span class="payplan__part payplan__part--start" style="flex-grow:5000"></span>
-      <span class="payplan__part payplan__part--lessons" style="flex-grow:53200;--n:28"></span>
-      <span class="payplan__part payplan__part--exam" style="flex-grow:3000"></span>
-    </div>
+      <div class="payroute__plan payroute__plan--0">
+    <ol class="payroute__steps">
+      <li class="payroute__step"><span><b>На старте</b><small>теоретический курс</small></span><strong>5 000 ₽</strong></li>
+      <li class="payroute__step"><span><b>По ходу обучения</b><small>занятия вождения, по одному</small></span><strong>28&nbsp;×&nbsp;1 900 ₽</strong></li>
+      <li class="payroute__step"><span><b>В конце</b><small>внутренний экзамен</small></span><strong>3 000 ₽</strong></li>
+    </ol>
+    <p class="payroute__total"><span>Итого за курс</span><strong>61 200 ₽</strong><small><svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1793711967#check-circle"></use></svg>Без кредита и процентов</small></p>
   </div>
-      <div class="payplan__row">
-    <div class="payplan__head">
-      <span class="payplan__label">Механика</span>
-      <strong class="payplan__total">63 100 ₽</strong>
-    </div>
-    <div class="payplan__bar" role="img" aria-label="Механика: 5 000 ₽ на старте, затем 29 занятий по 1 900 ₽, в конце внутренний экзамен 3 000 ₽">
-      <span class="payplan__part payplan__part--start" style="flex-grow:5000"></span>
-      <span class="payplan__part payplan__part--lessons" style="flex-grow:55100;--n:29"></span>
-      <span class="payplan__part payplan__part--exam" style="flex-grow:3000"></span>
-    </div>
+      <div class="payroute__plan payroute__plan--1">
+    <ol class="payroute__steps">
+      <li class="payroute__step"><span><b>На старте</b><small>теоретический курс</small></span><strong>5 000 ₽</strong></li>
+      <li class="payroute__step"><span><b>По ходу обучения</b><small>занятия вождения, по одному</small></span><strong>29&nbsp;×&nbsp;1 900 ₽</strong></li>
+      <li class="payroute__step"><span><b>В конце</b><small>внутренний экзамен</small></span><strong>3 000 ₽</strong></li>
+    </ol>
+    <p class="payroute__total"><span>Итого за курс</span><strong>63 100 ₽</strong><small><svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1793711967#check-circle"></use></svg>Без кредита и процентов</small></p>
   </div>
-    <ol class="payplan__legend">
-    <li><span class="payplan__dot payplan__dot--start"></span><strong>5 000 ₽</strong> на старте — теоретический курс</li>
-    <li><span class="payplan__dot payplan__dot--lessons"></span><strong>по 1 900 ₽</strong> за занятие вождения — по мере обучения (28 на автомате, 29 на механике)</li>
-    <li><span class="payplan__dot payplan__dot--exam"></span><strong>3 000 ₽</strong> в конце — внутренний экзамен</li>
-  </ol>
+  </div>
+  </section>
 </div>
-  </div>
-</section>
 
-<section class="section section--soft" aria-labelledby="shagi-title">
+<section class="section" aria-labelledby="shagi-title">
   <div class="container">
-    <h2 class="section-title" id="shagi-title">Как это выглядит по шагам</h2>
-    <ol class="pay-steps">
+    <div class="section-head">
+  <div>
+        <h2 class="section-title" id="shagi-title">Как это выглядит <span class="accent">по шагам</span></h2>
+      </div>
+  </div>
+    <ol class="pay-steps pay-steps--grid">
             <li class="pay-steps__item">
         <span class="pay-steps__num">1</span>
         <h3 class="pay-steps__title">Договор и теория</h3>
@@ -202,45 +201,32 @@
   </div>
 </section>
 
-<section class="section section--soft" aria-labelledby="molch-title">
-  <div class="container narrow">
-    <h2 class="section-title" id="molch-title">В Молчаново</h2>
-    <p>Теоретический курс в Молчаново стоит 10 000 ₽, занятия — те же 1 900 ₽. Поэтому курс на автомате там стоит 66 200 ₽, на механике — 68 100 ₽</p>
-    <div class="payplan">
-      <div class="payplan__row">
-    <div class="payplan__head">
-      <span class="payplan__label">Автомат</span>
-      <strong class="payplan__total">66 200 ₽</strong>
+<section class="section" aria-labelledby="molch-title">
+  <div class="container lchoose">
+    <div>
+      <h2 class="section-title" id="molch-title">В Молчаново <span class="accent">теория дороже</span></h2>
+      <p class="lchoose__text">Теоретический курс в Молчаново стоит 10 000 ₽, занятия вождения и внутренний экзамен — как в Томске. Платить так же: теория на старте, дальше по занятию</p>
+      <a class="link-arrow" href="/sto-dorog-site/kontakty/molchanovo">ул. Димитрова, 67 — адрес и набор <svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1793711967#arrow-right"></use></svg></a>
     </div>
-    <div class="payplan__bar" role="img" aria-label="Автомат: 10 000 ₽ на старте, затем 28 занятий по 1 900 ₽, в конце внутренний экзамен 3 000 ₽">
-      <span class="payplan__part payplan__part--start" style="flex-grow:10000"></span>
-      <span class="payplan__part payplan__part--lessons" style="flex-grow:53200;--n:28"></span>
-      <span class="payplan__part payplan__part--exam" style="flex-grow:3000"></span>
+    <div class="lchoose__list">
+      <ul class="pay-rows">
+        <li><span>Теоретический курс</span><b>10 000 ₽</b></li>
+        <li><span>Занятие вождения</span><b>1 900 ₽</b></li>
+        <li><span>Внутренний экзамен</span><b>3 000 ₽</b></li>
+        <li class="pay-rows__total"><span>Итого на автомате</span><b>66 200 ₽</b></li>
+        <li class="pay-rows__total"><span>Итого на механике</span><b>68 100 ₽</b></li>
+      </ul>
     </div>
-  </div>
-      <div class="payplan__row">
-    <div class="payplan__head">
-      <span class="payplan__label">Механика</span>
-      <strong class="payplan__total">68 100 ₽</strong>
-    </div>
-    <div class="payplan__bar" role="img" aria-label="Механика: 10 000 ₽ на старте, затем 29 занятий по 1 900 ₽, в конце внутренний экзамен 3 000 ₽">
-      <span class="payplan__part payplan__part--start" style="flex-grow:10000"></span>
-      <span class="payplan__part payplan__part--lessons" style="flex-grow:55100;--n:29"></span>
-      <span class="payplan__part payplan__part--exam" style="flex-grow:3000"></span>
-    </div>
-  </div>
-    <ol class="payplan__legend">
-    <li><span class="payplan__dot payplan__dot--start"></span><strong>10 000 ₽</strong> на старте — теоретический курс</li>
-    <li><span class="payplan__dot payplan__dot--lessons"></span><strong>по 1 900 ₽</strong> за занятие вождения — по мере обучения (28 на автомате, 29 на механике)</li>
-    <li><span class="payplan__dot payplan__dot--exam"></span><strong>3 000 ₽</strong> в конце — внутренний экзамен</li>
-  </ol>
-</div>
   </div>
 </section>
 
 <section class="section" aria-labelledby="faq-title">
-  <div class="container narrow">
-    <h2 class="section-title" id="faq-title">Вопросы об оплате</h2>
+  <div class="container lchoose lchoose--faq">
+    <div>
+      <h2 class="section-title" id="faq-title">Вопросы <span class="accent">об оплате</span></h2>
+      <p class="lchoose__text">Не нашли ответа — позвоните или напишите в MAX, администратор подскажет, сколько и когда платить в вашем случае</p>
+      <a class="link-arrow" href="/sto-dorog-site/price">Все цены <svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1793711967#arrow-right"></use></svg></a>
+    </div>
     <div class="faq">
         <details class="faq__item">
     <summary class="faq__q"><span class="faq__title">Сколько нужно заплатить, чтобы начать?</span><svg class="icon faq__icon" aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1793711967#plus"></use></svg></summary>
@@ -256,11 +242,8 @@
   </details>
       </div>
   </div>
-</section>
-
-<section class="section section--soft" aria-labelledby="ways-title">
   <div class="container">
-    <h2 class="section-title" id="ways-title">Другие способы оплаты</h2>
+    <h2 class="pay-ways__heading">Другие способы оплаты</h2>
     <ul class="pay-ways pay-ways--2">
     <li>
     <a class="pay-way" href="/sto-dorog-site/materinskij-kapital">
