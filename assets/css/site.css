@@ -889,6 +889,8 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 @media (min-width: 900px) {
   .panel { padding: 36px; }
   .split { grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
+  /* «Подойдёт, если» и «Важно знать» — плашки одной высоты (заказчик 04.11.2026) */
+  .split--even { align-items: stretch; }
 }
 
 /* Списки с отметками: плюс — оранжевая галочка, минус — «разметка» */
