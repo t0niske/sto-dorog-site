@@ -9,7 +9,7 @@
 <link rel="canonical" href="https://sto-dorog-tomsk.ru/raspisanie">
 <link rel="preload" href="/sto-dorog-site/assets/fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/sto-dorog-site/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/sto-dorog-site/assets/css/site.css?v=1793859023">
+<link rel="stylesheet" href="/sto-dorog-site/assets/css/site.css?v=1793859625">
 <script>try{var a=JSON.parse(localStorage.getItem('sd_a11y')||'null'),d=document.documentElement;if(a&&a.on){d.classList.add('a11y');d.setAttribute('data-a11y-font',a.font||1);d.setAttribute('data-a11y-theme',a.theme||'light');if(a.img===0)d.classList.add('a11y-noimg');}}catch(e){}</script>
 <link rel="icon" href="/sto-dorog-site/assets/img/favicon-32.png?v=1793608767" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/sto-dorog-site/assets/img/apple-touch-icon.png?v=1793608768">
@@ -182,36 +182,55 @@
   </div>
 </section>
 
-<section class="section" aria-labelledby="where-title">
+<section class="section" id="ofisy" aria-labelledby="ofisy-title">
   <div class="container">
-    <div class="section-head">
-  <div>
-        <h2 class="section-title" id="where-title">Где проходит <span class="accent">обучение</span></h2>
+    <div class="where">
+  <div class="where__map">
+    <div class="where__canvas" style="--ratio: 1">
+    <img class="where__base" src="/sto-dorog-site/assets/img/map/tomsk.webp?v=1793630002" width="1000" height="1000" alt="Карта Томска: адреса автошколы «Сто дорог» — пр. Мира, 50, ул. Елизаровых, 22, Иркутский тракт, 92" loading="lazy">
+            <a class="where__pin" href="/sto-dorog-site/kontakty/mira-50" style="--x: 35.22%; --y: 18.57%"><b></b><span class="where__tag">пр. Мира, 50</span></a>
+            <a class="where__pin where__pin--low" href="/sto-dorog-site/kontakty/elizarovykh-22" style="--x: 38.04%; --y: 79.37%"><b></b><span class="where__tag">ул. Елизаровых, 22</span></a>
+            <a class="where__pin where__pin--left" href="/sto-dorog-site/kontakty/irkutskij-trakt-92" style="--x: 64.71%; --y: 27.26%"><b></b><span class="where__tag">Иркутский тракт, 92</span></a>
       </div>
-    <a class="link-arrow" href="/sto-dorog-site/kontakty">Все контакты <svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1793711967#arrow-right"></use></svg></a>
+    <a class="where__inset" href="/sto-dorog-site/kontakty/molchanovo">
+    <img src="/sto-dorog-site/assets/img/map/molchanovo.webp?v=1793630002" width="360" height="360" alt="" loading="lazy">
+        <span class="where__pin where__pin--inset" style="--x: 50%; --y: 41.67%"><b></b></span>
+    <span class="where__town">Молчаново</span>
+  </a>
+    <a class="where__ya" href="https://yandex.ru/maps/?text=%D0%90%D0%B2%D1%82%D0%BE%D1%88%D0%BA%D0%BE%D0%BB%D0%B0%20%D0%A1%D1%82%D0%BE%20%D0%B4%D0%BE%D1%80%D0%BE%D0%B3%20%D0%A2%D0%BE%D0%BC%D1%81%D0%BA" target="_blank" rel="noopener" aria-label="Открыть в Яндекс Картах"><svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1793711967#map-pin-fill"></use></svg><span class="where__ya-short">Яндекс Карты</span><span class="where__ya-long">Открыть в Яндекс Картах</span></a>
+  <a class="where__copy" href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© <span class="where__copy-long">участники </span>OpenStreetMap</a>
+</div>
+
+  <div class="where__card">
+    <p class="where__label"><svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1793711967#phone-fill"></use></svg>Контакты</p>
+    <h2 class="where__title" id="ofisy-title">Ждём вас в четырёх адресах</h2>
+    <a class="where__phone" href="tel:+79832345656">+7 (983) 234-56-56</a>
+    <div class="where__grid">
+      <div class="where__item where__item--addr">
+        <p class="where__h"><svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1793711967#map-pin-fill"></use></svg>Адреса</p>
+        <ul class="where__list">
+                    <li><a href="/sto-dorog-site/kontakty/mira-50">Томск, пр. Мира, 50</a></li>
+                    <li><a href="/sto-dorog-site/kontakty/elizarovykh-22">Томск, ул. Елизаровых, 22</a></li>
+                    <li><a href="/sto-dorog-site/kontakty/irkutskij-trakt-92">Томск, Иркутский тракт, 92</a></li>
+                    <li><a href="/sto-dorog-site/kontakty/molchanovo">Молчаново, ул. Димитрова, 67</a></li>
+                  </ul>
+      </div>
+      <div class="where__item">
+        <p class="where__h"><svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1793711967#clock-fill"></use></svg>График работы</p>
+        <p class="where__text"><span>Пн–Сб 10:00–18:00</span><span>Воскресенье — выходной</span></p>
+      </div>
+      <div class="where__item">
+        <p class="where__h"><svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1793711967#chat-fill"></use></svg>Пишите нам</p>
+        <a class="where__mail" href="mailto:stod0rog@yandex.ru">stod0rog@<wbr>yandex.ru</a>
+        <p class="where__social">
+          <a href="https://max.ru/u/f9LHodD0cOIliYqcMhckQbwhvtkOkaoPDYD7xv4iAyfhT_qL3NcB_aCfq08" target="_blank" rel="noopener" aria-label="Написать в MAX"><svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1793711967#max-fill"></use></svg></a>
+          <a href="https://vk.ru/stodorog_tomsk" target="_blank" rel="noopener" aria-label="Сообщество ВКонтакте"><svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1793711967#vk"></use></svg></a>
+        </p>
+      </div>
+    </div>
+    <a class="btn btn--primary btn--lg where__cta" href="#zayavka">Записаться на обучение <svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1793711967#arrow-right"></use></svg></a>
   </div>
-    <ul class="card-grid card-grid--4 offices">
-    <li class="office">
-    <span class="office__pin"><svg class="picto " viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M32 59S12 39.5 12 25a20 20 0 0 1 40 0c0 14.5-20 34-20 34z" class="a si" stroke-width="4"/><circle cx="32" cy="25" r="8" class="p si" stroke-width="4"/></svg></span>    <h3 class="office__title"><a href="/sto-dorog-site/kontakty/mira-50">пр. Мира, 50</a></h3>
-    <p class="office__city">Томск</p>
-        <a class="link-arrow office__map" href="https://yandex.ru/maps/?text=%D0%A2%D0%BE%D0%BC%D1%81%D0%BA%2C%20%D0%BF%D1%80.%20%D0%9C%D0%B8%D1%80%D0%B0%2C%2050" target="_blank" rel="noopener">Как добраться <svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1793711967#external"></use></svg></a>
-  </li>
-    <li class="office">
-    <span class="office__pin"><svg class="picto " viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M32 59S12 39.5 12 25a20 20 0 0 1 40 0c0 14.5-20 34-20 34z" class="a si" stroke-width="4"/><circle cx="32" cy="25" r="8" class="p si" stroke-width="4"/></svg></span>    <h3 class="office__title"><a href="/sto-dorog-site/kontakty/elizarovykh-22">ул. Елизаровых, 22</a></h3>
-    <p class="office__city">Томск</p>
-        <a class="link-arrow office__map" href="https://yandex.ru/maps/?text=%D0%A2%D0%BE%D0%BC%D1%81%D0%BA%2C%20%D1%83%D0%BB.%20%D0%95%D0%BB%D0%B8%D0%B7%D0%B0%D1%80%D0%BE%D0%B2%D1%8B%D1%85%2C%2022" target="_blank" rel="noopener">Как добраться <svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1793711967#external"></use></svg></a>
-  </li>
-    <li class="office">
-    <span class="office__pin"><svg class="picto " viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M32 59S12 39.5 12 25a20 20 0 0 1 40 0c0 14.5-20 34-20 34z" class="a si" stroke-width="4"/><circle cx="32" cy="25" r="8" class="p si" stroke-width="4"/></svg></span>    <h3 class="office__title"><a href="/sto-dorog-site/kontakty/irkutskij-trakt-92">Иркутский тракт, 92</a></h3>
-    <p class="office__city">Томск</p>
-        <a class="link-arrow office__map" href="https://yandex.ru/maps/?text=%D0%A2%D0%BE%D0%BC%D1%81%D0%BA%2C%20%D0%98%D1%80%D0%BA%D1%83%D1%82%D1%81%D0%BA%D0%B8%D0%B9%20%D1%82%D1%80%D0%B0%D0%BA%D1%82%2C%2092" target="_blank" rel="noopener">Как добраться <svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1793711967#external"></use></svg></a>
-  </li>
-    <li class="office">
-    <span class="office__pin"><svg class="picto " viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M32 59S12 39.5 12 25a20 20 0 0 1 40 0c0 14.5-20 34-20 34z" class="a si" stroke-width="4"/><circle cx="32" cy="25" r="8" class="p si" stroke-width="4"/></svg></span>    <h3 class="office__title"><a href="/sto-dorog-site/kontakty/molchanovo">ул. Димитрова, 67</a></h3>
-    <p class="office__city">Молчаново</p>
-        <a class="link-arrow office__map" href="https://yandex.ru/maps/?text=%D0%9C%D0%BE%D0%BB%D1%87%D0%B0%D0%BD%D0%BE%D0%B2%D0%BE%2C%20%D1%83%D0%BB.%20%D0%94%D0%B8%D0%BC%D0%B8%D1%82%D1%80%D0%BE%D0%B2%D0%B0%2C%2067" target="_blank" rel="noopener">Как добраться <svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1793711967#external"></use></svg></a>
-  </li>
-  </ul>
+</div>
   </div>
 </section>
 

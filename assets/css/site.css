@@ -1290,15 +1290,6 @@ a.sched-row__what:hover { color: var(--orange-text); }
 .exam-box__list dd { font-weight: 800; white-space: nowrap; }
 @media (min-width: 900px) { .exam-box__list { grid-template-columns: 1fr 1fr; } }
 
-/* Адреса */
-.office { display: flex; flex-direction: column; gap: 4px; padding: 22px; border-radius: var(--radius-lg); background: #fff; }
-.office__pin .picto { width: 48px; height: 48px; margin-bottom: 10px; }
-.office__title { font-size: 20px; letter-spacing: -.02em; }
-.office__title a:hover { color: var(--orange-text); }
-.office__city { color: var(--muted); font-size: 15px; }
-.office__intake { margin-top: 6px; font-size: 14px; font-weight: 700; color: var(--orange-text); }
-.office__map { margin-top: auto; padding-top: 16px; font-size: 15px; }
-
 /* Люди и автопарк */
 
 .fleet-card { display: flex; flex-direction: column; padding: 18px; border-radius: var(--radius-lg); background: #fff; }
