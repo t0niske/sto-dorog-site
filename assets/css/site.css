@@ -374,29 +374,15 @@ table { border-collapse: collapse; }
 }
 
 /* ---------- Главная: первый экран ---------- */
-/* Оранжевая фирменная панель, текст белый, название школы и кнопка — чёрные. Панель и шапка — одна фигура:
-   «язычок» с логотипом тянется до меню, меню — на светлом фоне справа. Справа кадр «ученик с правами»
-   (маленькое фото команды поверх заказчик убрал 02.11.2026). Сразу под панелью — чёрный блок «Ближайшие наборы».
-   Телефон: города → заголовок → кадр → форма. Компьютер: текст слева, коллаж справа. */
-.site-header--home .logo {
-  position: relative; flex: 1 1 auto; align-self: flex-end; height: calc(100% - 8px); margin-right: 8px; padding: 0 18px;
-  border-radius: var(--radius-xl) var(--radius-xl) 0 0; background: var(--orange);
-}
-/* Кнопка записи в шапке главной не нужна: форма записи — сразу под ней. Так меню помещается рядом с язычком. */
-.site-header--home .site-header__cta { display: none; }
-/* Прилипшая шапка главной: панели первого экрана под ней уже нет — язычок становится отдельной плашкой */
-.site-header--home.is-stuck .logo { align-self: center; height: calc(100% - 16px); border-radius: var(--radius-lg); }
-.site-header--home.is-stuck .logo::after { display: none; }
-/* Вогнутое скругление там, где язычок переходит в верх панели */
-.site-header--home .logo::after {
-  content: ""; position: absolute; left: 100%; bottom: 0; width: 24px; height: 24px;
-  background: radial-gradient(circle at 100% 0, transparent 23.5px, var(--orange) 24px);
-}
+/* Оранжевая фирменная панель, текст белый, название школы и кнопка — чёрные. Шапка над ней — как на всех страницах:
+   обычный логотип и «Записаться» (заказчик 05.11.2026; раньше логотип стоял на «язычке» панели, без кнопки).
+   Справа кадр «ученик с правами» (маленькое фото команды поверх заказчик убрал 02.11.2026). Сразу под панелью —
+   чёрный блок «Ближайшие наборы». Телефон: города → заголовок → кадр → форма. Компьютер: текст слева, коллаж справа. */
 
 .hero {
   --fg: #fff; --muted: #fff; --line: rgba(255, 255, 255, .3); --link: #fff; --accent: #fff;
   position: relative; display: flex; flex-direction: column; padding: 14px 18px 20px;
-  border-radius: 0 var(--radius-xl) var(--radius-xl) var(--radius-xl); background: var(--orange); color: var(--fg);
+  margin-top: 6px; border-radius: var(--radius-xl); background: var(--orange); color: var(--fg);
 }
 .hero__body { display: contents; }
 /* Таблетка над заголовком оранжевой панели — на первом экране главной и в блоке записи */
@@ -444,13 +430,10 @@ table { border-collapse: collapse; }
 @media (max-width: 389px) { .lead-form__row { grid-template-columns: 1fr; } }
 
 @media (min-width: 600px) {
-  .site-header--home .logo { padding: 0 28px; }
   .hero { padding: 28px 28px 28px; }
   .hero__title { margin-top: 18px; font-size: 48px; }
 }
 @media (min-width: 900px) {
-  .site-header--home .logo { height: calc(100% - 14px); margin-right: 12px; padding: 0 56px; }
-  .site-header--home .logo::after { width: 36px; height: 36px; background: radial-gradient(circle at 100% 0, transparent 35.5px, var(--orange) 36px); }
   .hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .82fr); align-items: center; gap: 48px; padding: 40px 40px 40px 56px; }
   .hero__body { display: block; }
   .hero__title { margin-top: 22px; font-size: 54px; }
@@ -462,7 +445,6 @@ table { border-collapse: collapse; }
   .hero__photo img { height: 100%; aspect-ratio: auto; object-position: 50% 50%; border-radius: 26px; }
 }
 @media (min-width: 1240px) {
-  .site-header--home .logo { padding: 0 64px; }
   .hero { padding: 44px 44px 44px 64px; }
   .hero__title { font-size: 60px; }
   /* Кадр шире — видно и парня с правами, и логотип на двери */
@@ -1168,6 +1150,53 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
   .about-docs .topic-card__rows div { flex-direction: column; align-items: flex-start; gap: 2px; }
   .about-docs .topic-card__rows dt { flex: none; }
   .about-docs .topic-card__rows dd { max-width: none; text-align: left; }
+}
+
+/* /kontakty (вариант 1, 05.11.2026): оранжевый экран с белой карточкой «Как связаться» — подпись слева, значение справа;
+   на узком телефоне и в узкой карточке рядом с текстом (900–1099 px) подпись над значением */
+.contact-rows { margin-top: 8px; }
+.contact-rows > div { display: grid; grid-template-columns: 150px minmax(0, 1fr); align-items: baseline; gap: 4px 16px; padding: 14px 0; border-top: 1.5px dashed var(--line); }
+.contact-rows > div:first-child { border-top: 0; }
+.contact-rows dt { font-size: 15px; color: var(--muted); }
+.contact-rows dd { display: grid; justify-items: start; gap: 4px; margin: 0; font-size: 17px; font-weight: 800; }
+.contact-rows dd a:hover { color: var(--orange-text); }
+.contact-rows .contact-rows__phone { font-size: clamp(22px, 6.6vw, 26px); letter-spacing: -.02em; color: var(--orange); white-space: nowrap; }
+.contact-rows .contact-rows__phone:hover { color: var(--orange-2); }
+.contact-rows__social { display: flex !important; flex-wrap: wrap; gap: 8px 18px; }
+.contact-rows__social a { display: inline-flex; align-items: center; gap: 8px; }
+.contact-rows__social span { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--orange); color: #fff; }
+.contact-rows__social .icon { width: 18px; height: 18px; }
+@media (max-width: 419px), (min-width: 900px) and (max-width: 1099px) {
+  .contact-rows > div { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 599px) {
+  .contacts-hero .price-hero__actions .btn { width: 100%; justify-content: center; }
+}
+
+/* Адреса: карта (partials/where-map.php) слева, карточки 2 × 2 справа. Карта на компьютере не ниже 560 px —
+   иначе при обрезке как cover уходят за край крайние метки (пр. Мира, Елизаровых) */
+.contacts-where { display: grid; gap: 12px; }
+.addrs { display: grid; gap: 12px; }
+.addr { display: flex; flex-direction: column; gap: 10px; padding: 22px; border-radius: var(--radius-xl); background: #fff; transition: transform .2s, box-shadow .2s; }
+.addr:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.addr__chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 4px; }
+.addr__title { font-size: 22px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; }
+.addr__title a:hover { color: var(--orange-text); }
+.addr__how { margin-top: -4px; font-size: 15px; color: var(--muted); }
+.addr__list { display: grid; gap: 6px; }
+.addr__list li { position: relative; padding-left: 20px; font-size: 15px; font-weight: 600; line-height: 1.35; }
+.addr__list li::before { content: ""; position: absolute; left: 0; top: .66em; width: 10px; height: 2px; border-radius: 2px; background: var(--orange); }
+.addr__links { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 16px; margin-top: auto; padding-top: 14px; border-top: 1.5px dashed var(--line); font-size: 15px; }
+@media (min-width: 600px) {
+  .addrs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+/* Планшет: карта во всю ширину не квадратом, а 4 : 3 — метки ещё помещаются, экран не занят одной картой */
+@media (min-width: 600px) and (max-width: 999px) {
+  .contacts-where__map { aspect-ratio: 4 / 3; }
+}
+@media (min-width: 1000px) {
+  .contacts-where { grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr); gap: 16px; }
+  .contacts-where__map { aspect-ratio: auto; min-height: 560px; }
 }
 
 /* /raspisanie: наборы и экзамены одной лентой по датам (вариант 2, 04.11.2026). Телефон — дата слева, справа метка,
