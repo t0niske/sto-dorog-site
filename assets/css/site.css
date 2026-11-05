@@ -1297,6 +1297,29 @@ a.sched-row__what:hover { color: var(--orange-text); }
 .fleet-card__tags { font-size: 13px; color: var(--muted); }
 .fleet-card__photo { margin-top: auto; padding-top: 8px; }
 
+/* Телефон: инструкторы и автопарк — лентой с прокруткой, как отзывы: на экране одна крупная карточка, справа виден
+   край следующей — понятно, что дальше ещё есть (заказчик 05.11.2026, вместо мелкой сетки по две) */
+@media (max-width: 599px) {
+  .team, .fleet.card-grid {
+    grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 84%; gap: 10px;
+    overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); overscroll-behavior-x: contain;
+    margin: 0 calc(-1 * var(--gutter)); padding: 0 var(--gutter) 4px; scrollbar-width: none;
+  }
+  .team::-webkit-scrollbar, .fleet::-webkit-scrollbar { display: none; }
+  .team__card, .fleet-card { scroll-snap-align: start; }
+  .team__media { margin: 10px 10px 0; border-radius: calc(var(--radius-xl) - 10px); }
+  .team__chips { left: 12px; right: 12px; bottom: 12px; gap: 6px; }
+  .team__chip { padding: 7px 14px; font-size: 13px; }
+  .team__body { gap: 10px; padding: 18px 20px 22px; }
+  .team__name { font-size: 21px; }
+  .team__about { font-size: 15px; }
+  .team__since { gap: 8px; font-size: 14px; }
+  .team__since .icon { width: 18px; height: 18px; }
+  .fleet-card { padding: 22px; border-radius: var(--radius-xl); }
+  .fleet-card__model { font-size: 21px; }
+  .fleet-card__tags { font-size: 14px; }
+}
+
 /* Отзывы (вариант A, выбор заказчика 02.11.2026): чёрная карточка с оценкой в 2ГИС и белые карточки с цитатами.
    Телефон: в карточке оценки цифра слева, звёзды и число оценок справа; отзывы листаются пальцем вбок.
    Компьютер: оценка слева столбиком, отзывы сеткой 2 × 2. */
@@ -1757,6 +1780,10 @@ a.sched-row__what:hover { color: var(--orange-text); }
 .lead-section { padding-top: 32px; padding-bottom: 0; }
 /* После обычного блока хватает его нижнего отступа */
 .section + .lead-section { padding-top: 0; }
+/* Блок после панели записи («Другие программы»): у панели нет нижнего отступа — свой отступ сверху полный
+   (было 8 px от правила «два раздела подряд», заказчик 05.11.2026: «сильно маленький отступ») */
+.lead-section + .section { padding-top: 40px; }
+@media (min-width: 900px) { .lead-section + .section { padding-top: 56px; } }
 .lead-section__box {
   --fg: #fff; --muted: #fff; --line: rgba(255, 255, 255, .7); --link: #fff; --accent: #fff;
   display: flex; flex-direction: column; padding: 16px 18px 22px; border-radius: var(--radius-xl); background: var(--orange); color: var(--fg);
