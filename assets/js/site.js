@@ -253,6 +253,46 @@
       box.appendChild(p);
     }
     box.hidden = false;
+    // На телефоне форма часто у края экрана, а снизу закреплённая панель — ответ должен быть виден
+    var rect = box.getBoundingClientRect();
+    if (rect.top < 80 || rect.bottom > window.innerHeight - 96) {
+      box.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    }
+  }
+
+  /* Успешная заявка → страница «Спасибо» с ответом сервера (sessionStorage). Без хранилища — ответ прямо в форме. */
+  function goThanks(form, data) {
+    try {
+      window.sessionStorage.setItem('sd_lead_result', JSON.stringify({
+        title: data.title || '', message: data.message || '', max_link: data.max_link || ''
+      }));
+    } catch (err) {
+      return false;
+    }
+    var left = false;
+    var leave = function () { if (!left) { left = true; window.location.href = '/spasibo'; } };
+    if (typeof window.ym === 'function' && document.body.dataset.metrika) {
+      window.ym(Number(document.body.dataset.metrika), 'reachGoal', 'lead', {}, leave);
+      window.setTimeout(leave, 800);
+    } else {
+      leave();
+    }
+    return true;
+  }
+
+  // Страница «Спасибо»: текст ответа сервера и ссылка на бота MAX, если они есть
+  var thanks = document.querySelector('[data-lead-thanks]');
+  if (thanks) {
+    try {
+      var saved = JSON.parse(window.sessionStorage.getItem('sd_lead_result') || 'null');
+      if (saved) {
+        var msg = thanks.querySelector('[data-lead-message]');
+        var maxBtn = thanks.querySelector('[data-lead-max]');
+        if (saved.message && msg) msg.textContent = saved.message;
+        if (saved.max_link && maxBtn) maxBtn.href = saved.max_link;
+        window.sessionStorage.removeItem('sd_lead_result');
+      }
+    } catch (err) { /* приватный режим — остаётся общий текст */ }
   }
 
   function onSubmit(e) {
@@ -269,6 +309,7 @@
     }
 
     var label = button.innerHTML;
+    var leaving = false;
     button.disabled = true;
     button.textContent = 'Отправляем…';
     form.querySelector('.lead-form__result').hidden = true;
@@ -288,10 +329,17 @@
       var data = res.data || {};
       if (data.success) {
         form.classList.add('is-sent');
+        if (goThanks(form, data)) {
+          leaving = true;
+          button.textContent = 'Заявка отправлена';
+          return;
+        }
         showResult(form, 'success', data.title || 'Заявка принята!', data.message || '', data.max_link || '');
         if (typeof window.ym === 'function' && document.body.dataset.metrika) {
           window.ym(Number(document.body.dataset.metrika), 'reachGoal', 'lead');
         }
+        leaving = true;
+        button.textContent = 'Заявка отправлена';
         return;
       }
       showResult(form, 'error', '', data.message || 'Не удалось отправить заявку.', '');
@@ -299,6 +347,7 @@
     }).catch(function () {
       showResult(form, 'error', 'Не удалось отправить заявку', 'Похоже, сервер заявок сейчас недоступен. Попробуйте ещё раз через минуту.', '');
     }).then(function () {
+      if (leaving) return; // заявка ушла: повторно не отправляем
       button.disabled = false;
       button.innerHTML = label;
     });

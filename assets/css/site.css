@@ -233,6 +233,9 @@ table { border-collapse: collapse; }
 .topbar__link:hover, .topbar__link[aria-current] { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
 .topbar__link .icon { flex: none; width: 16px; height: 16px; color: var(--orange); }
 .topbar__link[hidden] { display: none; }
+/* Область нажатия больше видимой ссылки (полоса тонкая, а палец — нет): +12 px сверху и снизу, полоса не растёт */
+.topbar__link { position: relative; }
+.topbar__link::after { content: ""; position: absolute; inset: -12px -8px; }
 /* На телефоне полные подписи не помещаются в строку — короткие */
 .topbar__label { display: none; }
 .topbar__label--short { display: inline; }
@@ -479,7 +482,12 @@ table { border-collapse: collapse; }
   .soon__item { min-width: 170px; padding: 12px 20px; }
   .soon__item span { white-space: nowrap; }
   .soon__all { width: auto; }
+  /* Сезонная программа (категория A): вместо дат — текст о сезоне, справа «Записаться» */
+  .soon--season { grid-template-columns: minmax(0, 1fr) auto; }
+  .soon--season .soon__head { max-width: 820px; }
 }
+.soon--season .soon__head { align-items: flex-start; }
+.soon--season .soon__text { text-wrap: pretty; }
 /* ---------- Главная: программы ---------- */
 /* Карточки программ: крупное название программы, короткое пояснение, внизу цена; в правом нижнем углу
    предмет-вырезка выходит за край карточки; оранжевая точка в углу при наведении становится стрелкой. */
@@ -1971,6 +1979,35 @@ html.a11y .site-header__inner { flex-wrap: wrap; height: auto; min-height: var(-
 html.a11y .main-nav__list { flex-wrap: wrap; }
 /* Меню у правого края: выпадающий список «О школе» раскрывается влево, иначе при увеличении уходит за экран */
 html.a11y .main-nav__item--sub:nth-last-child(-n+2) .main-nav__sub { left: auto; right: -8px; }
+/* UX-аудит 11.11.2026. Выделенное слово в заголовке — без плашки и наклона: её фон закрывал строку выше
+   («в Томске», «Все программы»), строки заголовков свободнее */
+html.a11y .title-pill { transform: none; padding: 0; border-radius: 0; background-color: transparent !important; }
+html.a11y h1, html.a11y h2, html.a11y h3 { line-height: 1.25; }
+/* Выбранная вкладка (Томск / Молчаново, Автомат / Механика) — инверсией цветов, иначе её не отличить */
+html.a11y #city-tomsk:checked ~ .city-tabs__bar label[for=city-tomsk],
+html.a11y #city-molchanovo:checked ~ .city-tabs__bar label[for=city-molchanovo],
+html.a11y .payroute__input--0:checked ~ .payroute__tabs .payroute__tab--0,
+html.a11y .payroute__input--1:checked ~ .payroute__tabs .payroute__tab--1,
+html.a11y .payroute__input--0:checked ~ .payroute__head .payroute__tab--0,
+html.a11y .payroute__input--1:checked ~ .payroute__head .payroute__tab--1 { background-color: var(--a-fg) !important; color: var(--a-bg) !important; }
+html.a11y #city-tomsk:checked ~ .city-tabs__bar label[for=city-tomsk] *,
+html.a11y #city-molchanovo:checked ~ .city-tabs__bar label[for=city-molchanovo] *,
+html.a11y .payroute__input--0:checked ~ .payroute__tabs .payroute__tab--0 *,
+html.a11y .payroute__input--1:checked ~ .payroute__tabs .payroute__tab--1 *,
+html.a11y .payroute__input--0:checked ~ .payroute__head .payroute__tab--0 *,
+html.a11y .payroute__input--1:checked ~ .payroute__head .payroute__tab--1 * { background-color: transparent !important; color: var(--a-bg) !important; }
+/* Ценники «Цен»: крупный шрифт не помещался в две колонки — «₽» обрезался. Один столбец, без наклона и наложения */
+html.a11y .price-hero__media { display: grid; grid-template-columns: 1fr; min-height: 0; }
+html.a11y .price-hero__car { position: static; width: 100%; }
+html.a11y .price-tag { position: static; transform: none; justify-self: stretch; }
+/* Телефон: шапка в один ряд (кружки MAX и ВК есть в меню и в нижней панели), иначе шапка с панелью — треть экрана */
+@media (max-width: 1179px) {
+  html.a11y .header-social { display: none; }
+}
+/* Компьютер: шапка не закреплена — при крупном шрифте она занимала до трети экрана */
+@media (min-width: 1180px) {
+  html.a11y .site-header { position: static; }
+}
 /* Полоса: кнопка версии становится «Обычная версия»; под полосой — панель настроек */
 html.a11y .topbar { border-bottom: 2px solid var(--a-fg); }
 html.a11y .a11y-panel { display: block; border-bottom: 2px solid var(--a-fg); }
