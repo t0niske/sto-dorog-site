@@ -10,7 +10,7 @@
 <link rel="canonical" href="https://sto-dorog-tomsk.ru/spasibo">
 <link rel="preload" href="/sto-dorog-site/assets/fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/sto-dorog-site/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/sto-dorog-site/assets/css/site.css?v=1794366014">
+<link rel="stylesheet" href="/sto-dorog-site/assets/css/site.css?v=1794369891">
 <script>try{var a=JSON.parse(localStorage.getItem('sd_a11y')||'null'),d=document.documentElement;if(a&&a.on){d.classList.add('a11y');d.setAttribute('data-a11y-font',a.font||1);d.setAttribute('data-a11y-theme',a.theme||'light');if(a.img===0)d.classList.add('a11y-noimg');}}catch(e){}</script>
 <link rel="icon" href="/sto-dorog-site/assets/img/favicon-32.png?v=1793608767" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/sto-dorog-site/assets/img/apple-touch-icon.png?v=1793608768">
@@ -125,18 +125,29 @@
   </div>
 </header>
 <main id="main">
-<section class="simple-page" aria-labelledby="page-title" data-lead-thanks>
+<section class="thanks" aria-labelledby="page-title" data-lead-thanks>
   <div class="container narrow">
-    <h1 id="page-title">Спасибо, заявка принята</h1>
-    <p class="lead" data-lead-message aria-live="polite">Администратор свяжется с вами в рабочее время: Пн–Сб 10:00–18:00, воскресенье — выходной. Если вопрос срочный — позвоните нам</p>
-    <div class="page-hero__actions">
-      <a class="btn btn--primary btn--lg" href="tel:+79832345656"><svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1794211393#phone"></use></svg> +7 (983) 234-56-56</a>
-      <a class="btn btn--outline btn--lg" data-lead-max href="https://max.ru/u/f9LHodD0cOIliYqcMhckQbwhvtkOkaoPDYD7xv4iAyfhT_qL3NcB_aCfq08" target="_blank" rel="noopener"><svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1794211393#max-fill"></use></svg> Написать в MAX</a>
+    <h1 class="thanks__title" id="page-title">Спасибо, заявка принята</h1>
+    <p class="thanks__lead" data-lead-message aria-live="polite">Администратор свяжется с вами в рабочее время: Пн–Сб 10:00–18:00, воскресенье — выходной. Если вопрос срочный — позвоните нам</p>
+
+    <div class="thanks-card is-dark">
+      <p class="thanks-card__label">Сохраните наш номер</p>
+      <p class="thanks-card__phone"><a href="tel:+79832345656">+7 (983) 234-56-56</a></p>
+      <p class="thanks-card__hours"><svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1794211393#clock-fill"></use></svg>Пн–Сб 10:00–18:00, воскресенье — выходной</p>
+      <div class="thanks-card__actions">
+        <a class="btn btn--primary" href="/sto-dorog-site/sto-dorog.vcf" download="sto-dorog.vcf"><svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1794211393#plus"></use></svg> Добавить в контакты</a>
+        <a class="btn thanks-card__max" data-lead-max href="https://max.ru/u/f9LHodD0cOIliYqcMhckQbwhvtkOkaoPDYD7xv4iAyfhT_qL3NcB_aCfq08" target="_blank" rel="noopener"><svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1794211393#max-fill"></use></svg> Написать в MAX</a>
+      </div>
     </div>
-    <ul class="link-grid">
-      <li><a href="/sto-dorog-site/">На главную <svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1794211393#arrow-right"></use></svg></a></li>
-      <li><a href="/sto-dorog-site/price">Цены на обучение <svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1794211393#arrow-right"></use></svg></a></li>
-    </ul>
+
+    <h2 class="thanks__h2">Что будет дальше</h2>
+    <ol class="thanks-road">
+            <li class="is-done"><b>Заявка</b><span>Мы её получили</span></li>
+            <li class="is-next"><b>Звонок администратора</b><span>Подберём программу, адрес и время группы</span></li>
+            <li class=""><b>Договор</b><span>В офисе по паспорту — можно ещё до медицинской справки</span></li>
+            <li class=""><b>Теория и вождение</b><span>Начинаются, когда принесёте медицинскую справку. Платите частями — по занятию</span></li>
+            <li class=""><b>Экзамены и права</b><span>Внутренний экзамен в автошколе, затем экзамен в ГИБДД</span></li>
+          </ol>
   </div>
 </section>
 </main>

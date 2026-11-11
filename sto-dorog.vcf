@@ -1,0 +1,12 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Автошкола «Сто дорог»
+ORG:Автошкола «Сто дорог»
+TEL;TYPE=WORK,VOICE:+79832345656
+TEL;TYPE=WORK:+79138274422
+TEL;TYPE=WORK:+79966374944
+EMAIL;TYPE=WORK:stod0rog@yandex.ru
+URL:https://sto-dorog-tomsk.ru/
+ADR;TYPE=WORK:;;проспект Мира\, 50\, пом. 2008;Томск;Томская область;;Россия
+NOTE:Пн–Сб 10:00–18:00\, воскресенье — выходной
+END:VCARD

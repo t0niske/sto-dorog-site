@@ -638,10 +638,9 @@ table { border-collapse: collapse; }
    (ширина как у .lhero__car, пропорции картинки 768×412) */
 .lhero__card--service { padding-bottom: calc(min(92%, 460px) * .536 + 8px); }
 @media (min-width: 900px) { .lhero__card--service { padding-bottom: calc(min(80%, 460px) * .536 + 8px); } }
-/* Подарочный сертификат (вариант 1, 11.11.2026): карточка сертификата вместо машины, с наклоном, светлый контур —
-   чтобы тёмный сертификат читался на тёмной карточке */
+/* Подарочный сертификат (вариант 1, 11.11.2026): белый сертификат вместо машины, по центру карточки, с лёгким наклоном */
 .lhero__card--gift { padding-bottom: calc(min(84%, 430px) * .48 + 46px); }
-.lhero__card .lhero__gift { right: 5%; bottom: 26px; width: 84%; max-width: 430px; border-radius: 10px; transform: rotate(-5deg); box-shadow: 0 0 0 1px rgba(255, 255, 255, .16), 0 22px 44px rgba(0, 0, 0, .5); }
+.lhero__card .lhero__gift { left: 0; right: 0; bottom: 26px; width: 84%; max-width: 430px; margin-inline: auto; border-radius: 10px; transform: rotate(-4deg); box-shadow: 0 22px 44px rgba(0, 0, 0, .5); }
 /* Мотоцикл в карточке цены: чёрный на тёмном теряется — за ним светлое пятно */
 .lhero__card--moto { padding-bottom: 210px; background: radial-gradient(58% 42% at 70% 86%, #6b625c 0%, rgba(107, 98, 92, 0) 72%), var(--ink); }
 .lhero__card .lhero__moto { right: -2%; bottom: -14px; width: 70%; max-width: 380px; }
@@ -1741,6 +1740,36 @@ a.sched-row__what:hover { color: var(--orange-text); }
 
 /* Простые страницы: блог, тексты, 404 */
 .simple-page { padding: 24px 0 56px; }
+
+/* «Спасибо» (11.11.2026): верх — вариант 2 (заголовок, ответ сервера, карточка «Сохраните наш номер»),
+   ниже «Что будет дальше» — вариант 1: пунктирная дорога, первый шаг пройден (оранжевый), второй — следующий */
+.thanks { padding: 24px 0 56px; }
+.thanks__title { font-size: clamp(34px, 5vw, 52px); letter-spacing: -.04em; line-height: 1.04; }
+.thanks__lead { margin-top: 12px; font-size: 17px; line-height: 1.5; color: var(--muted); }
+.thanks-card { margin-top: 20px; padding: 22px 20px; border-radius: var(--radius-xl); background: var(--ink); }
+.thanks-card__label { font-size: 14px; color: var(--muted); }
+.thanks-card__phone { margin-top: 4px; font-size: 30px; font-weight: 800; letter-spacing: -.03em; white-space: nowrap; }
+.thanks-card__phone a { color: inherit; }
+.thanks-card__hours { display: flex; align-items: center; gap: 6px; margin-top: 6px; font-size: 14px; color: var(--muted); }
+.thanks-card__hours .icon { flex: none; width: 16px; height: 16px; color: var(--orange); }
+.thanks-card__actions { display: grid; gap: 8px; margin-top: 16px; }
+.thanks-card__actions .btn { justify-content: center; }
+.thanks-card__max { border: 2px solid rgba(255, 255, 255, .35); color: #fff; }
+.thanks__h2 { margin-top: 32px; font-size: 26px; letter-spacing: -.03em; line-height: 1.1; }
+.thanks-road { position: relative; display: grid; gap: 16px; margin-top: 18px; padding-left: 36px; }
+.thanks-road::before { content: ""; position: absolute; left: 11px; top: 10px; bottom: 10px; border-left: 3px dashed #cfcac4; }
+.thanks-road li { position: relative; display: grid; gap: 2px; }
+.thanks-road li::before { content: ""; position: absolute; left: -36px; top: 1px; width: 25px; height: 25px; border-radius: 50%; background: var(--paper); box-shadow: inset 0 0 0 3px #cfcac4; }
+.thanks-road li.is-done::before { background: var(--orange); box-shadow: none; }
+.thanks-road li.is-next::before { background: var(--ink); box-shadow: 0 0 0 5px rgba(240, 119, 20, .25); }
+.thanks-road b { font-size: 17px; }
+.thanks-road span { font-size: 15px; color: var(--muted); }
+.thanks-road li.is-next b { color: var(--orange-text); }
+@media (min-width: 600px) {
+  .thanks-card { padding: 28px 30px; }
+  .thanks-card__phone { font-size: 38px; }
+  .thanks-card__actions { grid-template-columns: 1fr 1fr; }
+}
 .simple-page h1 { font-size: clamp(34px, 5vw, 56px); letter-spacing: -.04em; line-height: 1.04; }
 .simple-page .lead { margin-top: 16px; }
 .simple-page .prose { margin-top: 32px; }
