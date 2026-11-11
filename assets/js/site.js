@@ -187,6 +187,35 @@
     }, 400);
   });
 
+  // Пока форма первого экрана на виду, нижняя панель телефона спрятана (класс hero-form-on у <html>)
+  var heroForm = document.querySelector('.lead-form--hero');
+  if (heroForm && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      document.documentElement.classList.toggle('hero-form-on', entries[0].isIntersecting);
+    }).observe(heroForm);
+  }
+
+  // «Записаться» в нижней панели открывает шторку с формой; без поддержки <dialog> — обычная ссылка к форме
+  var sheet = document.getElementById('zapis');
+  if (sheet && typeof sheet.showModal === 'function') {
+    var sheetForm = sheet.querySelector('[data-lead-form]');
+    var closeSheet = function () { sheet.close(); };
+    document.addEventListener('click', function (e) {
+      var opener = e.target.closest('[data-sheet-open]');
+      if (!opener) return;
+      e.preventDefault();
+      var pageForm = document.querySelector('#zayavka [data-lead-form]');
+      if (pageForm && pageForm.elements.service.value) sheetForm.elements.service.value = pageForm.elements.service.value;
+      sheet.showModal();
+      document.documentElement.classList.add('sheet-open');
+      window.setTimeout(function () { sheetForm.elements.name.focus(); }, 60);
+    });
+    sheet.addEventListener('click', function (e) {
+      if (e.target === sheet || e.target.closest('[data-sheet-close]')) closeSheet(); // мимо шторки или крестик
+    });
+    sheet.addEventListener('close', function () { document.documentElement.classList.remove('sheet-open'); });
+  }
+
   function fieldError(form, name) {
     return form.querySelector('[data-error-for="' + name + '"]');
   }

@@ -10,7 +10,7 @@
 <link rel="canonical" href="https://sto-dorog-tomsk.ru/materialno-tekhnicheskoe-obespechenie-i-osnashchennost-obrazovatelnogo-protsessa">
 <link rel="preload" href="/sto-dorog-site/assets/fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/sto-dorog-site/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/sto-dorog-site/assets/css/site.css?v=1794363932">
+<link rel="stylesheet" href="/sto-dorog-site/assets/css/site.css?v=1794366014">
 <script>try{var a=JSON.parse(localStorage.getItem('sd_a11y')||'null'),d=document.documentElement;if(a&&a.on){d.classList.add('a11y');d.setAttribute('data-a11y-font',a.font||1);d.setAttribute('data-a11y-theme',a.theme||'light');if(a.img===0)d.classList.add('a11y-noimg');}}catch(e){}</script>
 <link rel="icon" href="/sto-dorog-site/assets/img/favicon-32.png?v=1793608767" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/sto-dorog-site/assets/img/apple-touch-icon.png?v=1793608768">
@@ -25,7 +25,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Главная","item":"https://sto-dorog-tomsk.ru/"},{"@type":"ListItem","position":2,"name":"Сведения об образовательной организации","item":"https://sto-dorog-tomsk.ru/osnovnye-svedeniya"},{"@type":"ListItem","position":3,"name":"Материально-техническое обеспечение и оснащённость образовательного процесса","item":"https://sto-dorog-tomsk.ru/materialno-tekhnicheskoe-obespechenie-i-osnashchennost-obrazovatelnogo-protsessa"}]}]}</script><script src="/sto-dorog-site/assets/js/site.js?v=1794364661" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Главная","item":"https://sto-dorog-tomsk.ru/"},{"@type":"ListItem","position":2,"name":"Сведения об образовательной организации","item":"https://sto-dorog-tomsk.ru/osnovnye-svedeniya"},{"@type":"ListItem","position":3,"name":"Материально-техническое обеспечение и оснащённость образовательного процесса","item":"https://sto-dorog-tomsk.ru/materialno-tekhnicheskoe-obespechenie-i-osnashchennost-obrazovatelnogo-protsessa"}]}]}</script><script src="/sto-dorog-site/assets/js/site.js?v=1794365891" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Перейти к содержимому</a>
@@ -256,7 +256,62 @@
 <nav class="mobile-bar" aria-label="Быстрая связь">
   <a class="mobile-bar__item" href="tel:+79832345656"><svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1794211393#phone"></use></svg><span>Позвонить</span></a>
   <a class="mobile-bar__item" href="https://max.ru/u/f9LHodD0cOIliYqcMhckQbwhvtkOkaoPDYD7xv4iAyfhT_qL3NcB_aCfq08" target="_blank" rel="noopener"><svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1794211393#max-fill"></use></svg><span>MAX</span></a>
-  <a class="mobile-bar__item mobile-bar__item--accent" href="/sto-dorog-site/#zayavka"><svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1794211393#edit"></use></svg><span>Записаться</span></a>
+  <a class="mobile-bar__item mobile-bar__item--accent" href="/sto-dorog-site/#zayavka" data-sheet-open><svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1794211393#edit"></use></svg><span>Записаться</span></a>
 </nav>
+<dialog class="sheet" id="zapis" aria-labelledby="zapis-title">
+  <div class="sheet__body">
+    <div class="sheet__grip" aria-hidden="true"></div>
+    <div class="sheet__head">
+      <h2 class="sheet__title" id="zapis-title">Записаться на обучение</h2>
+      <button class="sheet__close" type="button" data-sheet-close aria-label="Закрыть"><svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1794211393#close"></use></svg></button>
+    </div>
+    <p class="sheet__text">Перезвоним, подберём адрес и группу</p>
+    <form class="lead-form" action="/sto-dorog-site/api/lead" method="post" novalidate data-lead-form>
+    <div class="lead-form__fields">
+    <div class="field">
+      <label class="field__label" for="lead1-name">Ваше имя</label>
+      <input class="field__input" id="lead1-name" name="name" type="text" maxlength="100" autocomplete="name" required>
+      <p class="field__error" data-error-for="name" hidden></p>
+    </div>
+    <div class="field">
+      <label class="field__label" for="lead1-phone">Телефон</label>
+      <input class="field__input" id="lead1-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__" data-phone-mask required>
+      <p class="field__error" data-error-for="phone" hidden></p>
+    </div>
+    <div class="field field--time">
+      <label class="field__label" for="lead1-time">Когда удобно связаться</label>
+      <select class="field__input" id="lead1-time" name="contact_time">
+        <option value="now">Как можно скорее</option>
+                <option value="morning">Утром, 10–13</option>
+        <option value="day">Днём, 13–17</option>
+        <option value="evening">Вечером, 17–18</option>
+      </select>
+    </div>
+  </div>
+      <input type="hidden" name="channel" value="call">
+
+  <label class="checkbox">
+    <input type="checkbox" name="consent" value="1" required>
+    <span>Даю <a href="/sto-dorog-site/soglasie-na-obrabotku-personalnyh-dannyh" target="_blank">согласие на обработку персональных данных</a> и знаком(а) с <a href="/sto-dorog-site/politika-konfidentsialnosti" target="_blank">политикой конфиденциальности</a></span>
+  </label>
+  <p class="field__error" data-error-for="consent" hidden></p>
+
+  <input type="hidden" name="service" value="Запись на обучение">
+  <input type="hidden" name="page_url" value="https://sto-dorog-tomsk.ru/materialno-tekhnicheskoe-obespechenie-i-osnashchennost-obrazovatelnogo-protsessa">
+    <input type="hidden" name="utm_source" value="">
+    <input type="hidden" name="utm_medium" value="">
+    <input type="hidden" name="utm_campaign" value="">
+    <input type="hidden" name="utm_content" value="">
+    <input type="hidden" name="utm_term" value="">
+    <input type="hidden" name="yclid" value="">
+    <div class="lead-form__trap" aria-hidden="true">
+    <label for="lead1-website">Не заполняйте это поле</label>
+    <input id="lead1-website" name="website" type="text" tabindex="-1" autocomplete="off">
+  </div>
+      <button class="btn btn--primary btn--lg lead-form__submit" type="submit">Записаться <svg class="icon " aria-hidden="true" focusable="false"><use href="/sto-dorog-site/assets/img/icons.svg?v=1794211393#arrow-right"></use></svg></button>
+    <div class="lead-form__result" role="status" aria-live="polite" hidden></div>
+</form>
+  </div>
+</dialog>
 </body>
 </html>

@@ -404,8 +404,12 @@ table { border-collapse: collapse; }
 .hero__lead { order: 4; display: none; font-weight: 500; }
 .hero .lead-form--hero { order: 5; }
 
-.hero__media { order: 3; position: relative; margin: 16px 0 18px; }
-.hero__photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: 74% 50%; border-radius: 20px; }
+/* Телефон и планшет (вариант 2, 11.11.2026): под заголовком цены плашками, кадр ниже — форма видна на первом экране */
+.hero__prices { order: 3; display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.hero__prices li { padding: 7px 12px; border-radius: 999px; background: #fff; color: var(--ink); font-size: 14px; font-weight: 600; line-height: 1.2; }
+.hero__prices b { font-weight: 800; }
+.hero__media { order: 4; position: relative; margin: 14px 0; }
+.hero__photo img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: 74% 50%; border-radius: 20px; }
 
 /* Форма первого экрана: телефон + кнопка в одну строку, под ней согласие */
 .lead-form--hero { gap: 12px; }
@@ -446,6 +450,7 @@ table { border-collapse: collapse; }
   .hero__body { display: block; }
   .hero__title { margin-top: 22px; font-size: 54px; }
   .hero__lead { display: block; margin-top: 18px; max-width: 470px; font-size: 17px; }
+  .hero__prices { display: none; }
   .hero .lead-form--hero { margin-top: 28px; max-width: 470px; }
 
   .hero__media { align-self: stretch; min-height: 500px; margin: 0; }
@@ -633,6 +638,10 @@ table { border-collapse: collapse; }
    (ширина как у .lhero__car, пропорции картинки 768×412) */
 .lhero__card--service { padding-bottom: calc(min(92%, 460px) * .536 + 8px); }
 @media (min-width: 900px) { .lhero__card--service { padding-bottom: calc(min(80%, 460px) * .536 + 8px); } }
+/* Подарочный сертификат (вариант 1, 11.11.2026): карточка сертификата вместо машины, с наклоном, светлый контур —
+   чтобы тёмный сертификат читался на тёмной карточке */
+.lhero__card--gift { padding-bottom: calc(min(84%, 430px) * .48 + 46px); }
+.lhero__card .lhero__gift { right: 5%; bottom: 26px; width: 84%; max-width: 430px; border-radius: 10px; transform: rotate(-5deg); box-shadow: 0 0 0 1px rgba(255, 255, 255, .16), 0 22px 44px rgba(0, 0, 0, .5); }
 /* Мотоцикл в карточке цены: чёрный на тёмном теряется — за ним светлое пятно */
 .lhero__card--moto { padding-bottom: 210px; background: radial-gradient(58% 42% at 70% 86%, #6b625c 0%, rgba(107, 98, 92, 0) 72%), var(--ink); }
 .lhero__card .lhero__moto { right: -2%; bottom: -14px; width: 70%; max-width: 380px; }
@@ -1697,6 +1706,21 @@ a.sched-row__what:hover { color: var(--orange-text); }
 /* В карточке таблица из двух колонок «что — цена»: на телефоне без прокрутки, иначе цены уходят за край */
 .panel .table { min-width: 0; }
 @media (min-width: 900px) { .table { font-size: 16px; } .table th, .table td { padding: 16px 24px; } }
+/* Таблицы сравнения на телефоне (вариант 1, 11.11.2026): подпись строки сверху, значения колонок рядом —
+   вбок листать не нужно. Названия колонок — оранжевые, первая пустая ячейка шапки скрыта */
+@media (max-width: 599px) {
+  .table--stack { display: block; min-width: 0; }
+  .table--stack thead, .table--stack tbody { display: block; }
+  .table--stack tr { display: grid; grid-template-columns: repeat(var(--stack-cols, 2), minmax(0, 1fr)); column-gap: 14px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+  .table--stack tbody tr:last-child { border-bottom: 0; }
+  .table--stack th, .table--stack td, .table--stack thead tr > *, .prose .table--stack th, .prose .table--stack td { padding: 0; border: 0; }
+  .table--stack thead th:first-child { display: none; }
+  .table--stack thead th { color: var(--orange-text); }
+  .table--stack tbody th { grid-column: 1 / -1; margin-bottom: 4px; font-size: 13px; font-weight: 600; color: var(--muted); }
+  .table--stack td { font-weight: 600; }
+  .table--stack-3 { --stack-cols: 3; }
+  .table--stack-3 tr { column-gap: 10px; }
+}
 
 /* ---------- Текст статей ---------- */
 .prose { max-width: 760px; font-size: 17px; line-height: 1.65; }
@@ -1922,6 +1946,29 @@ select.field__input option { color: var(--ink); }
 .mobile-bar__item--accent { background: var(--orange); color: #fff; }
 .nav-open .mobile-bar { display: none; }
 @media (min-width: 900px) { .mobile-bar { display: none; } }
+/* Пока на экране форма первого экрана, нижняя панель прячется: две разные «Записаться» рядом путали (UX-аудит) */
+.mobile-bar { transition: transform .25s ease, opacity .25s ease; }
+.hero-form-on .mobile-bar { transform: translateY(calc(100% + 16px)); opacity: 0; pointer-events: none; }
+
+/* Шторка записи (вариант 1, 11.11.2026): выезжает снизу, на компьютере — окно по центру */
+.sheet { width: 100%; max-width: 100%; max-height: 92vh; margin: auto 0 0; padding: 0; border: 0; border-radius: 26px 26px 0 0; background: var(--paper); color: var(--fg); box-shadow: 0 -10px 40px rgba(0, 0, 0, .25); }
+.sheet::backdrop { background: rgba(14, 14, 15, .55); }
+.sheet[open] { animation: sheet-up .28s ease-out; }
+@keyframes sheet-up { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+.sheet__body { padding: 10px 20px calc(24px + env(safe-area-inset-bottom, 0px)); }
+.sheet__grip { width: 44px; height: 5px; margin: 0 auto 14px; border-radius: 3px; background: #cfcac4; }
+.sheet__head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.sheet__title { font-size: 24px; line-height: 1.1; letter-spacing: -.03em; }
+.sheet__close { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 50%; background: #fff; color: var(--ink); cursor: pointer; }
+.sheet__close .icon { width: 20px; height: 20px; }
+.sheet__text { margin-top: 6px; font-size: 14px; color: var(--muted); }
+.sheet .lead-form { margin-top: 14px; }
+html.sheet-open { overflow: hidden; }
+@media (min-width: 600px) {
+  .sheet { max-width: 520px; margin: auto; border-radius: 26px; }
+  .sheet__grip { display: none; }
+  .sheet__body { padding: 24px 28px 28px; }
+}
 
 /* Уведомление о cookies */
 .cookie-note { position: fixed; z-index: 70; left: 10px; right: 10px; bottom: 76px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; max-width: 560px; padding: 16px 18px; border-radius: 20px; background: var(--black); box-shadow: 0 16px 40px rgba(0, 0, 0, .3); font-size: 14px; }
