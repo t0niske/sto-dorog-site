@@ -231,12 +231,25 @@
     return node;
   }
 
+  // Текст ответа сервера как есть, но номер телефона не рвётся переносом строки
+  function textWithPhones(node, text) {
+    var re = /\+7\s?\(\d{3}\)\s?\d{3}-\d{2}-\d{2}/g, last = 0, m;
+    node.textContent = '';
+    while ((m = re.exec(text)) !== null) {
+      node.appendChild(document.createTextNode(text.slice(last, m.index)));
+      node.appendChild(el('span', 'nowrap', m[0]));
+      last = re.lastIndex;
+    }
+    node.appendChild(document.createTextNode(text.slice(last)));
+    return node;
+  }
+
   function showResult(form, kind, title, message, maxLink) {
     var box = form.querySelector('.lead-form__result');
     box.innerHTML = '';
     box.className = 'lead-form__result is-' + kind;
     if (title) box.appendChild(el('strong', '', title));
-    if (message) box.appendChild(el('p', '', message));
+    if (message) box.appendChild(textWithPhones(el('p', ''), message));
     if (maxLink) {
       var a = el('a', 'btn btn--primary', 'Написать в MAX');
       a.href = maxLink;
@@ -288,7 +301,7 @@
       if (saved) {
         var msg = thanks.querySelector('[data-lead-message]');
         var maxBtn = thanks.querySelector('[data-lead-max]');
-        if (saved.message && msg) msg.textContent = saved.message;
+        if (saved.message && msg) textWithPhones(msg, saved.message);
         if (saved.max_link && maxBtn) maxBtn.href = saved.max_link;
         window.sessionStorage.removeItem('sd_lead_result');
       }
