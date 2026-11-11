@@ -1186,6 +1186,7 @@ a.where__pin:hover .where__tag { color: var(--orange-text); }
 .contact-rows dd a:hover { color: var(--orange-text); }
 .contact-rows .contact-rows__phone { font-size: clamp(22px, 6.6vw, 26px); letter-spacing: -.02em; color: var(--orange); white-space: nowrap; }
 .contact-rows .contact-rows__phone:hover { color: var(--orange-2); }
+.contact-rows__note { margin-left: 4px; font-size: 14px; font-weight: 600; color: var(--muted); white-space: nowrap; }
 .contact-rows__social { display: flex !important; flex-wrap: wrap; gap: 8px 18px; }
 .contact-rows__social a { display: inline-flex; align-items: center; gap: 8px; }
 .contact-rows__social span { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--orange); color: #fff; }
